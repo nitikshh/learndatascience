@@ -1,0 +1,639 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Manipulation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100vh;
+    background-color: #f2f2f2;
+    transition: width 0.3s ease;
+    overflow: hidden;
+  }
+
+  .icon::before {
+    content: "\2630"; /* Hamburger icon */
+  }
+
+  .icon.open::before {
+    content: "\2716"; /* Close icon */
+  }
+
+  .icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  #navbarList {
+    margin-top: 50px;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  #navbarList li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #navbarList li a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .open {
+    width: 300px;
+  }
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+           /* position: sticky;*/
+            top: 0;
+            background-color: #fff;
+            z-index: 999;
+        }
+
+        .search-container input[type=text] {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 10px;
+            margin: 0;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .faq-answer {
+            padding: 10px;
+            margin: 0;
+            font-size: 7px;
+            line-height: 1.5;
+            color: #666;
+        }
+         .faq-answer code {
+            font-size: 12px;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .container h1 {
+            font-size: 30px;
+            margin-bottom: 2px;
+            width: 100%;
+            text-align: center;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        @media screen and (max-width: 768px) {
+            .faq-section {
+                padding: 30px 10px;
+            }
+
+            .faq-question {
+                font-size: 13px;
+            }
+
+            .faq-answer {
+                font-size: 12px;
+            }
+        }
+
+        pre {
+            background-color: white !important;
+            color: white;
+            padding: 4px;
+            width: 100%;
+            overflow: scroll;
+            border-radius: 5px;
+           
+        }
+
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="icon" onclick="toggleNavbar()"></div>
+    <ul id="navbarList">
+      <li><a href="index.html">Chapter 1 - Starting with Python</a></li>
+      <li><a href="computer_ch2.html">Chapter 2 - If-else and loops</a></li>
+      <li><a href="computer_ch3.html">Chapter 3 - String Manipulation</a></li>
+      <li><a href="#">Chapter 4 - List Manipulation</a></li>
+      <li><a href="Touples.html">Chapter 5 - Touples</a></li>
+      <li><a href="dictionaries_ch6.html">Chapter 6 - Dictionaries</a></li>
+      <li><a href="functions_ch7.html">Chapter 7 - Functions</a></li>
+      <li><a href="lib_ch8.html">Chapter 8 - Working with Libraries</a></li>
+      <li><a href="#">Chapter 9 - Glossary</a></li>
+      <li><a href="#">Chapter 10 - Index</a></li>
+    </ul>
+  </div>
+
+    <script>
+    function toggleNavbar() {
+      var navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('open');
+
+      var icon = document.querySelector('.icon');
+      icon.classList.toggle('open');
+      
+      
+    }
+  </script>
+<div class="container">
+    <h1>Python</h1>
+</div>
+<section class="faq-section">
+    <div class="search-container">
+        <input type="text" placeholder="Search for a question...">
+    </div>
+    <div class="faq-list">
+   <div class="faq-item">
+      <h3 class="faq-question">
+           List Manipulation
+      </h3>
+      <div class="faq-answer">
+           List manipulation in Python refers to the process of modifying or manipulating lists, which are ordered collections of items. It involves various operations such as adding or removing elements, accessing specific elements, sorting, filtering, and transforming lists. Here's an example code that covers different aspects of list manipulation, along with explanations of each operation:
+      <pre><code class="language-python" id="code"># List Manipulation in Python
+
+# Creating an empty list
+my_list = []
+
+# Adding elements to the list
+my_list.append(10)        # Adding a single element at the end
+my_list.extend([20, 30])  # Adding multiple elements at the end
+
+print("Initial list:", my_list)
+
+# Accessing elements in the list
+first_element = my_list[0]     # Accessing the first element
+last_element = my_list[-1]     # Accessing the last element
+sublist = my_list[1:3]         # Accessing a sublist
+
+print("First element:", first_element)
+print("Last element:", last_element)
+print("Sublist:", sublist)
+
+# Modifying elements in the list
+my_list[0] = 15     # Modifying the value at index 0
+
+print("Modified list:", my_list)
+
+# Removing elements from the list
+removed_element = my_list.pop()         # Removing and returning the last element
+my_list.remove(20)                      # Removing the first occurrence of a specific element
+
+print("Removed element:", removed_element)
+print("List after removal:", my_list)
+
+# Sorting the list
+my_list.sort()     # Sorting the list in ascending order
+
+print("Sorted list:", my_list)
+
+# Reversing the list
+my_list.reverse()  # Reversing the order of elements in the list
+
+print("Reversed list:", my_list)
+
+# Filtering elements in the list
+filtered_list = [x for x in my_list if x > 10]     # Creating a new list with elements greater than 10
+
+print("Filtered list:", filtered_list)
+
+# Transforming the list
+transformed_list = [x * 2 for x in my_list]        # Creating a new list by doubling each element
+
+print("Transformed list:", transformed_list)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Empty, Long, Nested Lists
+      </h3>
+      <div class="faq-answer">
+           Empty List: This is a list that contains no elements. It is represented by empty_list, which is initialized as an empty pair of square brackets []. Printing the empty_list will show an empty list.
+<br<br>>
+Long List: This is a list that contains a large number of elements. In this example, long_list is initialized with numbers from 1 to 10. Printing the long_list will display all the elements.
+<br><br>
+Nested List: This is a list that contains other lists as its elements. In this example, nested_list is initialized with three sub-lists, each containing three numbers. Printing the nested_list will display the nested structure.
+      <pre><code class="language-python" id="code"># Definition: Empty List
+# An empty list is a list that contains no elements.
+empty_list = []
+
+# Definition: Long List
+# A long list is a list that contains a large number of elements.
+long_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Definition: Nested List
+# A nested list is a list that contains other lists as its elements.
+nested_list = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+# Print the empty list
+print("Empty List:", empty_list)
+
+# Print the long list
+print("Long List:", long_list)
+
+# Print the nested list
+print("Nested List:", nested_list)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Indexing and slicing of List
+      </h3>
+      <div class="faq-answer">
+           Indexing and slicing are important concepts when working with lists in Python. Indexing refers to accessing individual elements within a list, while slicing allows you to extract a portion of a list.
+
+Here's an example code that covers both indexing and slicing with their respective definitions:
+      <pre><code class="language-python" id="code"># Definition: Indexing
+# Indexing is the process of accessing individual elements within a list by their position.
+# The index starts from 0 for the first element and increments by 1 for each subsequent element.
+
+my_list = ['apple', 'banana', 'cherry', 'date']
+
+# Accessing elements using positive indexing
+print(my_list[0])  # Output: 'apple'
+print(my_list[2])  # Output: 'cherry'
+
+# Accessing elements using negative indexing
+print(my_list[-1])  # Output: 'date'
+print(my_list[-3])  # Output: 'banana'
+
+# Definition: Slicing
+# Slicing allows you to extract a portion of a list using a range of indices.
+# The range is specified as start:end, where the start index is inclusive and the end index is exclusive.
+
+my_list = ['apple', 'banana', 'cherry', 'date', 'elderberry']
+
+# Extracting a portion of the list using slicing
+print(my_list[1:3])      # Output: ['banana', 'cherry']
+print(my_list[2:])       # Output: ['cherry', 'date', 'elderberry']
+print(my_list[:4])       # Output: ['apple', 'banana', 'cherry', 'date']
+print(my_list[1:4:2])    # Output: ['banana', 'date']
+print(my_list[::-1])     # Output: ['elderberry', 'date', 'cherry', 'banana', 'apple']
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           List Operations
+      </h3>
+      <div class="faq-answer">
+           List operations in Python refer to the various actions or manipulations that can be performed on lists, which are a type of ordered, mutable sequence in Python.
+      <pre><code class="language-python" id="code"># List Operations in Python
+
+# Creating a list
+numbers = [1, 2, 3, 4, 5]
+
+# 1. Accessing Elements
+print("1. Accessing Elements:")
+print("First element:", numbers[0])  # Accessing the first element
+print("Last element:", numbers[-1])  # Accessing the last element
+print("Slicing elements:", numbers[1:4])  # Accessing a range of elements using slicing
+print()
+
+# 2. Modifying Elements
+print("2. Modifying Elements:")
+numbers[0] = 10  # Modifying an element
+print("Modified list:", numbers)
+print()
+
+# 3. List Concatenation
+print("3. List Concatenation:")
+new_numbers = [6, 7, 8]
+combined_list = numbers + new_numbers  # Concatenating two lists
+print("Combined list:", combined_list)
+print()
+
+# 4. List Repetition
+print("4. List Repetition:")
+repeated_list = numbers * 3  # Repeating a list
+print("Repeated list:", repeated_list)
+print()
+
+# 5. List Length
+print("5. List Length:")
+print("Length of the list:", len(numbers))
+print()
+
+# 6. Adding Elements
+print("6. Adding Elements:")
+numbers.append(6)  # Appending an element to the end of the list
+print("Appended list:", numbers)
+numbers.insert(2, 7)  # Inserting an element at a specific position
+print("Inserted list:", numbers)
+print()
+
+# 7. Removing Elements
+print("7. Removing Elements:")
+numbers.remove(4)  # Removing a specific element from the list
+print("List after removing:", numbers)
+popped_element = numbers.pop()  # Removing and returning the last element of the list
+print("Popped element:", popped_element)
+print()
+
+# 8. Searching Elements
+print("8. Searching Elements:")
+index = numbers.index(3)  # Finding the index of an element
+print("Index of 3:", index)
+count = numbers.count(2)  # Counting the occurrences of an element
+print("Count of 2:", count)
+print()
+
+# 9. Sorting Elements
+print("9. Sorting Elements:")
+numbers.sort()  # Sorting the list in ascending order
+print("Sorted list:", numbers)
+numbers.reverse()  # Reversing the order of elements
+print("Reversed list:", numbers)
+print()
+
+# 10. List Membership
+print("10. List Membership:")
+print("Is 5 in the list?", 5 in numbers)
+print("Is 9 not in the list?", 9 not in numbers)
+print()
+
+# 11. Clearing the List
+print("11. Clearing the List:")
+numbers.clear()  # Removing all elements from the list
+print("Cleared list:", numbers)
+print()
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           List Function and Methods
+      </h3>
+      <div class="faq-answer">
+           
+      <pre><code class="language-python" id="code"># List Functions and Methods
+
+# List Definition
+my_list = [1, 2, 3, 4, 5]
+
+# List Functions
+
+# len() function returns the length of the list
+list_length = len(my_list)
+print("Length of the list:", list_length)
+
+# max() function returns the maximum element in the list
+max_value = max(my_list)
+print("Maximum value in the list:", max_value)
+
+# min() function returns the minimum element in the list
+min_value = min(my_list)
+print("Minimum value in the list:", min_value)
+
+# sum() function returns the sum of all elements in the list
+sum_of_elements = sum(my_list)
+print("Sum of all elements in the list:", sum_of_elements)
+
+# List Methods
+
+# append() method adds an element at the end of the list
+my_list.append(6)
+print("List after appending 6:", my_list)
+
+# insert() method inserts an element at a specified index
+my_list.insert(2, 7)
+print("List after inserting 7 at index 2:", my_list)
+
+# remove() method removes the first occurrence of the specified element
+my_list.remove(4)
+print("List after removing the first occurrence of 4:", my_list)
+
+# pop() method removes and returns the element at a specified index
+popped_element = my_list.pop(1)
+print("Popped element at index 1:", popped_element)
+print("List after popping the element:", my_list)
+
+# index() method returns the index of the first occurrence of the specified element
+index_of_3 = my_list.index(3)
+print("Index of 3 in the list:", index_of_3)
+
+# count() method returns the number of occurrences of a specified element in the list
+count_of_2 = my_list.count(2)
+print("Count of 2 in the list:", count_of_2)
+
+# reverse() method reverses the order of the list
+my_list.reverse()
+print("Reversed list:", my_list)
+
+# sort() method sorts the elements of the list in ascending order
+my_list.sort()
+print("Sorted list:", my_list)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           2D List
+      </h3>
+      <div class="faq-answer">
+           A 2D list in Python is a list of lists, where each inner list represents a row of elements. It provides a way to store and manipulate data in a grid-like structure.
+
+Here's an example code that demonstrates the concept of a 2D list and covers various operations:
+      <pre><code class="language-python" id="code"># Definition of a 2D list
+two_dimensional_list = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+# Accessing elements in the 2D list
+print(two_dimensional_list[0][0])  # Output: 1
+print(two_dimensional_list[1][2])  # Output: 6
+
+# Modifying elements in the 2D list
+two_dimensional_list[2][1] = 10
+print(two_dimensional_list)  # Output: [[1, 2, 3], [4, 5, 6], [7, 10, 9]]
+
+# Iterating over the 2D list
+for row in two_dimensional_list:
+    for element in row:
+        print(element, end=' ')
+    print()
+# Output:
+# 1 2 3 
+# 4 5 6 
+# 7 10 9 
+
+# Adding a new row to the 2D list
+new_row = [11, 12, 13]
+two_dimensional_list.append(new_row)
+print(two_dimensional_list)
+# Output: [[1, 2, 3], [4, 5, 6], [7, 10, 9], [11, 12, 13]]
+
+# Removing a row from the 2D list
+removed_row = two_dimensional_list.pop(1)
+print(removed_row)  # Output: [4, 5, 6]
+print(two_dimensional_list)
+# Output: [[1, 2, 3], [7, 10, 9], [11, 12, 13]]
+
+# Checking the dimensions of the 2D list
+num_rows = len(two_dimensional_list)
+num_cols = len(two_dimensional_list[0])
+print(num_rows)  # Output: 3
+print(num_cols)  # Output: 3
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What are sorting,appending,extending, inserting,pop, remove in list
+      </h3>
+      <div class="faq-answer">
+           
+      <pre><code class="language-python" id="code"># Creating a list
+my_list = [1, 2, 3, 4, 5]
+
+# Sorting the list in ascending order
+my_list.sort()
+print("Sorted list:", my_list)
+
+# Appending an element to the end of the list
+my_list.append(6)
+print("After appending:", my_list)
+
+# Extending the list by another list
+extension = [7, 8, 9]
+my_list.extend(extension)
+print("After extending:", my_list)
+
+# Inserting an element at a specific index
+my_list.insert(3, 10)
+print("After inserting:", my_list)
+
+# Popping an element from the list (removing and returning the last element)
+popped_element = my_list.pop()
+print("Popped element:", popped_element)
+print("After popping:", my_list)
+
+# Removing a specific element from the list
+my_list.remove(4)
+print("After removing:", my_list)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           my_list is a non empty list. Find the smallest and largest integer in list.
+      </h3>
+      <div class="faq-answer">
+           You can use the min() and max() functions in Python to find the smallest and largest integers in a non-empty list. Here's an example code snippet that demonstrates this:
+      <pre><code class="language-python" id="code"># Input a non-empty list
+my_list = [5, 2, 8, 1, 9, 3]
+
+# Find the smallest integer in the list
+smallest = min(my_list)
+
+# Find the largest integer in the list
+largest = max(my_list)
+
+# Print the results
+print("Smallest integer:", smallest)
+print("Largest integer:", largest)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Write a code that find the correct email address from list
+      </h3>
+      <div class="faq-answer">
+           To find the correct email address from a list, you need to specify the criteria for a valid email address. One common criterion is to check if the email address follows a valid format, such as having the "@" symbol and a domain name.
+
+Here's an example code snippet that demonstrates how to find the correct email address from a list based on a basic format validation:
+      <pre><code class="language-python" id="code"># List of email addresses
+email_list = ["john@example.com", "jane@example", "invalid_email", "alice@example.com"]
+
+# Check for valid email address format
+correct_email = None
+for email in email_list:
+    if "@" in email and "." in email:
+        correct_email = email
+        break
+
+# Print the correct email address if found
+if correct_email:
+    print("Correct email address:", correct_email)
+else:
+    print("No valid email address found.")
+</code></pre>
+      </div>
+    </div>
+    
+    </div>
+</section>
+
+<script>
+    const searchInput = document.querySelector('.search-container input');
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    searchInput.addEventListener('keyup', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        faqItems.forEach(function(item) {
+            const question = item.querySelector('.faq-question').textContent.toLowerCase();
+            if (question.includes(searchTerm)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+<script>
+    Prism.highlightAll();
+</script>
+
+</body>
+</html>

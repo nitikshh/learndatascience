@@ -1,0 +1,904 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Python</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100vh;
+    background-color: #f2f2f2;
+    transition: width 0.3s ease;
+    overflow: hidden;
+  }
+
+  .icon::before {
+    content: "\2630"; /* Hamburger icon */
+  }
+
+  .icon.open::before {
+    content: "\2716"; /* Close icon */
+  }
+
+  .icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  #navbarList {
+    margin-top: 50px;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  #navbarList li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #navbarList li a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .open {
+    width: 300px;
+  }
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+           /* position: sticky;*/
+            top: 0;
+            background-color: #fff;
+            z-index: 999;
+        }
+
+        .search-container input[type=text] {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 10px;
+            margin: 0;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .faq-answer {
+            padding: 10px;
+            margin: 0;
+            font-size: 7px;
+            line-height: 1.5;
+            color: #666;
+        }
+         .faq-answer code {
+            font-size: 12px;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .container h1 {
+            font-size: 30px;
+            margin-bottom: 2px;
+            width: 100%;
+            text-align: center;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        @media screen and (max-width: 768px) {
+            .faq-section {
+                padding: 30px 10px;
+            }
+
+            .faq-question {
+                font-size: 13px;
+            }
+
+            .faq-answer {
+                font-size: 12px;
+            }
+        }
+
+        pre {
+            background-color: white !important;
+            color: white;
+            padding: 4px;
+            width: 100%;
+            overflow: scroll;
+            border-radius: 5px;
+           
+        }
+       
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="icon" onclick="toggleNavbar()"></div>
+    <ul id="navbarList">
+      <li><a href="#">Chapter 1 - Starting with Python</a></li>
+      <li><a href="computer_ch2.html">Chapter 2 - If-else and loops</a></li>
+      <li><a href="computer_ch3.html">Chapter 3 - String Manipulation</a></li>
+      <li><a href="computer_ch4.html">Chapter 4  - List Manipulation</a></li>
+      <li><a href="Touples.html">Chapter 5 - Touples</a></li>
+      <li><a href="dictionaries_ch6.html">Chapter 6 - Dictionaries</a></li>
+      <li><a href="functions_ch7.html">Chapter 7 - Functions</a></li>
+      <li><a href="lib_ch8.html">Chapter 8 - Working with Libraries</a></li>
+      <li><a href="#">Chapter 9 - Glossary</a></li>
+      <li><a href="#">Chapter 10 - Index</a></li>
+    </ul>
+  </div>
+
+    <script>
+    function toggleNavbar() {
+      var navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('open');
+
+      var icon = document.querySelector('.icon');
+      icon.classList.toggle('open');
+      
+      
+    }
+  </script>
+<div class="container">
+    <h1>Python</h1>
+</div>
+<section class="faq-section">
+    <div class="search-container">
+        <input type="text" placeholder="Search for a question...">
+    </div>
+    <div class="faq-list">
+        <div class="faq-item">
+            <h3 class="faq-question">
+                What is Python.
+            </h3>
+            <div class="faq-answer">
+                Python programming language was developed by Guido Van Rossum in February 1991.<br/>
+                Python is a high level language.<br/> Python was based on or influenced with two programming languages: <br/>
+                -> ABC language, a teaching language created as a replacement of BASIC<br/>
+                -> Module - 3<br/><br/>
+                This is the basic program:
+                <pre><code class="language-python" id="code">def calculate_sum(n):
+    """Calculates the sum of numbers from 1 to n."""
+    total = 0
+    for num in range(1, n + 1):
+        total += num
+    return total
+
+# Prompt the user for input
+number = int(input("Enter a positive integer: "))
+
+# Call the function to calculate the sum
+result = calculate_sum(number)
+
+# Display the result
+print(f"The sum of numbers from 1 to {number} is: {result}")</code></pre>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h3 class="faq-question">
+                What are keywords 
+            </h3>
+            <div class="faq-answer">
+Keyvords are the words that convey a special meaning to the Ianguage compiler/interpreter. These are reserved for special purpose and must not be used as normal identifier names. Python programming language conlains the following keywords :<br/>
+False, assert, break, true, for, in, range, with, not, and, else, class, def, if, lamda, pass,etc.
+<br/>
+A keyword is a word having special meaning reserved by programming language.
+
+<pre><code class="language-python" id="code">
+# Example code to demonstrate keyword usage in Python
+
+# List of keywords in Python
+keywords = ['False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class', 'continue', 'def',
+            'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import',
+            'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try',
+            'while', 'with', 'yield']
+
+# Count the number of occurrences of each keyword in a given code snippet
+def count_keywords(code):
+    keyword_count = {}
+    
+    # Initialize the count for each keyword to 0
+    for keyword in keywords:
+        keyword_count[keyword] = 0
+    
+    # Split the code into individual words
+    words = code.split()
+    
+    # Iterate over each word in the code
+    for word in words:
+        # Check if the word is a keyword
+        if word in keywords:
+            # Increment the count for the keyword
+            keyword_count[word] += 1
+    
+    return keyword_count
+
+# Example usage of the count_keywords function
+code_snippet = '''
+def calculate_sum(numbers):
+    total = 0
+    for num in numbers:
+        total += num
+    return total
+'''
+
+keyword_occurrences = count_keywords(code_snippet)
+
+# Print the count of each keyword
+for keyword, count in keyword_occurrences.items():
+    print(f"{keyword}: {count}")
+
+</code></pre>
+
+This code demonstrates how to count the occurrences of Python keywords in a given code snippet. The `count_keywords` function takes a code snippet as input and returns a dictionary containing the count of each keyword. It initializes the count for each keyword to 0, splits the code into individual words, and then iterates over each word to check if it matches any of the keywords. If a match is found, the count for that keyword is incremented.
+<br>
+In the example usage, a code snippet is provided, and the `count_keywords` function is called on it. The resulting keyword occurrences are then printed using a loop.
+<br>
+Note that this code assumes the code snippet is given as a string and separated by whitespace. It may not accurately handle code with complex syntax or comments.
+
+            </div>
+        </div>
+        <div class="faq-item">
+      <h3 class="faq-question">
+           What is Identifier
+</h3>
+      <div class="faq-answer">
+ldentifiers are fundamental building blocks of a program and are used as the general terminology for the names given to different parts of the program viz. variables, objects, classes, functions, lists, dictionaries elc. Identifier forming rules of Python are being specified below :
+<br/>
+-> An identifier is an arbitrarily long sequence of letters and digits.
+<br/>
+-> The first character must be a letter; the underscore (_) counts as a letter.
+<br/>
+-> Upper and lower-case letters are different. All characters are significant.
+<br/>
+-> The digits 0 through 9 can be part of the identifier except for the first character.
+<br/>
+-> ldentifiers are unlimited in length. Case is significant i.e, Python is case sensitive as il treats upper and lower-case characters differently.
+<br/>
+-> An identifier must not be a keyword of Python.
+<br/>
+->Python is case sensitive as it treats upper and lower-case characters differently.
+<br/>
+-> An identifier cannot contain any special character except for underscore (_).
+
+<pre><code class="language-python" id="code">
+# Here is the code
+
+# Function to check if a number is even or odd
+def check_even_odd(number):
+    if number % 2 == 0:
+        return "Even"
+    else:
+        return "Odd"
+
+# Function to check if a string is a palindrome
+def check_palindrome(string):
+    reversed_string = string[::-1]
+    if string == reversed_string:
+        return "Palindrome"
+    else:
+        return "Not a Palindrome"
+
+# Function to check if a number is prime
+def check_prime(number):
+    if number <= 1:
+        return "Not Prime"
+    for i in range(2, int(number ** 0.5) + 1):
+        if number % i == 0:
+            return "Not Prime"
+    return "Prime"
+
+# Test the functions
+number = 10
+print(f"The number {number} is {check_even_odd(number)}")
+
+string = "madam"
+print(f"The string '{string}' is {check_palindrome(string)}")
+
+number = 17
+print(f"The number {number} is {check_prime(number)}")
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What are literals
+</h3>
+      <div class="faq-answer">
+Literals (often referred to as constant-Values) are data items that have a fixed value. Python allows several kinds of literals :
+<br/>
+(i) String literals<br/>
+(ii) Numeric literals<br/>
+ (ii) Boolean literals <br/>
+(iv) Special Literal - None <br/>
+ (v) Literal Collections<br/>
+ <pre><code class="language-python" id="code">
+# Example code demonstrating literals in Python
+
+# Integer literal
+num = 10
+print("Integer literal:", num)
+
+# Float literal
+pi = 3.14
+print("Float literal:", pi)
+
+# String literal
+name = "John Doe"
+print("String literal:", name)
+
+# Boolean literals
+is_true = True
+is_false = False
+print("Boolean literals:", is_true, is_false)
+
+# List literal
+my_list = [1, 2, 3, 4, 5]
+print("List literal:", my_list)
+
+# Tuple literal
+my_tuple = (1, 2, 3)
+print("Tuple literal:", my_tuple)
+
+# Dictionary literal
+my_dict = {"name": "John", "age": 25}
+print("Dictionary literal:", my_dict)
+
+# Set literal
+my_set = {1, 2, 3}
+print("Set literal:", my_set)
+
+# None literal
+my_none = None
+print("None literal:", my_none)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What are Operators
+</h3>
+      <div class="faq-answer">
+Operators are tokerns that trigger some computation when applied to variables and other objects in an expression Variables and objects to which the computation is applied, are called operands. So, an operator requires some operands to work upon.
+<br/>
+(i) - Unary Operators - Unary operators are those operators that require one operand to operate upon. Following are some unary operators :
+<br/>
+Unary plus (+)
+<br/>
+Unary minus (-)
+<br/>
+Bitwise complement (~)
+<br/>
+not logical negation (not)
+<br/>
+(ii) - Binary Operators - Binary operators are those operators that require two operands to operate upon. Following are some binary operators :
+<br/>
+---> Arithmetic operators
+<br/>
++ Addition
+<br/>
+- Subtraction
+<br/>
+* Multiplication
+<br/>
+/ Division
+<br/>
+% Remainder/ Modulus
+<br/>
+** exponent (raise to power)
+<br/>
+//  Floor division
+<br/>
+---> Bitwise operators
+<br/>
+& Bitwise AND
+<br/>
+^ Bitwise exclusive OR (XOR) 
+<br/>
+| Bitwise OR
+<br/>
+-> Shift operators 
+<br/>
+<< shift left
+<br/>
+>>shift right
+<br/>
+---> ldentity operators
+<br/>
+is
+<br/>
+is not
+<br/>
+--->Relational Operators
+<br/>
+< Less than
+<br/>
+> Greater than
+<br/>
+<= Less than or equal to 
+<br/>
+>= Greater than or equal to
+<br/>
+== Equal to
+<br/>
+!= Not Equal to
+<br/>
+---> Logical Operators 
+<br/>
+and Logical AND
+<br/>
+or Logical OR
+<br/>
+---> Assignment Operators 
+<br/>
+= Assignment 
+<br/>
+/= Assign quotient 
+<br/>
++= Assign Sum
+<br/>
+*=Assign product 
+<br/>
+%= Assign remainder 
+<br/>
+-= Assign difference 
+<br/>
+**= Assign exponent
+<br/>
+//= Assign floor division 
+<br/>
+---> Membership Operators 
+<br/>
+in  -  whether variables in sequence 
+<br/>
+not in  -  whether variable not in sequence
+
+<pre><code class="language-python" id="code">
+# Arithmetic Operators
+num1 = 10
+num2 = 5
+
+# Addition
+sum = num1 + num2
+print("Sum:", sum)
+
+# Subtraction
+diff = num1 - num2
+print("Difference:", diff)
+
+# Multiplication
+product = num1 * num2
+print("Product:", product)
+
+# Division
+quotient = num1 / num2
+print("Quotient:", quotient)
+
+# Modulus
+remainder = num1 % num2
+print("Remainder:", remainder)
+
+# Exponentiation
+power = num1 ** num2
+print("Power:", power)
+
+# Floor Division
+floor_division = num1 // num2
+print("Floor Division:", floor_division)
+
+# Relational Operators
+a = 5
+b = 10
+
+# Equality
+print(a == b)  # False
+
+# Inequality
+print(a != b)  # True
+
+# Greater than
+print(a > b)   # False
+
+# Less than
+print(a < b)   # True
+
+# Greater than or equal to
+print(a >= b)  # False
+
+# Less than or equal to
+print(a <= b)  # True
+
+# Logical Operators
+p = True
+q = False
+
+# Logical AND
+print(p and q)  # False
+
+# Logical OR
+print(p or q)   # True
+
+# Logical NOT
+print(not p)    # False
+
+# Bitwise Operators
+x = 5
+y = 3
+
+# Bitwise AND
+print(x & y)   # 1
+
+# Bitwise OR
+print(x | y)   # 7
+
+# Bitwise XOR
+print(x ^ y)   # 6
+
+# Bitwise NOT
+print(~x)      # -6
+
+# Bitwise Left Shift
+print(x << 1)  # 10
+
+# Bitwise Right Shift
+print(x >> 1)  # 2
+
+# Assignment Operators
+num = 10
+
+# Add and Assign
+num += 5
+print("Add and Assign:", num)
+
+# Subtract and Assign
+num -= 3
+print("Subtract and Assign:", num)
+
+# Multiply and Assign
+num *= 2
+print("Multiply and Assign:", num)
+
+# Divide and Assign
+num /= 4
+print("Divide and Assign:", num)
+
+# Modulus and Assign
+num %= 3
+print("Modulus and Assign:", num)
+
+# Exponentiate and Assign
+num **= 2
+print("Exponentiate and Assign:", num)
+
+# Floor Divide and Assign
+num //= 2
+print("Floor Divide and Assign:", num)
+
+# Membership Operators
+list = [1, 2, 3, 4, 5]
+
+# In Operator
+print(3 in list)  # True
+
+# Not In Operator
+print(6 not in list)  # True
+
+# Identity Operators
+x = 5
+y = 5
+
+# Is Operator
+print(x is y)   # True
+
+# Is Not Operator
+print(x is not y)  # False
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What are expressions
+</h3>
+      <div class="faq-answer">
+           An expression is any legal combination of symbols that represents a value. An expression represents something, which Python evaluates and which then produces a value
+           <pre><code class="language-python" id="code">
+# Example code for expressions in Python
+
+# Arithmetic expressions
+a = 10
+b = 5
+c = a + b
+print("Addition:", c)
+
+d = a - b
+print("Subtraction:", d)
+
+e = a * b
+print("Multiplication:", e)
+
+f = a / b
+print("Division:", f)
+
+g = a // b
+print("Floor Division:", g)
+
+h = a % b
+print("Modulo:", h)
+
+i = a ** b
+print("Exponentiation:", i)
+
+# Comparison expressions
+x = 3
+y = 7
+
+print("x == y:", x == y)
+print("x != y:", x != y)
+print("x > y:", x > y)
+print("x < y:", x < y)
+print("x >= y:", x >= y)
+print("x <= y:", x <= y)
+
+# Logical expressions
+p = True
+q = False
+
+print("p and q:", p and q)
+print("p or q:", p or q)
+print("not p:", not p)
+
+# Conditional expressions
+score = 85
+result = "Pass" if score >= 60 else "Fail"
+print("Result:", result)
+
+# String expressions
+name1 = "John"
+name2 = "Doe"
+
+full_name = name1 + " " + name2
+print("Full Name:", full_name)
+
+greeting = "Hello " * 3
+print("Greeting:", greeting)
+
+# List expressions
+numbers = [1, 2, 3, 4, 5]
+
+length = len(numbers)
+print("Length:", length)
+
+sum_numbers = sum(numbers)
+print("Sum:", sum_numbers)
+
+# Function call expressions
+def square(x):
+    return x ** 2
+
+result = square(4)
+print("Square:", result)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What is Statement
+</h3>
+      <div class="faq-answer">
+           While an expression represents somnething, a statement is a programming instruction that does something i.e., some action takes place.
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What are comments
+</h3>
+      <div class="faq-answer">
+           Comments are the additional readable information, which is read by the programmers but ignored by Python interpreter. In Python, comments begin with symbol # (Pound or hash character) and end with the end of physical line.
+
+Comments in Python begin with symbol # and generally end with end of the physical line.
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What are multiline comment
+</h3>
+      <div class="faq-answer">
+           Multi-line comments are useful for detailed additional information related to the program in question. It helps clarify certain important things
+
+This type of multi-line comment is also known as docstring. You can either use triple-apostrophe (''') or triple quotes (""") to write docstrings.
+<pre><code class="language-python" id="code">
+# This is a basic code example
+# demonstrating the use of comments
+
+# This is a single-line comment
+print("Hello, world!")  # This line prints a greeting message
+
+"""
+This is a multi-line comment.
+It can span multiple lines and is enclosed in triple quotes.
+"""
+
+# This code calculates the sum of two numbers
+a = 5
+b = 10
+sum = a + b
+print("The sum of", a, "and", b, "is", sum)
+
+# End of the code
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What is function
+</h3>
+      <div class="faq-answer">
+           A function is a code that has a name and it can be reused (executed again) by specifying ie name in the program, where needed.
+           
+         <br>  Certainly! Here's an example of a basic Python code that demonstrates the usage of functions:
+
+<pre><code class="language-python" id="code">
+# Function to calculate the sum of two numbers
+def add_numbers(a, b):
+    return a + b
+
+# Function to calculate the difference between two numbers
+def subtract_numbers(a, b):
+    return a - b
+
+# Function to calculate the product of two numbers
+def multiply_numbers(a, b):
+    return a * b
+
+# Function to calculate the division of two numbers
+def divide_numbers(a, b):
+    if b == 0:
+        return "Error: Cannot divide by zero"
+    return a / b
+
+# Main program
+num1 = 10
+num2 = 5
+
+# Call the add_numbers function and print the result
+sum_result = add_numbers(num1, num2)
+print("Sum:", sum_result)
+
+# Call the subtract_numbers function and print the result
+diff_result = subtract_numbers(num1, num2)
+print("Difference:", diff_result)
+
+# Call the multiply_numbers function and print the result
+prod_result = multiply_numbers(num1, num2)
+print("Product:", prod_result)
+
+# Call the divide_numbers function and print the result
+div_result = divide_numbers(num1, num2)
+print("Division:", div_result)
+</code></pre>
+
+In this code, we define four functions: `add_numbers`, `subtract_numbers`, `multiply_numbers`, and `divide_numbers`. These functions perform basic arithmetic operations on two numbers. The main program demonstrates how to call these functions with example numbers and print the results.
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What is code block
+</h3>
+      <div class="faq-answer">
+           Sometimes a group of statements is part of another statement or function. Such a group of one or more statements is called block or code-block or suite.
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Write a program to inputa welcome message and print it.
+</h3>
+      <div class="faq-answer">
+           <pre><code class="language-python" id="code">message = input("Enter welcome message: ") 
+print("Hello, ", message)</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What is the difference between a keyword and an identifier ?
+</h3>
+      <div class="faq-answer">
+ Keyword is a special word that has a special meaning and purpose. Keywords are reserved and are a few. For example, if, elif, else etc. are keywords.
+<br/>
+Identifier is a user-defined name given to a part of a program viz. variable, object, tunchon etC. Identifiers are not reserved. These are defined by the user but they can have letters, digits and a symbol underscore. They must begin with either a letter or underscore. For instance, _chk, chess, trial etc. are identifiers in Python.
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What are literals in Python ? How many types of literals are allowed in Python ?
+</h3>
+      <div class="faq-answer">
+           Literals mean constants i.e., the data items that never change their value during a program
+run.
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           How many ways are there in Python to represent an integer literal ?
+</h3>
+      <div class="faq-answer">
+           Solution. Python allows tree types of integer literals: <br/>
+(a) Decimal Integer Literals. An integer literal consisting of a sequence of digits is taken to b. decimal integer literal unless it begins with 0 (digit zero). 
+<br/>
+(b) Octal Integer Literals. A sequence of digits starting with Oo (digit zero followed by letter is taken to be an octal integer. 
+<br/>
+(c) Hexadecimal Integer Literals. A sequence of digits preceded by 0x or 0X is taken to be an hexadecimal integer.
+      </div>
+    </div>
+    
+    
+        
+        
+        
+    </div>
+</section>
+
+<script>
+    const searchInput = document.querySelector('.search-container input');
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    searchInput.addEventListener('keyup', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        faqItems.forEach(function(item) {
+            const question = item.querySelector('.faq-question').textContent.toLowerCase();
+            if (question.includes(searchTerm)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+<script>
+    Prism.highlightAll();
+</script>
+
+</body>
+</html>

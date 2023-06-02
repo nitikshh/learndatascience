@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tuples in Python</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100vh;
+    background-color: #f2f2f2;
+    transition: width 0.3s ease;
+    overflow: hidden;
+  }
+
+  .icon::before {
+    content: "\2630"; /* Hamburger icon */
+  }
+
+  .icon.open::before {
+    content: "\2716"; /* Close icon */
+  }
+
+  .icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  #navbarList {
+    margin-top: 50px;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  #navbarList li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #navbarList li a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .open {
+    width: 300px;
+  }
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+           /* position: sticky;*/
+            top: 0;
+            background-color: #fff;
+            z-index: 999;
+        }
+
+        .search-container input[type=text] {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 10px;
+            margin: 0;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .faq-answer {
+            padding: 10px;
+            margin: 0;
+            font-size: 7px;
+            line-height: 1.5;
+            color: #666;
+        }
+         .faq-answer code {
+            font-size: 12px;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .container h1 {
+            font-size: 30px;
+            margin-bottom: 2px;
+            width: 100%;
+            text-align: center;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        @media screen and (max-width: 768px) {
+            .faq-section {
+                padding: 30px 10px;
+            }
+
+            .faq-question {
+                font-size: 13px;
+            }
+
+            .faq-answer {
+                font-size: 12px;
+            }
+        }
+
+        pre {
+            background-color: white !important;
+            color: white;
+            padding: 4px;
+            width: 100%;
+            overflow: scroll;
+            border-radius: 5px;
+           
+        }
+
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="icon" onclick="toggleNavbar()"></div>
+    <ul id="navbarList">
+      <li><a href="index.html">Chapter 1 - Starting with Python</a></li>
+      <li><a href="computer_ch2.html">Chapter 2 - If-else and loops</a></li>
+      <li><a href="computer_ch3.html">Chapter 3 - String Manipulation</a></li>
+      <li><a href="computer_ch4.html">Chapter 4 - List Manipulation</a></li>
+      <li><a href="#">Chapter 5 - Touples</a></li>
+      <li><a href="dictionaries_ch6.html">Chapter 6 - Dictionaries</a></li>
+      <li><a href="functions_ch7.html">Chapter 7 - Functions</a></li>
+      <li><a href="lib_ch8.html">Chapter 8 - Working with Libraries</a></li>
+      <li><a href="#">Chapter 9 - Glossary</a></li>
+      <li><a href="#">Chapter 10 - Index</a></li>
+    </ul>
+  </div>
+
+    <script>
+    function toggleNavbar() {
+      var navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('open');
+
+      var icon = document.querySelector('.icon');
+      icon.classList.toggle('open');
+      
+      
+    }
+  </script>
+<div class="container">
+    <h1>Python</h1>
+</div>
+<section class="faq-section">
+    <div class="search-container">
+        <input type="text" placeholder="Search for a question...">
+    </div>
+    <div class="faq-list">
+   <div class="faq-item">
+      <h3 class="faq-question">
+           Tuples
+</h3>
+      <div class="faq-answer">
+           The code demonstrates various operations such as creating a tuple, accessing elements, tuple length, concatenation, counting occurrences, finding index, unpacking, iterating, and working with nested tuples.
+           <pre><code class="language-python" id="code"># Tuples in Python
+
+# Definition: A tuple is an ordered, immutable collection of elements enclosed in parentheses. 
+# It can contain elements of different data types and allows duplicates.
+
+# Creating a tuple
+my_tuple = (1, 2, 3, 'a', 'b', 'c')
+
+# Accessing elements of a tuple
+print(my_tuple[0])   # Output: 1
+print(my_tuple[3])   # Output: 'a'
+
+# Modifying elements of a tuple is not allowed (immutable)
+# my_tuple[0] = 10   # Throws an error
+
+# Length of a tuple
+print(len(my_tuple))  # Output: 6
+
+# Concatenating tuples
+tuple1 = (1, 2, 3)
+tuple2 = ('a', 'b', 'c')
+concatenated_tuple = tuple1 + tuple2
+print(concatenated_tuple)  # Output: (1, 2, 3, 'a', 'b', 'c')
+
+# Counting occurrences of an element in a tuple
+count = my_tuple.count('a')
+print(count)   # Output: 1
+
+# Index of the first occurrence of an element in a tuple
+index = my_tuple.index('b')
+print(index)   # Output: 4
+
+# Unpacking a tuple
+x, y, z, *rest = my_tuple
+print(x, y, z)   # Output: 1 2 3
+print(rest)      # Output: ['a', 'b', 'c']
+
+# Iterating over a tuple
+for element in my_tuple:
+    print(element)
+
+# Nested tuples
+nested_tuple = ((1, 2), ('a', 'b'), (True, False))
+print(nested_tuple[0][1])  # Output: 2
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Immutable and Mutable Tuples
+</h3>
+      <div class="faq-answer">
+           In Python, tuples are immutable sequences, meaning their elements cannot be changed once created. However, it's important to note that tuples can contain mutable objects, such as lists, which can be modified.
+
+Here's an example code that demonstrates mutable and immutable tuples in Python:
+           <pre><code class="language-python" id="code"># Immutable tuple
+immutable_tuple = (1, 2, 3)
+print("Immutable Tuple:", immutable_tuple)
+# Output: Immutable Tuple: (1, 2, 3)
+
+# Trying to modify an immutable tuple
+# This will raise an error
+# immutable_tuple[0] = 10
+
+# Mutable tuple with a list as an element
+mutable_tuple = ([1, 2, 3], 'Hello', 3.14)
+print("Mutable Tuple:", mutable_tuple)
+# Output: Mutable Tuple: ([1, 2, 3], 'Hello', 3.14)
+
+# Modifying a mutable object within a tuple
+mutable_tuple[0].append(4)
+print("Modified Mutable Tuple:", mutable_tuple)
+# Output: Modified Mutable Tuple: ([1, 2, 3, 4], 'Hello', 3.14)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Empty ,single element ,nested long tuples
+</h3>
+      <div class="faq-answer">
+           Here's an example code that covers the topics of empty tuples, single-element tuples, long tuples, and nested tuples in Python, along with their definitions as comments in the code:
+           <pre><code class="language-python" id="code"># Empty Tuple:
+empty_tuple = ()
+# An empty tuple is a tuple with no elements. It is represented by a pair of parentheses with nothing in between.
+
+# Single-element Tuple:
+single_element_tuple = (42,)
+# A single-element tuple is a tuple that contains only one element. It is represented by the element followed by a comma inside parentheses.
+# The comma is necessary to distinguish a tuple from a normal parentheses-enclosed expression.
+
+# Long Tuple:
+long_tuple = (1, 2, 3, 4, 5)
+# A long tuple is a tuple that contains multiple elements. It can have any number of elements, separated by commas, and enclosed in parentheses.
+
+# Nested Tuple:
+nested_tuple = ((1, 2), ('a', 'b'), (True, False))
+# A nested tuple is a tuple that contains other tuples as its elements. The tuples can be of different lengths and can contain different types of elements.
+# In this example, the nested tuple contains three tuples, each representing a pair of values.
+
+# Printing the tuples:
+print("Empty Tuple:", empty_tuple)
+print("Single-element Tuple:", single_element_tuple)
+print("Long Tuple:", long_tuple)
+print("Nested Tuple:", nested_tuple)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           slicing in tuples
+</h3>
+      <div class="faq-answer">
+           Slicing in a tuple in Python refers to the process of extracting a portion of the tuple by specifying a range of indices. It allows you to create a new tuple containing a subset of the original tuple's elements.
+
+Here's an example code that demonstrates slicing in tuples:
+           <pre><code class="language-python" id="code"># Tuple creation
+my_tuple = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+# Basic slicing
+slice_1 = my_tuple[2:6]  # Extracts elements from index 2 to 5 (exclusive)
+slice_2 = my_tuple[:4]  # Extracts elements from the beginning up to index 3 (exclusive)
+slice_3 = my_tuple[6:]  # Extracts elements from index 6 to the end
+
+print("Original Tuple:", my_tuple)
+print("Slice 1:", slice_1)
+print("Slice 2:", slice_2)
+print("Slice 3:", slice_3)
+
+# Slicing with a step
+slice_4 = my_tuple[1:9:2]  # Extracts elements from index 1 to 8 (exclusive) with a step of 2
+
+print("Slice 4:", slice_4)
+
+# Negative indexing
+slice_5 = my_tuple[-4:-1]  # Extracts elements from index -4 to -2 (exclusive)
+
+print("Slice 5:", slice_5)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           tuple for every type of data
+</h3>
+      <div class="faq-answer">
+           In Python, a tuple is an ordered collection of elements enclosed in parentheses (). Tuples are immutable, meaning their values cannot be modified after creation. Each element within a tuple can be of any data type, including integers, strings, Booleans, floats, and more.
+
+Here's an example code demonstrating a tuple with various data types:
+           <pre><code class="language-python" id="code"># Tuple with different data types
+my_tuple = (42, "Hello", True, 3.14, ('a', 'b', 'c'))
+
+# Accessing elements in the tuple
+print("Tuple:", my_tuple)
+print("Integer:", my_tuple[0])
+print("String:", my_tuple[1])
+print("Boolean:", my_tuple[2])
+print("Float:", my_tuple[3])
+print("Nested Tuple:", my_tuple[4])
+
+# Modifying the tuple (Note: Tuples are immutable, so modification is not possible)
+# my_tuple[0] = 99  # This line will raise an error
+
+# Tuple unpacking
+a, b, c, d, e = my_tuple
+print("Unpacked values:", a, b, c, d, e)
+
+# Length of the tuple
+print("Length of the tuple:", len(my_tuple))
+#Output
+Tuple: (42, 'Hello', True, 3.14, ('a', 'b', 'c'))
+Integer: 42
+String: Hello
+Boolean: True
+Float: 3.14
+Nested Tuple: ('a', 'b', 'c')
+Unpacked values: 42 Hello True 3.14 ('a', 'b', 'c')
+Length of the tuple: 5
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Tuple function and methods
+</h3>
+      <div class="faq-answer">
+           A tuple is an immutable sequence type in Python, represented by comma-separated values enclosed within parentheses. It is similar to a list but cannot be modified once created. Python provides several built-in functions and methods for tuples. Here's an example code covering the tuple functions and methods, along with their definitions:
+           <pre>
+<code class="language-python" id="code"># Creating a tuple
+my_tuple = (1, 2, 3, 4, 5)
+
+# Tuple Functions
+
+# len(): Returns the number of elements in the tuple.
+tuple_length = len(my_tuple)
+print("Length of the tuple:", tuple_length)
+
+# max(): Returns the maximum value from the tuple.
+maximum_value = max(my_tuple)
+print("Maximum value in the tuple:", maximum_value)
+
+# min(): Returns the minimum value from the tuple.
+minimum_value = min(my_tuple)
+print("Minimum value in the tuple:", minimum_value)
+
+# sum(): Returns the sum of all elements in the tuple.
+sum_of_elements = sum(my_tuple)
+print("Sum of all elements in the tuple:", sum_of_elements)
+
+# Tuple Methods
+
+# count(): Returns the number of occurrences of a specified element in the tuple.
+element_count = my_tuple.count(2)
+print("Number of occurrences of '2' in the tuple:", element_count)
+
+# index(): Returns the index of the first occurrence of a specified element in the tuple.
+element_index = my_tuple.index(4)
+print("Index of the first occurrence of '4' in the tuple:", element_index)
+
+#Output
+Length of the tuple: 5
+Maximum value in the tuple: 5
+Minimum value in the tuple: 1
+Sum of all elements in the tuple: 15
+Number of occurrences of '2' in the tuple: 1
+Index of the first occurrence of '4' in the tuple: 3</code></pre>
+      </div>
+    </div>
+    
+    </div>
+</section>
+
+<script>
+    const searchInput = document.querySelector('.search-container input');
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    searchInput.addEventListener('keyup', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        faqItems.forEach(function(item) {
+            const question = item.querySelector('.faq-question').textContent.toLowerCase();
+            if (question.includes(searchTerm)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+<script>
+    Prism.highlightAll();
+</script>
+
+</body>
+</html>

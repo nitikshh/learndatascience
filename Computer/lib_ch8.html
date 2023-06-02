@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ask Computer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100vh;
+    background-color: #f2f2f2;
+    transition: width 0.3s ease;
+    overflow: hidden;
+  }
+
+  .icon::before {
+    content: "\2630"; /* Hamburger icon */
+  }
+
+  .icon.open::before {
+    content: "\2716"; /* Close icon */
+  }
+
+  .icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  #navbarList {
+    margin-top: 50px;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  #navbarList li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #navbarList li a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .open {
+    width: 300px;
+  }
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+           /* position: sticky;*/
+            top: 0;
+            background-color: #fff;
+            z-index: 999;
+        }
+
+        .search-container input[type=text] {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 10px;
+            margin: 0;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .faq-answer {
+            padding: 10px;
+            margin: 0;
+            font-size: 7px;
+            line-height: 1.5;
+            color: #666;
+        }
+         .faq-answer code {
+            font-size: 12px;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .container h1 {
+            font-size: 30px;
+            margin-bottom: 2px;
+            width: 100%;
+            text-align: center;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        @media screen and (max-width: 768px) {
+            .faq-section {
+                padding: 30px 10px;
+            }
+
+            .faq-question {
+                font-size: 13px;
+            }
+
+            .faq-answer {
+                font-size: 12px;
+            }
+        }
+
+        pre {
+            background-color: white !important;
+            color: white;
+            padding: 4px;
+            width: 100%;
+            overflow: scroll;
+            border-radius: 5px;
+           
+        }
+
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="icon" onclick="toggleNavbar()"></div>
+    <ul id="navbarList">
+      <li><a href="index.html">Chapter 1 - Starting with Python</a></li>
+      <li><a href="computer_ch2.html">Chapter 2 - If-else and loops</a></li>
+      <li><a href="computer_ch3.html">Chapter 3 - String Manipulation</a></li>
+      <li><a href="computer_ch4.html">Chapter 4  - List Manipulation</a></li>
+      <li><a href="Touples.html">Chapter 5 - Touples</a></li>
+      <li><a href="dictionaries_ch6.html">Chapter 6 - Dictionaries</a></li>
+      <li><a href="functions_ch7.html">Chapter 7 - Functions </a></li>
+      <li><a href="#">Chapter 8 - Working with Libraries</a></li>
+      <li><a href="#">Chapter 9 - Glossary</a></li>
+      <li><a href="#">Chapter 10 - Index</a></li>
+    </ul>
+  </div>
+
+    <script>
+    function toggleNavbar() {
+      var navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('open');
+
+      var icon = document.querySelector('.icon');
+      icon.classList.toggle('open');
+      
+      
+    }
+  </script>
+<div class="container">
+    <h1>Python</h1>
+</div>
+<section class="faq-section">
+    <div class="search-container">
+        <input type="text" placeholder="Search for a question...">
+    </div>
+    <div class="faq-list">
+   <div class="faq-item">
+      <h3 class="faq-question">
+What is Libraries in Python 
+</h3>
+      <div class="faq-answer">
+In Python, libraries (also known as modules or packages) are collections of pre-written code that provide additional functionality, allowing you to perform tasks efficiently without having to write all the code from scratch. Libraries in Python help extend the language's capabilities and make it easier to accomplish various tasks. Here are some commonly used libraries in Python:
+<br><br>
+1. **Python Standard Library**: The Python Standard Library is a collection of modules that are included with Python. It provides a wide range of functionalities for tasks such as file handling, networking, regular expressions, data compression, threading, and more. Some notable modules from the standard library include `os`, `datetime`, `random`, `math`, and `json`.
+<br><br>
+2. **NumPy**: NumPy is a powerful library for numerical computing in Python. It provides support for large, multi-dimensional arrays and matrices, along with a collection of mathematical functions to operate on these arrays efficiently. NumPy is widely used in scientific and data-related applications.
+<br><br>
+3. **Pandas**: Pandas is a popular library for data manipulation and analysis. It offers data structures like DataFrames, which allow easy handling and analysis of structured data. Pandas provides functionalities for data cleaning, filtering, merging, reshaping, and performing statistical computations on data.
+<br><br>
+4. **Matplotlib**: Matplotlib is a plotting library that enables the creation of various types of visualizations, such as line plots, scatter plots, bar charts, histograms, and more. It provides a high degree of customization and allows you to create publication-quality plots.
+<br><br>
+5. **Scikit-learn**: Scikit-learn is a machine learning library in Python that provides a wide range of tools for various tasks, including classification, regression, clustering, dimensionality reduction, and model evaluation. It offers a consistent interface and integrates well with other scientific libraries.
+<br><br>
+6. **TensorFlow**: TensorFlow is a popular open-source library for machine learning and deep learning. It provides a flexible framework for building and training neural networks, and it includes various tools for working with large-scale datasets and deploying models.
+<br><br>
+7. **Keras**: Keras is an easy-to-use, high-level neural networks library that runs on top of TensorFlow. It simplifies the process of building and training deep learning models by providing a user-friendly API and pre-defined neural network layers.
+<br><br>
+8. **Requests**: Requests is a library for making HTTP requests in Python. It simplifies the process of interacting with web services and APIs by providing an elegant and intuitive API for sending HTTP requests and handling responses.
+<br><br>
+These are just a few examples of the vast number of libraries available in Python. Depending on your specific needs, there are many other specialized libraries for tasks such as image processing (OpenCV), natural language processing (NLTK), web development (Django), scientific computing (SciPy), and more.
+           <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+What is a Module 
+</h3>
+      <div class="faq-answer">
+In Python, a module is a file that contains Python code, typically in the form of functions, classes, and variables. It is used to organize and reuse code in a structured manner. Modules provide a way to logically group related code, making it easier to manage and maintain large Python programs.
+<br><br>
+A module can be thought of as a library or a collection of functions and variables that serve a specific purpose. It can be written by yourself or obtained from external sources, such as the Python Standard Library or third-party libraries.
+<br><br>
+Here are some key points about modules in Python:
+<br>
+1. **Code Reusability**: Modules promote code reusability by allowing you to import and use functions, classes, and variables defined in other modules within your Python programs.
+<br><br>
+2. **Namespace Isolation**: Each module has its own namespace, which means that the names defined within a module are separate from the names in other modules. This avoids naming conflicts between variables and functions with the same name in different modules.
+<br><br>
+3. **Encapsulation**: Modules provide a way to encapsulate related code, making it easier to understand and maintain. By grouping related code in a module, you can hide the implementation details and expose only the necessary interfaces to other parts of the program.
+<br><br>
+4. **Importing Modules**: To use the functionality of a module, you need to import it into your Python program using the `import` statement. Once imported, you can access the functions, classes, and variables defined in the module using the module name as a prefix.
+<br><br>
+Here's an example of importing and using a module named `math` from the Python Standard Library:
+           <pre onclick="copyText()"><code class="language-python" id="code">import math
+
+# Using functions from the math module
+print(math.sqrt(25))  # Square root function
+print(math.pi)  # Value of pi
+
+# Using constants from the math module
+radius = 5
+circumference = 2 * math.pi * radius
+print(circumference)</code></pre>
+In this code, we import the `math` module using the `import` statement. We then use the `sqrt()` function from the `math` module to calculate the square root of 25 and print it. Additionally, we access the value of pi (`math.pi`) and use it to calculate the circumference of a circle with a given radius.
+<h3 class="faq-question">
+ Let's have a look at an axample modeule,
+</h3>
+Here's the code for `tempConversion.py` module that converts temperature between Celsius and Fahrenheit:
+
+<pre onclick="copyText()"><code class="language-python" id="code">#tempConversion.py
+def celsius_to_fahrenheit(celsius):
+    fahrenheit = (celsius * 9/5) + 32
+    return fahrenheit
+
+def fahrenheit_to_celsius(fahrenheit):
+    celsius = (fahrenheit - 32) * 5/9
+    return celsius
+</code></pre>
+And here's an example usage in another file, let's call it `main.py`:
+<pre onclick="copyText()"><code class="language-python" id="code"># Import the tempConversion module
+import tempConversion
+
+# Convert Celsius to Fahrenheit
+celsius = 25
+fahrenheit = tempConversion.celsius_to_fahrenheit(celsius)
+print(f"{celsius} degrees Celsius is equal to {fahrenheit} degrees Fahrenheit")
+
+# Convert Fahrenheit to Celsius
+fahrenheit = 77
+celsius = tempConversion.fahrenheit_to_celsius(fahrenheit)
+print(f"{fahrenheit} degrees Fahrenheit is equal to {celsius} degrees Celsius")</code></pre>
+In the `main.py` file, we import the `tempConversion` module and use the functions `celsius_to_fahrenheit` and `fahrenheit_to_celsius` to convert temperature values. We provide sample values and print the conversion results.
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+Importing Modules
+</h3>
+      <div class="faq-answer">
+In Python, modules are an essential part of a program as they provide a way to organize and reuse code. There are two common ways to use modules in Python:
+<br><br>
+1. Importing the Entire Module:
+   This approach involves importing the entire module, which allows you to access all the objects defined within it. You can use the module name followed by a dot (`.`) to access the objects.
+<br><br>
+   Here's an example:
+
+<pre onclick="copyText()"><code class="language-python" id="code">
+   import math
+   radius = 5
+   circumference = 2 * math.pi * radius
+   print(f"The circumference of a circle with radius {radius} is {circumference}")</code></pre>
+
+   In the above code, the `math` module is imported, and the `pi` constant defined in the module is used to calculate the circumference of a circle.
+<br><br>
+2. Importing Select Objects from a Module:
+   Sometimes, you may only need specific objects from a module rather than importing the entire module. This approach allows you to import and use only the required objects from the module.
+<br><br>
+   Here's an example:
+   <pre onclick="copyText()"><code class="language-python" id="code">
+   from datetime import datetime
+   current_time = datetime.now()
+   print(f"The current time is: {current_time}")</code></pre>
+
+   In the above code, only the `datetime` class is imported from the `datetime` module. This allows direct usage of the `datetime.now()` function to retrieve the current time.
+<br><br>
+   You can also import specific objects using the `as` keyword to assign them different names:
+
+   <pre onclick="copyText()"><code class="language-python" id="code">
+   from math import pi as math_pi
+   radius = 5
+   circumference = 2 * math_pi * radius
+   print(f"The circumference of a circle with radius {radius} is {circumference}")</code></pre>
+
+   In this code, the `pi` constant is imported from the `math` module and assigned the name `math_pi`. This provides a shorter name to reference the constant in the calculations.
+<br><br>
+Importing modules or specific objects from modules allows you to access pre-defined functionality and resources in Python, making your code more efficient, organized, and reusable.
+           <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+Some standard library's functions and modules
+</h3>
+      <div class="faq-answer">
+Here's an example code snippet that utilizes various Python standard library functions and modules:
+           <pre onclick="copyText()"><code class="language-python" id="code">import os
+import random
+from datetime import datetime
+from math import sqrt
+
+# OS module
+current_directory = os.getcwd()
+print(f"Current directory: {current_directory}")
+
+# Random module
+random_number = random.randint(1, 10)
+print(f"Random number between 1 and 10: {random_number}")
+
+# Datetime module
+current_time = datetime.now()
+print(f"Current time: {current_time}")
+
+# Len function
+text = "Hello, World!"
+text_length = len(text)
+print(f"Length of the text: {text_length}")
+
+# Str, Int, Float functions
+num_str = "123"
+num_int = int(num_str)
+num_float = float(num_str)
+print(f"Converted to int: {num_int}")
+print(f"Converted to float: {num_float}")
+
+# Math module (sqrt function)
+number = 25
+square_root = sqrt(number)
+print(f"Square root of {number}: {square_root}")
+
+# Range function
+for i in range(5):
+    print(i, end=" ")
+print()
+
+# Type function
+value = 42
+value_type = type(value)
+print(f"Type of the value: {value_type}")
+
+# Sum function
+numbers = [1, 2, 3, 4, 5]
+numbers_sum = sum(numbers)
+print(f"Sum of numbers: {numbers_sum}")
+
+# Max function
+numbers = [10, 20, 30, 40, 50]
+maximum = max(numbers)
+print(f"Maximum number: {maximum}")
+
+# Min function
+numbers = [10, 20, 30, 40, 50]
+minimum = min(numbers)
+print(f"Minimum number: {minimum}")
+
+# Oct and Hex functions
+number = 42
+octal = oct(number)
+hexadecimal = hex(number)
+print(f"Octal representation: {octal}")
+print(f"Hexadecimal representation: {hexadecimal}")
+
+# Absolute function
+number = -10
+absolute_value = abs(number)
+print(f"Absolute value: {absolute_value}")
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+
+</h3>
+      <div class="faq-answer">
+
+           <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+
+</h3>
+      <div class="faq-answer">
+
+           <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+
+</h3>
+      <div class="faq-answer">
+
+           <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+
+</h3>
+      <div class="faq-answer">
+
+           <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+
+</h3>
+      <div class="faq-answer">
+
+           <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+
+</h3>
+      <div class="faq-answer">
+
+           <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+
+</h3>
+      <div class="faq-answer">
+
+           <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+
+</h3>
+      <div class="faq-answer">
+
+           <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+      </div>
+    </div>
+    
+        
+        
+        
+    </div>
+</section>
+
+<script>
+    const searchInput = document.querySelector('.search-container input');
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    searchInput.addEventListener('keyup', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        faqItems.forEach(function(item) {
+            const question = item.querySelector('.faq-question').textContent.toLowerCase();
+            if (question.includes(searchTerm)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+<script>
+    Prism.highlightAll();
+</script>
+<script>
+    function copyText() {
+        var codeElement = document.getElementById('code');
+        var text = codeElement.textContent;
+
+        navigator.clipboard.writeText(text)
+            .then(function() {
+                alert("Text copied to clipboard!");
+            })
+            .catch(function(error) {
+                console.error("Failed to copy text: ", error);
+            });
+    }
+</script>
+
+</body>
+</html>

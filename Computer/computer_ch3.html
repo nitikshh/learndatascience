@@ -1,0 +1,700 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>String Manipulation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100vh;
+    background-color: #f2f2f2;
+    transition: width 0.3s ease;
+    overflow: hidden;
+  }
+
+  .icon::before {
+    content: "\2630"; /* Hamburger icon */
+  }
+
+  .icon.open::before {
+    content: "\2716"; /* Close icon */
+  }
+
+  .icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  #navbarList {
+    margin-top: 50px;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  #navbarList li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #navbarList li a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .open {
+    width: 300px;
+  }
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+           /* position: sticky;*/
+            top: 0;
+            background-color: #fff;
+            z-index: 999;
+        }
+
+        .search-container input[type=text] {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 10px;
+            margin: 0;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .faq-answer {
+            padding: 10px;
+            margin: 0;
+            font-size: 7px;
+            line-height: 1.5;
+            color: #666;
+        }
+         .faq-answer code {
+            font-size: 12px;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .container h1 {
+            font-size: 30px;
+            margin-bottom: 2px;
+            width: 100%;
+            text-align: center;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        @media screen and (max-width: 768px) {
+            .faq-section {
+                padding: 30px 10px;
+            }
+
+            .faq-question {
+                font-size: 13px;
+            }
+
+            .faq-answer {
+                font-size: 12px;
+            }
+        }
+
+        pre {
+            background-color: white !important;
+            color: white;
+            padding: 4px;
+            width: 100%;
+            overflow: scroll;
+            border-radius: 5px;
+           
+        }
+
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="icon" onclick="toggleNavbar()"></div>
+    <ul id="navbarList">
+      <li><a href="index.html">Chapter 1 - Starting with Python</a></li>
+      <li><a href="computer_ch2.html">Chapter 2 - If-else and loops</a></li>
+      <li><a href="#">Chapter 3 - String Manipulation</a></li>
+      <li><a href="computer_ch4.html">Chapter 4 - List Manipulation</a></li>
+      <li><a href="Touples.html">Chapter 5 - Touples</a></li>
+      <li><a href="dictionaries_ch6.html">Chapter 6 - Dictionaries</a></li>
+      <li><a href="functions_ch7.html">Chapter 7 - Functions</a></li>
+      <li><a href="lib_ch8.html">Chapter 8 - Working with Libraries</a></li>
+      <li><a href="#">Chapter 9 - Glossary</a></li>
+      <li><a href="#">Chapter 10 - Index</a></li>
+    </ul>
+  </div>
+
+    <script>
+    function toggleNavbar() {
+      var navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('open');
+
+      var icon = document.querySelector('.icon');
+      icon.classList.toggle('open');
+      
+      
+    }
+  </script>
+<div class="container">
+    <h1>Python</h1>
+</div>
+<section class="faq-section">
+    <div class="search-container">
+        <input type="text" placeholder="Search for a question...">
+    </div>
+    <div class="faq-list">
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What is String Manipulation
+</h3>
+      <div class="faq-answer">
+           String manipulation refers to the various operations and transformations that can be performed on strings, such as concatenation, slicing, replacing characters, converting cases, and more. It involves modifying or extracting specific parts of a string to achieve the desired outcome.
+
+Here's a basic program that demonstrates some common string manipulation operations in Python:
+      <pre><code class="language-python" id="code"># String Manipulation Example
+text = "Hello, World!"
+
+# Length of the string
+length = len(text)
+print("Length of the string:", length)
+
+# Accessing individual characters
+first_char = text[0]
+last_char = text[-1]
+print("First character:", first_char)
+print("Last character:", last_char)
+
+# Slicing the string
+substring = text[7:12]
+print("Substring:", substring)
+
+# Concatenating strings
+greeting = "Hello"
+name = "John"
+full_greeting = greeting + " " + name
+print("Full greeting:", full_greeting)
+
+# Converting case
+uppercase = text.upper()
+lowercase = text.lower()
+print("Uppercase:", uppercase)
+print("Lowercase:", lowercase)
+
+# Replacing characters
+new_text = text.replace("World", "Python")
+print("Modified text:", new_text)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           what is string concatenation Operator (+)
+</h3>
+      <div class="faq-answer">
+           String concatenation in Python refers to the operation of combining multiple strings together into a single string. The concatenation operator in Python is the plus sign (+), which is used to join two or more strings.
+
+Here's an example code that demonstrates string concatenation using the plus operator and covers various aspects of this topic:
+      <pre><code class="language-python" id="code"># String concatenation using the plus operator
+
+# Defining two strings
+string1 = "Hello"
+string2 = "World"
+
+# Concatenating strings using the plus operator
+concatenated_string = string1 + " " + string2
+
+# Displaying the concatenated string
+print("Concatenated String:", concatenated_string)
+
+# Concatenating strings with variables of different types
+name = "Alice"
+age = 25
+greeting = "Hello, my name is " + name + " and I am " + str(age) + " years old."
+
+# Displaying the concatenated string
+print("Greeting:", greeting)
+
+# Concatenating strings within print function
+print("Hello" + " " + "World")
+
+# Using the plus operator for multiple concatenations
+string3 = "I"
+string4 = "love"
+string5 = "Python"
+full_sentence = string3 + " " + string4 + " " + string5
+
+# Displaying the full sentence
+print("Full Sentence:", full_sentence)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           what is string replication operator (*)
+</h3>
+      <div class="faq-answer">
+           The string replicator operator (*) in Python is used to repeat a string a certain number of times. It allows you to create a new string by concatenating multiple copies of the original string. Here's the definition of the string replicator operator and an example code that covers its usage:
+      <pre><code class="language-python" id="code">def string_replicator(string, n):
+    """
+    Function to replicate a string 'n' times using the string replicator operator (*).
+    
+    Args:
+        string (str): The string to be replicated.
+        n (int): The number of times the string should be repeated.
+    
+    Returns:
+        str: The resulting string after replication.
+    """
+    return string * n
+
+# Example usage
+original_string = "Hello!"
+replicated_string = string_replicator(original_string, 3)
+print(replicated_string)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           what are membership operators
+</h3>
+      <div class="faq-answer">
+           Membership operators in Python are used to test whether a value or a variable is a member of a sequence (such as a string, list, or tuple) or a collection (such as a set or dictionary). The two membership operators available in Python are in and not in.
+
+Here's an example code that covers the topic of membership operators and includes their definitions:
+      <pre><code class="language-python" id="code"># Membership operators in Python
+
+# Definition of membership operators
+"""
+The 'in' operator checks if a value is present in a sequence or collection.
+It returns True if the value is found, and False otherwise.
+Syntax: value in sequence/collection
+
+The 'not in' operator checks if a value is not present in a sequence or collection.
+It returns True if the value is not found, and False if it is found.
+Syntax: value not in sequence/collection
+"""
+
+# Example usage of membership operators
+# Lists
+fruits = ['apple', 'banana', 'orange']
+
+# 'in' operator
+print('apple' in fruits)          # True
+print('grape' in fruits)          # False
+
+# 'not in' operator
+print('apple' not in fruits)      # False
+print('grape' not in fruits)      # True
+
+# Strings
+name = 'John Doe'
+
+# 'in' operator
+print('John' in name)             # True
+print('Jane' in name)             # False
+
+# 'not in' operator
+print('John' not in name)         # False
+print('Jane' not in name)         # True
+
+# Sets
+numbers = {1, 2, 3, 4, 5}
+
+# 'in' operator
+print(3 in numbers)               # True
+print(6 in numbers)               # False
+
+# 'not in' operator
+print(3 not in numbers)           # False
+print(6 not in numbers)           # True
+
+# Dictionaries
+person = {'name': 'John', 'age': 30, 'city': 'New York'}
+
+# 'in' operator (checks keys)
+print('name' in person)           # True
+print('gender' in person)         # False
+
+# 'not in' operator (checks keys)
+print('name' not in person)       # False
+print('gender' not in person)     # True
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           what are comparison operators
+</h3>
+      <div class="faq-answer">
+           Certainly! Comparison operators in Python are used to compare values and determine the relationship between them. They return a Boolean value (True or False) based on the result of the comparison. Here's a code snippet that covers all the comparison operators in Python along with their definitions:
+      <pre><code class="language-python" id="code"># Comparison operators in Python
+
+# Equal to (==) operator: Checks if two values are equal
+x = 5
+y = 10
+print("Equal to (==) operator:", x == y)  # False
+
+# Not equal to (!=) operator: Checks if two values are not equal
+print("Not equal to (!=) operator:", x != y)  # True
+
+# Greater than (>) operator: Checks if the left value is greater than the right value
+print("Greater than (>) operator:", x > y)  # False
+
+# Less than (<) operator: Checks if the left value is less than the right value
+print("Less than (<) operator:", x < y)  # True
+
+# Greater than or equal to (>=) operator: Checks if the left value is greater than or equal to the right value
+print("Greater than or equal to (>=) operator:", x >= y)  # False
+
+# Less than or equal to (<=) operator: Checks if the left value is less than or equal to the right value
+print("Less than or equal to (<=) operator:", x <= y)  # True
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           what is string slicing
+</h3>
+      <div class="faq-answer">
+           String slicing in Python refers to extracting a portion of a string by specifying the starting and ending indices. It allows you to retrieve a substring from a larger string based on its position.
+
+Here's an example code that covers various aspects of string slicing along with the definitions:
+      <pre><code class="language-python" id="code"># String slicing in Python
+
+# Definition:
+# String slicing is the process of extracting a portion of a string by specifying the starting and ending indices.
+
+# Example 1: Basic slicing
+string1 = "Hello, World!"
+substring1 = string1[7:12]
+print("Substring 1:", substring1)  # Output: "World"
+
+# Example 2: Omitting start or end index
+string2 = "Python Programming"
+substring2_1 = string2[:6]
+substring2_2 = string2[7:]
+print("Substring 2.1:", substring2_1)  # Output: "Python"
+print("Substring 2.2:", substring2_2)  # Output: "Programming"
+
+# Example 3: Negative indices
+string3 = "OpenAI"
+substring3 = string3[-3:]
+print("Substring 3:", substring3)  # Output: "AI"
+
+# Example 4: Step value
+string4 = "abcdefghijklmnopqrstuvwxyz"
+substring4_1 = string4[::2]
+substring4_2 = string4[1::3]
+print("Substring 4.1:", substring4_1)  # Output: "acegikmoqsuwy"
+print("Substring 4.2:", substring4_2)  # Output: "bfilorvx"
+
+# Example 5: Reverse string
+string5 = "Hello, World!"
+substring5 = string5[::-1]
+print("Substring 5:", substring5)  # Output: "!dlroW ,olleH"
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What are string functions
+</h3>
+      <div class="faq-answer">
+           In Python, string functions and methods are predefined operations that can be performed on strings. They provide a way to manipulate and work with strings in various ways.
+      <pre><code class="language-python" id="code"># String Functions and Methods
+
+# len(): Returns the length of a string.
+string = "Hello, World!"
+length = len(string)
+print(f"Length of the string: {length}")
+
+# count(): Returns the number of occurrences of a substring in a string.
+count = string.count("l")
+print(f"Count of 'l' in the string: {count}")
+
+# capitalize(): Converts the first character of a string to uppercase and the rest to lowercase.
+capitalized_string = string.capitalize()
+print(f"Capitalized string: {capitalized_string}")
+
+# find(): Returns the index of the first occurrence of a substring in a string.
+index = string.find("World")
+print(f"Index of 'World' in the string: {index}")
+
+# index(): Same as find(), but raises an exception if the substring is not found.
+try:
+    index = string.index("World")
+    print(f"Index of 'World' in the string: {index}")
+except ValueError:
+    print("Substring not found!")
+
+# isalnum(): Returns True if all characters in a string are alphanumeric (letters or digits).
+is_alnum = string.isalnum()
+print(f"Is the string alphanumeric? {is_alnum}")
+
+# isalpha(): Returns True if all characters in a string are alphabetic (letters).
+is_alpha = string.isalpha()
+print(f"Is the string alphabetic? {is_alpha}")
+
+# isdigit(): Returns True if all characters in a string are digits.
+is_digit = string.isdigit()
+print(f"Is the string numeric? {is_digit}")
+
+# islower(): Returns True if all characters in a string are lowercase.
+is_lower = string.islower()
+print(f"Is the string lowercase? {is_lower}")
+
+# isspace(): Returns True if all characters in a string are whitespace characters.
+is_space = string.isspace()
+print(f"Is the string whitespace? {is_space}")
+
+# isupper(): Returns True if all characters in a string are uppercase.
+is_upper = string.isupper()
+print(f"Is the string uppercase? {is_upper}")
+
+# lower(): Converts all characters in a string to lowercase.
+lower_string = string.lower()
+print(f"Lowercase string: {lower_string}")
+
+# upper(): Converts all characters in a string to uppercase.
+upper_string = string.upper()
+print(f"Uppercase string: {upper_string}")
+
+# lstrip(): Removes leading whitespace characters from a string.
+lstripped_string = string.lstrip()
+print(f"Left-stripped string: {lstripped_string}")
+
+# rstrip(): Removes trailing whitespace characters from a string.
+rstripped_string = string.rstrip()
+print(f"Right-stripped string: {rstripped_string}")
+
+# strip(): Removes leading and trailing whitespace characters from a string.
+stripped_string = string.strip()
+print(f"Stripped string: {stripped_string}")
+
+# istitle(): Returns True if a string is titlecased (each word starts with an uppercase character and the remaining characters are lowercase).
+is_title = string.istitle()
+print(f"Is the string titlecased? {is_title}")
+
+# title(): Converts a string to titlecase (each word starts with an uppercase character and the remaining characters are lowercase).
+title_string = string.title()
+print(f"Titlecased string: {title_string}")
+
+# startswith(): Returns True if a string starts with a specified substring.
+starts_with = string.startswith("Hello")
+print(f"Does the string start with 'Hello'? {starts_with}")
+
+# endswith(): Returns True if a string ends with a specified substring.
+ends_with = string.endswith("World!")
+print(f"Does the string end with 'World!'? {ends_with}")
+
+# replace(): Replaces all occurrences of a substring in a string with another substring.
+replaced_string = string.replace("Hello", "Hi")
+print(f"Replaced string: {replaced_string}")
+
+# join(): Joins elements of an iterable (e.g., list) into a single string using a specified separator.
+words = ["Hello", "World!"]
+joined_string = " ".join(words)
+print(f"Joined string: {joined_string}")
+
+# split(): Splits a string into a list of substrings based on a specified separator.
+split_string = string.split(",")
+print(f"Split string: {split_string}")
+
+# partition(): Splits a string into a tuple containing the substring before the first occurrence of a separator, the separator itself, and the substring after it.
+partitioned_string = string.partition(",")
+print(f"Partitioned string: {partitioned_string}")
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Write a program to input a string and check if contains a digit or not in python
+</h3>
+      <div class="faq-answer">
+           
+      <pre><code class="language-python" id="code">string = input("Enter a string: ")
+
+# Using the isdigit() method to check if the string contains a digit
+if any(char.isdigit() for char in string):
+    print("The string contains a digit.")
+else:
+    print("The string does not contain a digit.")
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Write a program that input and full address containing a pin code and extract and print the pin code from the input address.
+</h3>
+      <div class="faq-answer">
+           
+      <pre><code class="language-python" id="code">address = input("Enter the full address: ")
+
+# Splitting the address into individual words
+words = address.split()
+
+# Searching for the pin code in the address
+pin_code = None
+for word in words:
+    if word.isdigit() and len(word) == 6:
+        pin_code = word
+        break
+
+# Printing the extracted pin code, if found
+if pin_code:
+    print("Pin code:", pin_code)
+else:
+    print("Pin code not found in the address.")
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Write a program to input a string and print number to upper and the lower case letter in it
+</h3>
+      <div class="faq-answer">
+           
+      <pre><code class="language-python" id="code">string = input("Enter a string: ")
+
+numbers = ""
+uppercase_letters = ""
+lowercase_letters = ""
+
+for char in string:
+    if char.isdigit():
+        numbers += char
+    elif char.isupper():
+        uppercase_letters += char
+    elif char.islower():
+        lowercase_letters += char
+
+print("Numbers:", numbers)
+print("Uppercase Letters:", uppercase_letters)
+print("Lowercase Letters:", lowercase_letters)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Write a program to input a string and print each individual word of it along with its length
+</h3>
+      <div class="faq-answer">
+           
+      <pre><code class="language-python" id="code">string = input("Enter a string: ")
+
+words = string.split()
+
+for word in words:
+    print(f"Word: {word} | Length: {len(word)}")
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Take input as username, phone number and email and check the email and phone number is correct or not.
+</h3>
+      <div class="faq-answer">
+           
+      <pre><code class="language-python" id="code">import re
+
+# Function to validate the email format
+def is_valid_email(email):
+    pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+    return re.match(pattern, email)
+
+# Function to validate the phone number format
+def is_valid_phone_number(phone_number):
+    pattern = r'^\d{10}$'
+    return re.match(pattern, phone_number)
+
+# Taking input from the user
+username = input("Enter your username: ")
+phone_number = input("Enter your phone number: ")
+email = input("Enter your email: ")
+
+# Validating the email and phone number
+if is_valid_email(email):
+    print("Email is valid.")
+else:
+    print("Email is not valid.")
+
+if is_valid_phone_number(phone_number):
+    print("Phone number is valid.")
+else:
+    print("Phone number is not valid.")
+</code></pre>
+      </div>
+    </div>
+    
+    </div>
+</section>
+
+<script>
+    const searchInput = document.querySelector('.search-container input');
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    searchInput.addEventListener('keyup', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        faqItems.forEach(function(item) {
+            const question = item.querySelector('.faq-question').textContent.toLowerCase();
+            if (question.includes(searchTerm)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+<script>
+    Prism.highlightAll();
+</script>
+
+</body>
+</html>

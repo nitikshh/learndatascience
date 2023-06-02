@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ask Computer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100vh;
+    background-color: #f2f2f2;
+    transition: width 0.3s ease;
+    overflow: hidden;
+  }
+
+  .icon::before {
+    content: "\2630"; /* Hamburger icon */
+  }
+
+  .icon.open::before {
+    content: "\2716"; /* Close icon */
+  }
+
+  .icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  #navbarList {
+    margin-top: 50px;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  #navbarList li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #navbarList li a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .open {
+    width: 300px;
+  }
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+           /* position: sticky;*/
+            top: 0;
+            background-color: #fff;
+            z-index: 999;
+        }
+
+        .search-container input[type=text] {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+       .faq-question {
+            padding: 10px;
+            margin: 0;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .faq-answer {
+            padding: 10px;
+            margin: 0;
+            font-size: 7px;
+            line-height: 1.5;
+            color: #666;
+        }
+         .faq-answer code {
+            font-size: 12px;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .container h1 {
+            font-size: 30px;
+            margin-bottom: 2px;
+            width: 100%;
+            text-align: center;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        @media screen and (max-width: 768px) {
+            .faq-section {
+                padding: 30px 10px;
+            }
+
+            .faq-question {
+                font-size: 13px;
+            }
+
+            .faq-answer {
+                font-size: 12px;
+            }
+        }
+
+        pre {
+            background-color: white !important;
+            color: white;
+            padding: 4px;
+            width: 100%;
+            overflow: scroll;
+            border-radius: 5px;
+           
+        }
+
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="icon" onclick="toggleNavbar()"></div>
+    <ul id="navbarList">
+      <li><a href="index.html">Chapter 1 - Starting with Python</a></li>
+      <li><a href="computer_ch2.html">Chapter 2 - If-else and loops</a></li>
+      <li><a href="computer_ch3.html">Chapter 3 - String Manipulation</a></li>
+      <li><a href="computer_ch4.html">Chapter 4  - List Manipulation</a></li>
+      <li><a href="Touples.html">Chapter 5 - Touples</a></li>
+      <li><a href="#">Chapter 6 - Dictionaries</a></li>
+      <li><a href="functions_ch7.html">Chapter 7 - Functions</a></li>
+      <li><a href="lib_ch8.html">Chapter 8 - Working with Libraries</a></li>
+      <li><a href="#">Chapter 9 - Glossary</a></li>
+      <li><a href="#">Chapter 10 - Index</a></li>
+    </ul>
+  </div>
+
+    <script>
+    function toggleNavbar() {
+      var navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('open');
+
+      var icon = document.querySelector('.icon');
+      icon.classList.toggle('open');
+      
+      
+    }
+  </script>
+<div class="container">
+    <h1>Python</h1>
+</div>
+<section class="faq-section">
+    <div class="search-container">
+        <input type="text" placeholder="Search for a question...">
+    </div>
+    <div class="faq-list">
+   <div class="faq-item">
+      <h3 class="faq-question">
+what are dictionaries
+      </h3>
+      <div class="faq-answer">
+Dictionaries in Python are unordered collections of key-value pairs. They are used to store and retrieve data in an efficient manner. Keys in a dictionary are unique and immutable, while values can be of any data type and can be duplicated.
+<br>
+Here's an example code that covers the definition and demonstrates the various operations related to dictionaries in Python:
+           <pre onclick="copyText()"><code class="language-python" id="code"># Define a dictionary
+my_dict = {
+    'name': 'John',
+    'age': 25,
+    'city': 'New York'
+}
+
+# Accessing values using keys
+print("Name:", my_dict['name'])
+print("Age:", my_dict['age'])
+print("City:", my_dict['city'])
+
+# Modifying values
+my_dict['age'] = 26
+print("Updated age:", my_dict['age'])
+
+# Adding a new key-value pair
+my_dict['occupation'] = 'Engineer'
+print("Occupation:", my_dict['occupation'])
+
+# Removing a key-value pair
+del my_dict['city']
+print("After deleting 'city' key:", my_dict)
+
+# Checking if a key exists
+if 'name' in my_dict:
+    print("Key 'name' exists in the dictionary")
+
+# Getting all keys and values
+print("Keys:", my_dict.keys())
+print("Values:", my_dict.values())
+
+# Iterating over keys and values
+for key, value in my_dict.items():
+    print(key, ":", value)
+
+# Clearing the dictionary
+my_dict.clear()
+print("Dictionary after clearing:", my_dict)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+Working with Dictionaries
+      </h3>
+      <div class="faq-answer">
+
+           <pre onclick="copyText()"><code class="language-python" id="code"># Dictionary Definition
+"""
+A dictionary is an unordered collection of key-value pairs, where each key is unique within the dictionary.
+Dictionaries are mutable, meaning they can be modified after creation.
+The keys in a dictionary are used to access the corresponding values, similar to a real-life dictionary.
+"""
+
+# Creating a Dictionary
+my_dict = {
+    "name": "John",
+    "age": 25,
+    "country": "USA"
+}
+
+# Accessing Values in a Dictionary
+name = my_dict["name"]
+age = my_dict["age"]
+country = my_dict["country"]
+
+# Modifying Values in a Dictionary
+my_dict["age"] = 26
+
+# Adding New Key-Value Pairs to a Dictionary
+my_dict["city"] = "New York"
+
+# Removing Key-Value Pairs from a Dictionary
+del my_dict["country"]
+
+# Checking if a Key Exists in a Dictionary
+if "name" in my_dict:
+    print("Key 'name' exists!")
+
+# Dictionary Length
+dict_length = len(my_dict)
+
+# Getting a List of Keys in a Dictionary
+keys_list = list(my_dict.keys())
+
+# Getting a List of Values in a Dictionary
+values_list = list(my_dict.values())
+
+# Clearing a Dictionary
+my_dict.clear()
+
+# Printing the Final Dictionary
+print(my_dict)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+Dictionaries Functions and Methods
+      </h3>
+      <div class="faq-answer">
+Here's an example code that covers the functions and methods of dictionaries in Python along with their definitions:
+           <pre onclick="copyText()"><code class="language-python" id="code"># Dictionary Functions and Methods
+
+# 1. len() - Returns the number of key-value pairs in the dictionary.
+dictionary = {'apple': 3, 'banana': 5, 'orange': 2}
+length = len(dictionary)
+print("len(dictionary) returns:", length)
+# Output: len(dictionary) returns: 3
+
+
+# 2. dict() - Creates a new dictionary.
+new_dictionary = dict()
+print("dict() creates an empty dictionary:", new_dictionary)
+# Output: dict() creates an empty dictionary: {}
+
+
+# 3. clear() - Removes all items from the dictionary.
+dictionary.clear()
+print("dictionary.clear() clears the dictionary:", dictionary)
+# Output: dictionary.clear() clears the dictionary: {}
+
+
+# 4. copy() - Returns a shallow copy of the dictionary.
+copy_dictionary = new_dictionary.copy()
+print("copy_dictionary = new_dictionary.copy() creates a shallow copy:", copy_dictionary)
+# Output: copy_dictionary = new_dictionary.copy() creates a shallow copy: {}
+
+
+# Dictionary Methods:
+
+# 1. keys() - Returns a view object that contains all the keys in the dictionary.
+keys = copy_dictionary.keys()
+print("copy_dictionary.keys() returns:", keys)
+# Output: copy_dictionary.keys() returns: dict_keys([])
+
+
+# 2. values() - Returns a view object that contains all the values in the dictionary.
+values = copy_dictionary.values()
+print("copy_dictionary.values() returns:", values)
+# Output: copy_dictionary.values() returns: dict_values([])
+
+
+# 3. items() - Returns a view object that contains all the key-value pairs in the dictionary as tuples.
+items = copy_dictionary.items()
+print("copy_dictionary.items() returns:", items)
+# Output: copy_dictionary.items() returns: dict_items([])
+
+
+# 4. get(key[, default]) - Returns the value for the given key if it exists, otherwise returns the default value.
+value = copy_dictionary.get('key', 'default_value')
+print("copy_dictionary.get('key', 'default_value') returns:", value)
+# Output: copy_dictionary.get('key', 'default_value') returns: default_value
+
+
+# 5. pop(key[, default]) - Removes the item with the specified key and returns its value. If the key is not found, returns the default value.
+value = copy_dictionary.pop('key', 'default_value')
+print("copy_dictionary.pop('key', 'default_value') returns:", value)
+# Output: copy_dictionary.pop('key', 'default_value') returns: default_value
+
+
+# 6. update(iterable) - Updates the dictionary with the key-value pairs from the specified iterable.
+copy_dictionary.update({'key': 'value'})
+print("copy_dictionary.update({'key': 'value'}) updates the dictionary:", copy_dictionary)
+# Output: copy_dictionary.update({'key': 'value'}) updates the dictionary: {'key': 'value'}
+
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+Creating Dictionaries from Keys
+      </h3>
+      <div class="faq-answer">
+Creating dictionaries from keys in Python refers to the process of generating a dictionary where the keys are provided, and the corresponding values are assigned either a default value or are derived from some calculation or logic. Below is an example code that covers this topic:
+           <pre onclick="copyText()"><code class="language-python" id="code"># Define the keys
+keys = ['apple', 'banana', 'cherry']
+
+# Create a dictionary with default values
+dictionary_with_default = {key: 0 for key in keys}
+print("Dictionary with default values:", dictionary_with_default)
+
+# Create a dictionary with derived values
+dictionary_with_derived = {key: len(key) for key in keys}
+print("Dictionary with derived values:", dictionary_with_derived)
+
+# Create a dictionary with user input values
+dictionary_with_user_input = {key: input(f"Enter a value for {key}: ") for key in keys}
+print("Dictionary with user input values:", dictionary_with_user_input)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+Create a dictionary in Python with some state and their capitals and print them
+      </h3>
+      <div class="faq-answer">
+
+           <pre onclick="copyText()"><code class="language-python" id="code"># Create the dictionary
+state_capitals = {
+    'California': 'Sacramento',
+    'Texas': 'Austin',
+    'Florida': 'Tallahassee',
+    'New York': 'Albany',
+    'Illinois': 'Springfield'
+}
+
+# Print the state capitals
+for state, capital in state_capitals.items():
+    print(f"The capital of {state} is {capital}.")
+#Output
+The capital of California is Sacramento.
+The capital of Texas is Austin.
+The capital of Florida is Tallahassee.
+The capital of New York is Albany.
+The capital of Illinois is Springfield.
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+Write a code which take input as students name,roll number and put them into dictionary and print them
+      </h3>
+      <div class="faq-answer">
+
+           <pre onclick="copyText()"><code class="language-python" id="code"># Initialize an empty dictionary
+student_dict = {}
+
+# Get the number of students
+num_students = int(input("Enter the number of students: "))
+
+# Iterate over the range of number of students
+for i in range(num_students):
+    # Get student name and roll number
+    name = input("Enter student name: ")
+    roll_number = input("Enter student roll number: ")
+    
+    # Add student information to the dictionary
+    student_dict[roll_number] = name
+
+# Print the student dictionary
+print("Student Dictionary:")
+for roll_number, name in student_dict.items():
+    print(f"Roll Number: {roll_number}, Name: {name}")
+</code></pre>
+      </div>
+    </div>
+    
+    </div>
+</section>
+
+<script>
+    const searchInput = document.querySelector('.search-container input');
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    searchInput.addEventListener('keyup', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        faqItems.forEach(function(item) {
+            const question = item.querySelector('.faq-question').textContent.toLowerCase();
+            if (question.includes(searchTerm)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+<script>
+    Prism.highlightAll();
+</script>
+<script>
+    function copyText() {
+        var codeElement = document.getElementById('code');
+        var text = codeElement.textContent;
+
+        navigator.clipboard.writeText(text)
+            .then(function() {
+                alert("Text copied to clipboard!");
+            })
+            .catch(function(error) {
+                console.error("Failed to copy text: ", error);
+            });
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,892 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loops and if else statements</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+        }
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100vh;
+    background-color: #f2f2f2;
+    transition: width 0.3s ease;
+    overflow: hidden;
+  }
+
+  .icon::before {
+    content: "\2630"; /* Hamburger icon */
+  }
+
+  .icon.open::before {
+    content: "\2716"; /* Close icon */
+  }
+
+  .icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  #navbarList {
+    margin-top: 50px;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  #navbarList li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #navbarList li a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .open {
+    width: 300px;
+  }
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+           /* position: sticky;*/
+            top: 0;
+            background-color: #fff;
+            z-index: 999;
+        }
+
+        .search-container input[type=text] {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 10px;
+            margin: 0;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .faq-answer {
+            padding: 10px;
+            margin: 0;
+            font-size: 7px;
+            line-height: 1.5;
+            color: #666;
+        }
+         .faq-answer code {
+            font-size: 12px;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .container h1 {
+            font-size: 30px;
+            margin-bottom: 2px;
+            width: 100%;
+            text-align: center;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        @media screen and (max-width: 768px) {
+            .faq-section {
+                padding: 30px 10px;
+            }
+
+            .faq-question {
+                font-size: 13px;
+            }
+
+            .faq-answer {
+                font-size: 12px;
+            }
+            pre code.language-python {
+        font-size: 14px;
+            }
+            }
+           
+                
+
+        pre {
+            background-color: white !important;
+            color: white;
+            padding: 4px;
+            width: 100%;
+            overflow: scroll;
+            border-radius: 5px;
+            
+        }
+        pre code.language-python {
+        font-size: 12px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="icon" onclick="toggleNavbar()"></div>
+    <ul id="navbarList">
+      <li><a href="index.html">Chapter 1 - Starting with Python</a></li>
+      <li><a href="#">Chapter 2 - If-else and loops</a></li>
+      <li><a href="computer_ch3.html">Chapter 3 - String Manipulation</a></li>
+      <li><a href="computer_ch4.html">Chapter 4 - List Manipulation</a></li>
+      <li><a href="Touples.html">Chapter 5 - Touples</a></li>
+      <li><a href="dictionaries_ch6.html">Chapter 6 - Dictionaries</a></li>
+      <li><a href="functions_ch7.html">Chapter 7 - Functions</a></li>
+      <li><a href="lib_ch8.html">Chapter 8 - Working with Libraries</a></li>
+      <li><a href="#">Chapter 9 - Glossary</a></li>
+      <li><a href="#">Chapter 10 - Index</a></li>
+    </ul>
+  </div>
+
+    <script>
+    function toggleNavbar() {
+      var navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('open');
+
+      var icon = document.querySelector('.icon');
+      icon.classList.toggle('open');
+      
+      
+    }
+  </script>
+<div class="container">
+    <h1>Python</h1>
+</div>
+<section class="faq-section">
+    <div class="search-container">
+        <input type="text" placeholder="Search for a question...">
+    </div>
+    <div class="faq-list">
+   <div class="faq-item">
+      <h3 class="faq-question">
+           What are complex numbers
+</h3>
+      <div class="faq-answer">
+           In Python, complex numbers are a built-in data type used to represent numbers in the form "a + bj" or "a + b*i", where "a" represents the real part and "b" represents the imaginary part of the complex number. The imaginary part is multiplied by the imaginary unit "j" or "i" to distinguish it from real numbers.<br>
+           <pre><code class="language-python" id="code"># Basic complex number creation
+z1 = 2 + 3j
+z2 = complex(4, -2)
+
+# Accessing real and imaginary parts
+real_part = z1.real
+imaginary_part = z1.imag
+
+# Arithmetic operations
+addition = z1 + z2
+subtraction = z1 - z2
+multiplication = z1 * z2
+division = z1 / z2
+conjugate = z1.conjugate()
+
+# Absolute value and argument (phase)
+abs_value = abs(z1)
+argument = z1.phase()
+
+# Complex number comparisons
+is_equal = z1 == z2
+is_not_equal = z1 != z2
+
+# String representation
+string_repr = str(z1)
+
+# Printing results
+print("z1:", z1)
+print("z2:", z2)
+print("Real part of z1:", real_part)
+print("Imaginary part of z1:", imaginary_part)
+print("Addition:", addition)
+print("Subtraction:", subtraction)
+print("Multiplication:", multiplication)
+print("Division:", division)
+print("Conjugate of z1:", conjugate)
+print("Absolute value of z1:", abs_value)
+print("Argument of z1:", argument)
+print("Is z1 equal to z2?", is_equal)
+print("Is z1 not equal to z2?", is_not_equal)
+print("String representation of z1:", string_repr)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What are integers
+</h3>
+      <div class="faq-answer">
+           In Python, integers are a data type used to represent whole numbers without any fractional or decimal parts. They can be positive, negative, or zero. Integers in Python have unlimited precision, meaning they can be arbitrarily large or small, limited only by the amount of memory available.
+           <pre><code class="language-python" id="code"># Integer Basics
+x = 10
+y = -5
+z = 0
+
+# Arithmetic Operations
+addition = x + y
+subtraction = x - y
+multiplication = x * y
+division = x / y
+floor_division = x // y
+modulo = x % y
+exponentiation = x ** 2
+
+# Type Conversion
+a = 15.6
+b = int(a)
+c = str(x)
+
+# Integer Methods
+num = -10
+absolute_value = abs(num)
+maximum_value = max(x, y, z)
+minimum_value = min(x, y, z)
+
+# Integer Functions
+int_from_string = int("25")
+float_to_int = int(3.8)
+string_to_int = int("42")
+hex_to_int = int("FF", 16)
+binary_to_int = int("1010", 2)
+
+# Bitwise Operations
+bitwise_and = x & y
+bitwise_or = x | y
+bitwise_xor = x ^ y
+bitwise_complement = ~x
+left_shift = x << 2
+right_shift = x >> 1
+
+# Comparison Operators
+greater_than = x > y
+less_than = x < y
+greater_than_equal = x >= y
+less_than_equal = x <= y
+equal_to = x == y
+not_equal_to = x != y
+
+# Printing Results
+print("Integer Basics:")
+print(f"x: {x}, y: {y}, z: {z}")
+print("\nArithmetic Operations:")
+print(f"Addition: {addition}")
+print(f"Subtraction: {subtraction}")
+print(f"Multiplication: {multiplication}")
+print(f"Division: {division}")
+print(f"Floor Division: {floor_division}")
+print(f"Modulo: {modulo}")
+print(f"Exponentiation: {exponentiation}")
+print("\nType Conversion:")
+print(f"float to int: {b}")
+print(f"int to str: {c}")
+print("\nInteger Methods:")
+print(f"Absolute Value: {absolute_value}")
+print(f"Maximum Value: {maximum_value}")
+print(f"Minimum Value: {minimum_value}")
+print("\nInteger Functions:")
+print(f"int from string: {int_from_string}")
+print(f"float to int: {float_to_int}")
+print(f"string to int: {string_to_int}")
+print(f"hex to int: {hex_to_int}")
+print(f"binary to int: {binary_to_int}")
+print("\nBitwise Operations:")
+print(f"Bitwise AND: {bitwise_and}")
+print(f"Bitwise OR: {bitwise_or}")
+print(f"Bitwise XOR: {bitwise_xor}")
+print(f"Bitwise Complement: {bitwise_complement}")
+print(f"Left Shift: {left_shift}")
+print(f"Right Shift: {right_shift}")
+print("\nComparison Operators:")
+print(f"Greater Than: {greater_than}")
+print(f"Less Than: {less_than}")
+print(f"Greater Than or Equal To: {greater_than_equal}")
+print(f"Less Than or Equal To: {less_than_equal}")
+print(f"Equal To: {equal_to}")
+print(f"Not Equal To: {not_equal_to}")
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What is if elif else statements
+</h3>
+      <div class="faq-answer">
+           The if-elif-else statements in Python allow you to control the flow of your program based on certain conditions. They are used to perform different actions depending on the outcome of a specific condition or multiple conditions.
+
+Here's an example code that covers the topic of if-elif-else statements in Python:
+<pre><code class="language-python" id="code"># Definition: if-elif-else statements allow you to control the flow of a program based on conditions.
+
+# Variables for demonstration
+x = 10
+y = 5
+
+# Example 1: Basic if statement
+if x > y:
+    print("x is greater than y")
+
+# Example 2: if-else statement
+if x < y:
+    print("x is less than y")
+else:
+    print("x is greater than or equal to y")
+
+# Example 3: if-elif-else statement
+if x < y:
+    print("x is less than y")
+elif x == y:
+    print("x is equal to y")
+else:
+    print("x is greater than y")
+
+# Example 4: Nested if statement
+if x > 0:
+    if x % 2 == 0:
+        print("x is a positive even number")
+    else:
+        print("x is a positive odd number")
+else:
+    print("x is not a positive number")
+    
+
+# Variables for demonstration
+x = 10
+y = 5
+z = 7
+
+# Example 1: Chained if-elif-else statements
+if x > y and x > z:
+    print("x is the largest number")
+elif y > x and y > z:
+    print("y is the largest number")
+elif z > x and z > y:
+    print("z is the largest number")
+else:
+    print("All numbers are equal")
+
+# Example 2: Multiple conditions in an if statement
+if (x > y or x > z) and x % 2 == 0:
+    print("x is greater than y or z, and x is an even number")
+
+# Example 3: Using the "in" operator
+fruits = ["apple", "banana", "orange"]
+
+if "apple" in fruits:
+    print("Apple is in the fruit list")
+
+# Example 4: Ternary operator
+age = 18
+is_adult = True if age >= 18 else False
+print("Is the person an adult?", is_adult)
+
+
+# Variables for demonstration
+temperature = 25
+time_of_day = "morning"
+weather = "sunny"
+
+# Example: Weather-based clothing recommendation
+if temperature < 10:
+    print("It's cold outside. Wear a jacket and a hat.")
+elif temperature < 20:
+    print("It's cool outside. Wear a light sweater.")
+elif temperature < 30:
+    print("It's warm outside. Wear a t-shirt and shorts.")
+else:
+    print("It's hot outside. Wear light and breathable clothing.")
+
+# Example: Greeting based on time of day
+if time_of_day == "morning":
+    print("Good morning!")
+elif time_of_day == "afternoon":
+    print("Good afternoon!")
+elif time_of_day == "evening":
+    print("Good evening!")
+else:
+    print("Hello!")
+
+# Example: Activity suggestion based on weather and temperature
+if weather == "sunny" and temperature > 20:
+    print("It's a perfect day for the beach!")
+elif weather == "sunny":
+    print("Enjoy the sunshine!")
+elif weather == "rainy":
+    print("Stay indoors and watch a movie.")
+else:
+    print("Have a great day!")
+
+# Example: Checking eligibility for a discount
+age = 35
+is_student = False
+
+if age < 18:
+    print("Sorry, you must be at least 18 years old to avail the discount.")
+elif age >= 60:
+    print("Congratulations! You are eligible for a senior citizen discount.")
+elif is_student:
+    print("You are eligible for a student discount.")
+else:
+    print("You are eligible for a standard discount.")
+
+# Example: Checking a number's divisibility
+number = 21
+
+if number % 2 == 0 and number % 3 == 0:
+    print("The number is divisible by both 2 and 3.")
+elif number % 2 == 0:
+    print("The number is divisible by 2.")
+elif number % 3 == 0:
+    print("The number is divisible by 3.")
+else:
+    print("The number is not divisible by 2 or 3.")
+
+# Example: Checking username and password
+username = "admin"
+password = "password123"
+
+if username == "admin" and password == "password123":
+    print("Login successful. Welcome, admin!")
+elif username == "admin":
+    print("Incorrect password. Please try again.")
+else:
+    print("Invalid username. Please register or try again.")
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           what is for loop
+</h3>
+      <div class="faq-answer">
+           A for loop in Python is a control flow statement that allows you to iterate over a sequence (such as a list, tuple, string, or range) or any other iterable object. It repeatedly executes a block of code for each item in the sequence until the loop reaches its end. The for loop provides a concise way to perform repetitive tasks without the need for manual indexing or counting
+           <pre><code class="language-python" id="code"># This is a sample code demonstrating the usage of a for loop in Python
+
+# Defining a list of numbers
+numbers = [1, 2, 3, 4, 5]
+
+# Example 1: Basic iteration
+print("Example 1: Basic Iteration")
+for num in numbers:
+    print(num)
+# Definition: A for loop is used to iterate over a sequence (such as a list) and perform operations on each element.
+# In this example, the loop iterates through the numbers list and prints each number.
+
+# Example 2: Using range()
+print("\nExample 2: Using range()")
+for i in range(1, 6):
+    print(i)
+# Definition: The `range()` function generates a sequence of numbers starting from the first argument and ending before the second argument.
+# In this example, the loop iterates from 1 to 5 (excluding 6) and prints each number.
+
+# Example 3: Iterating over a string
+print("\nExample 3: Iterating Over a String")
+message = "Hello, World!"
+for char in message:
+    print(char)
+# Definition: A for loop can iterate over a string, treating it as a sequence of characters.
+# In this example, the loop iterates over each character in the message string and prints it.
+
+# Example 4: Looping with an index
+print("\nExample 4: Looping with an Index")
+for index, fruit in enumerate(['apple', 'banana', 'cherry']):
+    print(f"Index: {index}, Fruit: {fruit}")
+# Definition: The `enumerate()` function returns both the index and the value of each element during iteration.
+# In this example, the loop iterates over a list of fruits, and `enumerate()` provides the index and value of each fruit.
+
+# Example 5: Skipping iterations with continue
+print("\nExample 5: Skipping Iterations with continue")
+for num in numbers:
+    if num == 3:
+        continue
+    print(num)
+# Definition: The `continue` statement is used to skip the current iteration and move to the next iteration.
+# In this example, when the loop encounters the number 3, it skips the iteration and continues with the next number.
+
+# Example 6: Terminating the loop with break
+print("\nExample 6: Terminating the Loop with break")
+for num in numbers:
+    if num == 3:
+        break
+    print(num)
+# Definition: The `break` statement is used to terminate the loop prematurely.
+# In this example, when the loop encounters the number 3, it terminates and exits the loop.
+
+# Example 7: Using else with a for loop
+print("\nExample 7: Using else with a for loop")
+for num in numbers:
+    print(num)
+else:
+    print("Loop completed successfully!")
+# Definition: The `else` block is executed after the completion of the loop unless a `break` statement is encountered.
+# In this example, the loop iterates through the numbers list and prints each number, then the "Loop completed successfully!" message is printed.
+
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           What is While loop
+</h3>
+      <div class="faq-answer">
+           In Python, the while loop is a control flow statement that repeatedly executes a block of code as long as a given condition is true.
+           <pre><code class="language-python" id="code"># Example code illustrating the while loop in Python
+
+# Definition: The while loop is a control flow statement that repeatedly executes a block of code as long as a given condition is true.
+
+# Example 1: Basic while loop
+counter = 0
+while counter < 5:
+    print("Counter:", counter)
+    counter += 1
+
+# Definition: In the above example, the while loop iterates until the condition `counter < 5` becomes false. The `counter` variable is incremented by 1 in each iteration.
+
+# Example 2: Using a flag variable
+flag = True
+while flag:
+    user_input = input("Enter a number (0 to exit): ")
+    if user_input == "0":
+        flag = False
+    else:
+        print("You entered:", user_input)
+
+# Definition: The flag variable is used to control the execution of the while loop. It allows the loop to continue until a specific condition is met. In this example, the loop continues until the user enters '0'.
+
+# Example 3: Using the `break` statement
+counter = 0
+while True:
+    print("Counter:", counter)
+    counter += 1
+    if counter == 5:
+        break
+
+# Definition: The `break` statement is used to exit the loop prematurely. In this example, the loop breaks when the `counter` variable reaches 5.
+
+# Example 4: Using the `continue` statement
+counter = 0
+while counter < 5:
+    counter += 1
+    if counter == 3:
+        continue
+    print("Counter:", counter)
+
+# Definition: The `continue` statement is used to skip the remaining code in the current iteration of the loop and move to the next iteration. In this example, when the `counter` variable is equal to 3, the loop continues to the next iteration without printing.
+
+# Example 5: Nested while loops
+outer_counter = 0
+while outer_counter < 3:
+    inner_counter = 0
+    while inner_counter < 2:
+        print("Outer:", outer_counter, "Inner:", inner_counter)
+        inner_counter += 1
+    outer_counter += 1
+
+# Definition: Nested while loops are while loops that are placed inside another while loop. The inner while loop will execute its block of code for each iteration of the outer while loop. In this example, the outer loop runs three times, and the inner loop runs twice for each iteration of the outer loop.
+
+# Example 6: Using the `else` clause with a while loop
+counter = 0
+while counter < 5:
+    print("Counter:", counter)
+    counter += 1
+else:
+    print("Loop execution completed.")
+
+# Definition: The `else` clause in a while loop is optional and is executed when the loop condition becomes false. In this example, the message "Loop execution completed" is printed after the while loop finishes executing.
+
+# End of code
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           what is random in python
+</h3>
+      <div class="faq-answer">
+           In Python, the random module is a built-in module that provides functions for generating random numbers and making random selections. It is used to introduce randomness or unpredictability in programs. The random module uses pseudorandom number generators to produce random values.
+           <pre><code class="language-python" id="code">import random
+
+# Random integer between a range
+random_integer = random.randint(1, 10)
+print("Random Integer:", random_integer)
+
+# Random float between 0 and 1
+random_float = random.random()
+print("Random Float:", random_float)
+
+# Random element from a sequence
+my_list = [1, 2, 3, 4, 5]
+random_element = random.choice(my_list)
+print("Random Element:", random_element)
+
+# Random element from a string
+my_string = "Hello, World!"
+random_char = random.choice(my_string)
+print("Random Character:", random_char)
+
+# Randomly shuffle a sequence
+my_list = [1, 2, 3, 4, 5]
+random.shuffle(my_list)
+print("Shuffled List:", my_list)
+
+# Random sample from a sequence without replacement
+my_list = [1, 2, 3, 4, 5]
+random_sample = random.sample(my_list, 3)
+print("Random Sample:", random_sample)
+
+# Random sample from a sequence with replacement
+my_list = [1, 2, 3, 4, 5]
+random_sample_with_replacement = [random.choice(my_list) for _ in range(3)]
+print("Random Sample with Replacement:", random_sample_with_replacement)
+
+# Random number from a normal distribution
+random_normal = random.normalvariate(0, 1)
+print("Random Number from Normal Distribution:", random_normal)
+
+# Random boolean value
+random_boolean = random.choice([True, False])
+print("Random Boolean:", random_boolean)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Write a programm to add the odd number up to a given value N and print the result.
+</h3>
+      <div class="faq-answer">
+           <pre><code class="language-python" id="code">def sum_odd_numbers(N):
+    total = 0
+    for number in range(1, N+1, 2):
+        total += number
+    return total
+
+# Example usage
+N = 10
+result = sum_odd_numbers(N)
+print("Sum of odd numbers up to", N, "is:", result)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Write a Python program to calculate factorials from loops
+</h3>
+      <div class="faq-answer">
+           <pre><code class="language-python" id="code">def calculate_factorial(n):
+    factorial = 1
+    for num in range(1, n + 1):
+        factorial *= num
+    return factorial
+
+# Example usage
+number = 5
+result = calculate_factorial(number)
+print("Factorial of", number, "is:", result)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Write a Python program to find the largest and lowest number from the 10 input numbers
+</h3>
+      <div class="faq-answer">
+           <pre><code class="language-python" id="code"># Prompt the user to enter 10 numbers
+numbers = []
+for i in range(1, 11):
+    number = float(input("Enter number {}: ".format(i)))
+    numbers.append(number)
+
+# Find the largest and lowest numbers
+largest = max(numbers)
+lowest = min(numbers)
+
+# Print the result
+print("Largest number:", largest)
+print("Lowest number:", lowest)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Write a python script in which input 3 angles and determine if the for my equilateral triangle or not
+</h3>
+      <div class="faq-answer">
+           <pre><code class="language-python" id="code"># Input three angles of a triangle
+angle1 = float(input("Enter the first angle: "))
+angle2 = float(input("Enter the second angle: "))
+angle3 = float(input("Enter the third angle: "))
+
+# Check if it forms an equilateral triangle
+if angle1 == angle2 == angle3 == 60:
+    print("The angles form an equilateral triangle.")
+else:
+    print("The angles do not form an equilateral triangle.")
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Write a Python program to input to integers X and n to compute x<sup>n</sup>
+</h3>
+      <div class="faq-answer">
+           <pre><code class="language-python" id="code"># Input the base (X) and exponent (n)
+X = int(input("Enter the base (X): "))
+n = int(input("Enter the exponent (n): "))
+
+# Compute X raised to the power n
+result = 1
+for _ in range(n):
+    result *= X
+
+# Print the result
+print(X, "raised to the power", n, "is:", result)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Write the programm to find the sum of the series : s = 1 + x + x<sup>2</sup> + x<sup>3</sup> + ..... + x<sup>n</sup>
+</h3>
+      <div class="faq-answer">
+           <pre><code class="language-python" id="code"># Input the value of x and n
+x = float(input("Enter the value of x: "))
+n = int(input("Enter the value of n: "))
+
+# Calculate the sum of the series
+s = 0
+for i in range(n + 1):
+    term = x ** i
+    s += term
+
+# Print the result
+print("The sum of the series is:", s)
+</code></pre>
+      </div>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-question">
+           Write a program to implement a simple calculator for two input numbers. Offer choices through a menu
+</h3>
+      <div class="faq-answer">
+           <pre><code class="language-python" id="code">def add(num1, num2):
+    return num1 + num2
+
+def subtract(num1, num2):
+    return num1 - num2
+
+def multiply(num1, num2):
+    return num1 * num2
+
+def divide(num1, num2):
+    if num2 != 0:
+        return num1 / num2
+    else:
+        print("Error: Cannot divide by zero.")
+
+# Display the menu options
+def display_menu():
+    print("Calculator Menu:")
+    print("1. Addition")
+    print("2. Subtraction")
+    print("3. Multiplication")
+    print("4. Division")
+    print("5. Quit")
+
+# Get user's choice from the menu
+def get_choice():
+    choice = int(input("Enter your choice (1-5): "))
+    return choice
+
+# Perform the calculation based on user's choice
+def perform_calculation(choice, num1, num2):
+    if choice == 1:
+        return add(num1, num2)
+    elif choice == 2:
+        return subtract(num1, num2)
+    elif choice == 3:
+        return multiply(num1, num2)
+    elif choice == 4:
+        return divide(num1, num2)
+    elif choice == 5:
+        return None
+    else:
+        print("Invalid choice.")
+
+# Main program
+while True:
+    display_menu()
+    user_choice = get_choice()
+
+    if user_choice == 5:
+        print("Thank you for using the calculator.")
+        break
+
+    number1 = float(input("Enter the first number: "))
+    number2 = float(input("Enter the second number: "))
+
+    result = perform_calculation(user_choice, number1, number2)
+    if result is not None:
+        print("Result:", result)
+</code></pre>
+      </div>
+    </div>
+        
+    </div>
+</section>
+
+<script>
+    const searchInput = document.querySelector('.search-container input');
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    searchInput.addEventListener('keyup', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        faqItems.forEach(function(item) {
+            const question = item.querySelector('.faq-question').textContent.toLowerCase();
+            if (question.includes(searchTerm)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+<script>
+    Prism.highlightAll();
+</script>
+
+</body>
+</html>
