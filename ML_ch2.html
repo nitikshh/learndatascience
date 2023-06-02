@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8">
+    <title>Machine Learning</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        section h2 {
+            margin-bottom: 10px;
+            color:white;
+            text-align:center;
+            text-shadow: 2px 2px 8px black;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        pre{
+            padding:0px;
+
+        }
+        .container h4{
+            padding:5px;
+            width:100%;
+        }
+        .p{
+            background:#FEFCF3;
+            padding:0px;
+            font-size:13px;
+            
+        }
+        .p span{
+            background-color:#F5EBE0;
+            font-size:13px;
+        }
+        .chart {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size:13px;
+            width:100%;
+            overflow:scroll;
+            margin-bottom: 20px;
+        }
+        redtag{
+            color:red;
+            margin-top:1px;
+            font-size:13px;
+            font-family: 'Kanit', sans-serif;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100vh;
+            background-color: black;
+            transition: width 0.3s ease;
+            color:black;
+            overflow: hidden;
+        }
+
+        .icon::before {
+            content: "\2630"; /* Hamburger icon */
+        }
+
+        .icon.open::before {
+            content: "\2716"; /* Close icon */
+        }
+
+        .icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color:white;
+            cursor: pointer;
+        }
+
+        #navbarList {
+            margin-top: 50px;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        #navbarList li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #navbarList li a {
+            text-decoration: none;
+            color:white;
+        }
+        #code {
+        font-size: 12px;
+        }
+        
+@media(min-width:700px){
+     .p{
+          font-size:6px;
+     }
+     redtag{
+          font-size:7px;
+          color:red;
+     }
+     h4{
+          font-size:8px;
+     }
+     p span{
+          font-size:8px;
+     }
+}
+#icon-container {
+  position: fixed;
+  left: 88%;
+  top: 35px;
+  transform: translateY(-50%);
+  z-index: 9999;
+}
+
+#whatsapp-icon {
+  font-size: 32px;
+  cursor: pointer;
+  color:white;
+  
+}
+img{
+     width:100%;
+}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+</head>
+<body>
+<div class="navbar" id="navbar">
+    <div class="icon" onclick="toggleNavbar()"></div>
+<div id="icon-container">
+  <a href="https://wa.me/whatsappphonenumber" target="_blank" id="whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></a>
+</div>
+<script>
+const whatsappIcon = document.getElementById('whatsapp-icon');
+const whatsappPhoneNumber = '7668703721'; // Replace with your phone number
+
+whatsappIcon.href = `https://wa.me/${whatsappPhoneNumber}`;
+     
+</script>
+    <ul id="navbarList">
+        <li><a href="index.html">Chapter 0 - Starting with small project</a></li>
+        <li><a href="ch_1_throey.html">Chapter 1 - The Theory</a></li>
+        <li><a href="ML_ch2.html">Chapter 2 - Machine Learning - I</a></li>
+        <li><a href="datacleaning_ch3.html">Chapter 3 - Data Cleaning</a></li>
+        <li><a href="dataVis_ch4.html">Chapter 4 - Data Visualization</a></li>
+        <li><a href="ML_ch5.html">Chapter 5 - Machine Learning - II</a></li>
+        <li><a href="#">Chapter 7 - Appendix A</a></li>
+        <li><a href="#">Chapter 8 - Appendix B</a></li>
+        <li><a href="#">Chapter 9 - Glossary</a></li>
+        <li><a href="#">Chapter 10 - Index</a></li>
+    </ul>
+</div>
+
+<script>
+    function toggleNavbar() {
+        var navbar = document.getElementById('navbar');
+        var icon = document.querySelector('.icon');
+        
+        if (navbar.style.width === '300px') {
+            navbar.style.width = '0';
+            icon.classList.remove('open');
+        } else {
+            navbar.style.width = '300px';
+            icon.classList.add('open');
+        }
+    }
+</script>
+
+<header>
+    <h1>Data Science</h1>
+</header>
+<main>
+    <section>
+        <h2>Machine Learning</h2>
+
+		  <div class="container">
+			     <h4>
+How it came?
+			     </h4>
+				<!-- <div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div> -->
+				<p class="p"><span>Explanation</span> :
+In 2006, Geoffrey Hinton et al. published a paper1 showing how to train a deep neural network capable of recognizing handwritten digits with state-of-the-art precision (>98%). They branded this technique “Deep Learning.” Training a deep neural net was widely considered impossible at the time,2 and most researchers had abandoned the idea since the 1990s. This paper revived the interest of the scientific community and before long many new papers demonstrated that Deep Learning was not only possible, but capable of mind-blowing achievements that no other Machine Learning (ML) technique could hope to match (with the help of tremendous computing power and great amounts of data). This enthusiasm soon extended to many other areas of Machine Learning.<br><br> Fast-forward 10 years and Machine Learning has conquered the industry: it is now at the heart of much of the magic in today’s high-tech products, ranking your web search results, powering your smartphone’s speech recognition, recommending videos, and beating the world champion at the game of Go. Before you know it, it will be driving your car.
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+What is Machine Learning?
+			     </h4>
+				<!-- <div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div> -->
+				<p class="p"><span>Explanation</span> :
+Machine Learning is the science (and art) of programming computers so they can learn from data.<br>For example, your spam filter is a Machine Learning program that can learn to flag spam given examples of spam emails (e.g., flagged by users) and examples of regular (nonspam, also called “ham”) emails. The examples that the system uses to learn are called the training set. Each training example is called a training instance (or sample). In this case, the task T is to flag spam for new emails, the experience E is the training data, and the performance measure P needs to be defined; for example, you can use the ratio of correctly classified emails. This particular performance measure is called accuracy and it is often used in classification tasks.<br>
+If you just download a copy of Wikipedia, your computer has a lot more data, but it is not suddenly better at any task. Thus, it is not Machine Learning.
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+Why we use Machine Learning?
+			     </h4>
+				<!-- <div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div> -->
+				<p class="p"><span>Explanation</span> :
+Consider how you would write a spam filter using traditional programming techniques- <br>
+1.First you would look at what spam typically looks like. You might notice that some words or phrases (such as “4U,” “credit card,” “free,” and “amazing”) tend to come up a lot in the subject. Perhaps you would also notice a few other patterns in the sender’s name, the email’s body, and so on.<br><br>
+2. You would write a detection algorithm for each of the patterns that you noticed, and your program would flag emails as spam if a number of these patterns are detected.<br><br>
+3. You would test your program, and repeat steps 1 and 2 until it is good enough.
+<img src="images/img1.png" alt="image">
+Since the problem is not trivial, your program will likely become a long list of complex rules—pretty hard to maintain. In contrast, a spam filter based on Machine Learning techniques automatically learns which words and phrases are good predictors of spam by detecting unusually frequent patterns of words in the spam examples compared to the ham examples. The program is much shorter, easier to maintain, and most likely more accurate.
+<img src="images/img2.png" alt="image">
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+What are the Types of Machine Learning Systems
+			     </h4>
+				<!-- <div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div> -->
+				<p class="p"><span>Explanation</span> :
+There are so many different types of Machine Learning systems that it is useful to classify them in broad categories based on:<br><br>
+Whether or not they are trained with human supervision (supervised, unsupervised, semisupervised, and Reinforcement Learning)<br><br>
+Whether or not they can learn incrementally on the fly (online versus batch learning)<br><br>
+Whether they work by simply comparing new data points to known data points, or instead detect patterns in the training data and build a predictive model, much like scientists do (instance-based versus model-based learning)<br><br>
+These criteria are not exclusive; you can combine them in any way you like. For example, a state-of-the-art spam filter may learn on the fly using a deep neural network model trained using examples of spam and ham; this makes it an online, modelbased, supervised learning system. <br>Let’s look at each of these criteria a bit more closely.<br>
+       </p>
+			</div>
+			
+			<div class="container">
+			     <h4>
+Supervised/Unsupervised Learning
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+ Machine Learning systems can be classified according to the amount and type of supervision they get during training. There are four major categories: supervised learning, unsupervised learning, semisupervised learning, and Reinforcement Learning.<br>
+ <redtag>Supervised learning</redtag/>: In supervised learning, the training data you feed to the algorithm includes the desired solutions, called labels (Figure).
+ <img src="images/img3.jpg" alt="images">
+ <br><br>A typical supervised learning task is classification. The spam filter is a good example of this: it is trained with many example emails along with their class (spam or ham), and it must learn how to classify new emails.<br>
+Another typical task is to predict a target numeric value, such as the price of a car, given a set of features (mileage, age, brand, etc.) called predictors. This sort of task is called regression (Figure 1-6).1 To train the system, you need to give it many examples of cars, including both their predictors and their labels (i.e., their prices).<br><br>
+Here are some of the most important supervised learning algorithms:<br>
+• k-Nearest Neighbors <br>• Linear Regression <br>• Logistic Regression <br>• Support Vector Machines (SVMs) <br>• Decision Trees and Random Forests <br>• Neural networks2<br><br>
+<redtag>Unsupervised learning</redtag/>: In unsupervised learning, as you might guess, the training data is unlabeled (Figure). The system tries to learn without a teacher.<br>
+<img src="images/img4.jpg" alt="image">
+Here are some of the most important unsupervised learning algorithms:<br>
+• Clustering <br>—K-Means <br>—DBSCAN <br>—Hierarchical Cluster Analysis (HCA)<br>
+• Anomaly detection and novelty detection <br>—One-class SVM <br>—Isolation Forest<br>
+• Visualization and dimensionality reduction <br>—Principal Component Analysis (PCA) <br>—Kernel PCA <br>—Locally-Linear Embedding (LLE) <br>—t-distributed Stochastic Neighbor Embedding (t-SNE)<br>
+• Association rule learning <br>—Apriori <br>—Eclat
+<br><br>
+For example, say you have a lot of data about your blog’s visitors. You may want to run a clustering algorithm to try to detect groups of similar visitors (Figure 1-8). At no point do you tell the algorithm which group a visitor belongs to: it finds those connections without your help. For example, it might notice that 40% of your visitors are males who love comic books and generally read your blog in the evening, while 20% are young sci-fi lovers who visit during the weekends, and so on. If you use a hierarchical clustering algorithm, it may also subdivide each group into smaller groups. This may help you target your posts for each group.<br>
+<img src="images/img5.jpg" alt="image">
+<redtag>Semisupervised learning</redtag/>: Some algorithms can deal with partially labeled training data, usually a lot of unlabeled data and a little bit of labeled data. This is called semisupervised learning (Figure).
+Some photo-hosting services, such as Google Photos, are good examples of this. Once you upload all your family photos to the service, it automatically recognizes that the same person A shows up in photos 1, 5, and 11, while another person B shows up in photos 2, 5, and 7. This is the unsupervised part of the algorithm (clustering). Now all the system needs is for you to tell it who these people are. Just one label per person,4 and it is able to name everyone in every photo, which is useful for searching photos.
+<img src="images/img6.png" alt="image">
+Most semisupervised learning algorithms are combinations of unsupervised and supervised algorithms. For example, deep belief networks (DBNs) are based on unsupervised components called restricted Boltzmann machines (RBMs) stacked on top of one another. RBMs are trained sequentially in an unsupervised manner, and then the whole system is fine-tuned using supervised learning techniques.<br><br>
+<redtag>Reinforcement Learning</redtag/>: Reinforcement Learning is a very different beast. The learning system, called an agent in this context, can observe the environment, select and perform actions, and get rewards in return (or penalties in the form of negative rewards, as in Figure 1-12). It must then learn by itself what is the best strategy, called a policy, to get the most reward over time. A policy defines what action the agent should choose when it is in a given situation.
+<img src="images/img7.png" alt="image">
+For example, many robots implement Reinforcement Learning algorithms to learn how to walk. DeepMind’s AlphaGo program is also a good example of Reinforcement Learning: it made the headlines in May 2017 when it beat the world champion Ke Jie at the game of Go. It learned its winning policy by analyzing millions of games, and then playing many games against itself. Note that learning was turned off during the games against the champion; AlphaGo was just applying the policy it had learned.
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+Batch and Online Learning
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+ Another criterion used to classify Machine Learning systems is whether or not the system can learn incrementally from a stream of incoming data.<br>
+<redtag>Batch learning</redtag/>: In batch learning, the system is incapable of learning incrementally: it must be trained using all the available data. This will generally take a lot of time and computing resources, so it is typically done offline. First the system is trained, and then it is launched into production and runs without learning anymore; it just applies what it has learned. This is called offline learning.<br><br>
+If you want a batch learning system to know about new data (such as a new type of spam), you need to train a new version of the system from scratch on the full dataset (not just the new data, but also the old data), then stop the old system and replace it with the new one.<br><br>
+<redtag>Online Learning</redtag/>: In online learning, you train the system incrementally by feeding it data instances sequentially, either individually or by small groups called mini-batches. Each learning step is fast and cheap, so the system can learn about new data on the fly, as it arrives (see Figure).
+<img src="images/img8.png" alt="">
+Online learning is great for systems that receive data as a continuous flow (e.g., stock prices) and need to adapt to change rapidly or autonomously. It is also a good option.<br>
+if you have limited computing resources: once an online learning system has learned about new data instances, it does not need them anymore, so you can discard them (unless you want to be able to roll back to a previous state and “replay” the data).<br> This can save a huge amount of space.
+Online learning algorithms can also be used to train systems on huge datasets that cannot fit in one machine’s main memory (this is called out-of-core learning). The algorithm loads part of the data, runs a training step on that data, and repeats the process until it has run on all of the data (see Figure 1).
+<img src="images/img9.png" alt="">
+One important parameter of online learning systems is how fast they should adapt to changing data: this is called the learning rate. If you set a high learning rate, then your system will rapidly adapt to new data, but it will also tend to quickly forget the old data (you don’t want a spam filter to flag only the latest kinds of spam it was shown).<br> Conversely, if you set a low learning rate, the system will have more inertia; that is, it will learn more slowly, but it will also be less sensitive to noise in the new data or to sequences of nonrepresentative data points (outliers).
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+Instance-Based And Model-Based Learning
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+One more way to categorize Machine Learning systems is by how they generalize. Most Machine Learning tasks are about making predictions. This means that given a number of training examples, the system needs to be able to generalize to examples it has never seen before. Having a good performance measure on the training data is good, but insufficient; the true goal is to perform well on new instances.
+There are two main approaches to generalization: instance-based learning and model-based learning.<br>
+<redtag>Instance-based learning</redtag/> the system learns the examples by heart, then generalizes to new cases by comparing them to the learned examples (or a subset of them), using a similarity measure. For example, the new instance would be classified as a triangle because the majority of the most similar instances belong to that class.<br>
+<img src="images/img10.png" alt="image">
+<redtag>Model-based learning</redtag/>: Another way to generalize from a set of examples is to build a model of these examples, then use that model to make predictions. This is called model-based learning (see Figure).
+<img src="images/img11.png" alt="image">
+For example, suppose you want to know if money makes people happy, so you download the Better Life Index data from the OECD’s website as well as stats about GDP per capita from the IMF’s website. Then you join the tables and sort by GDP per capita. Table 1-1 shows an excerpt of what you get.<br>
+<img src="images/img12.png" alt="">
+Let’s plot the data for a few random countries (see Figure).
+<img src="images/img13.png" alt="">
+Although the data is noisy (i.e., partly random)
+<img src="images/img14.png" alt="">
+This is where the Linear Regression algorithm comes in: you feed it your training examples and it finds the parameters that make the linear model fit best to your data. This is called training the model.<br>
+Now the model fits the training data as closely as possible (for a linear model), as you can see in figure below.
+<img src="images/img15.png" alt="">
+You are finally ready to run the model to make predictions<br>
+<pre onclick="copyText()"><code class="language-python" id="code">import matplotlib.pyplot as plt 
+import numpy as np 
+import pandas as pd 
+import sklearn.linear_model
+# Load the data 
+oecd_bli = pd.read_csv("oecd_bli_2015.csv", thousands=',') 
+gdp_per_capita = pd.read_csv("gdp_per_capita.csv",thousands=',',delimiter='\t', encoding='latin1', na_values="n/a")
+# Prepare the data 
+country_stats = prepare_country_stats(oecd_bli, gdp_per_capita) 
+X = np.c_[country_stats["GDP per capita"]] 
+y = np.c_[country_stats["Life satisfaction"]]
+# Visualize the data 
+country_stats.plot(kind='scatter', x="GDP per capita", y='Life satisfaction') plt.show()
+# Select a linear model 
+model = sklearn.linear_model.LinearRegression()
+# Train the model 
+model.fit(X, y)
+# Make a prediction for Cyprus 
+X_new = [[22587]] # Cyprus' GDP per capita 
+print(model.predict(X_new)) # outputs [[ 5.96242338]]</code></pre>
+<p class="p"><span>Explanation</span> :
+The code you provided demonstrates a simple linear regression analysis using the data from two CSV files: "oecd_bli_2015.csv" and "gdp_per_capita.csv".<br> Let's break down the code step by step:
+<br><br>
+1. <redtag>`import matplotlib.pyplot as plt`</redtag/>: This imports the `pyplot` module from the Matplotlib library, which provides a collection of functions to create various types of plots and visualizations.
+<br><br>
+2. <redtag>`import numpy as np`</redtag/>: This imports the NumPy library, which provides support for efficient numerical operations and arrays in Python.
+<br><br>
+3. <redtag>`import pandas as pd`</redtag/>: This imports the Pandas library, which provides data manipulation and analysis tools in Python.
+<br><br>
+4. <redtag>`import sklearn.linear_model`</redtag/>: This imports the `linear_model` module from Scikit-learn, which provides a variety of linear regression models.
+<br><br>
+5. <redtag>`oecd_bli = pd.read_csv("oecd_bli_2015.csv", thousands=',')`</redtag/>: This line reads the "oecd_bli_2015.csv" file into a Pandas DataFrame named `oecd_bli`. The `read_csv` function is used to read a CSV file, and the `thousands=','` argument specifies that the thousands separator is a comma.
+<br><br>
+6. <redtag>`gdp_per_capita = pd.read_csv("gdp_per_capita.csv", thousands=',', delimiter='\t', encoding='latin1', na_values="n/a")`</redtag/>: Similarly, this line reads the "gdp_per_capita.csv" file into a DataFrame named `gdp_per_capita`. The file has a tab delimiter ('\t'), and the `encoding='latin1'` argument specifies the character encoding. The `na_values="n/a"` argument specifies that "n/a" should be considered as missing values.
+<br><br>
+7. <redtag>`country_stats = prepare_country_stats(oecd_bli, gdp_per_capita)`</redtag/>: This line prepares the data by calling a function named `prepare_country_stats` with the `oecd_bli` and `gdp_per_capita` DataFrames as arguments. The function presumably combines and preprocesses the data to create a new DataFrame called `country_stats`.
+<br><br>
+8. <redtag>`X = np.c_[country_stats["GDP per capita"]]`</redtag/>: This line creates the feature matrix `X` by extracting the "GDP per capita" column from the `country_stats` DataFrame. The `np.c_` function concatenates the extracted column along the columns axis.
+<br><br>
+9. <redtag>`y = np.c_[country_stats["Life satisfaction"]]`</redtag/>: Similarly, this line creates the target variable array `y` by extracting the "Life satisfaction" column from the `country_stats` DataFrame.
+<br><br>
+10. <redtag>`country_stats.plot(kind='scatter', x="GDP per capita", y='Life satisfaction')`</redtag/>: This line creates a scatter plot using the `plot` function from Pandas. It visualizes the relationship between the "GDP per capita" (x-axis) and "Life satisfaction" (y-axis) columns from the `country_stats` DataFrame.
+<br><br>
+11. <redtag>`plt.show()`</redtag/>: This displays the generated scatter plot.
+<br><br>
+12. <redtag>`model = sklearn.linear_model.LinearRegression()`</redtag/>: This line creates an instance of the `LinearRegression` class from Scikit-learn. It represents the linear regression model that will be used for training and prediction.
+<br><br>
+13. <redtag>`model.fit(X, y)`</redtag/>: This line trains the linear regression model by fitting it to the feature matrix `X` and the target variable array `y`. The model learns the relationship between the GDP per capita and life satisfaction.
+<br><br>
+14. <redtag>`X_new = [[22587]]`</redtag/>: This line defines a new feature matrix `X_new` with a single sample, where the GDP per capita is 22587. It represents the data
+ for making a prediction.
+<br><br>
+15. <redtag>`print(model.predict(X_new))`</redtag/>: This line predicts the life satisfaction value for the given GDP per capita value using the trained linear regression model. The `predict` function takes the feature matrix `X_new` as input and returns the predicted value.
+<br><br>
+The result is then printed using `<redtag>print()</redtag/>`, and it should output a predicted life satisfaction value for the given GDP per capita value, which is represented as `<redtag>[[ 5.96242338]]</redtag/>`.
+       </p>
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+Project - 1
+			     </h4>
+			     <p class="p">To perform a basic prediction on the Iris dataset using the sklearn library, you can follow these steps:</p>
+				<div class="chart" id="chart1">
+<pre onclick="copyText()"><code class="language-python" id="code">import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+from sklearn.datasets import fetch_openml
+
+# Load the Iris dataset
+iris_data = fetch_openml(name='iris', as_frame=True)
+
+# Extract the data and target variables
+X = iris_data['data'][['sepallength']].values.reshape(-1, 1)
+y = pd.cut(iris_data['data']['petallength'], bins=3, labels=[0, 1, 2])
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create an instance of the Logistic Regression model
+model = LogisticRegression()
+
+# Train the model on the training data
+model.fit(X_train, y_train)
+
+# Make predictions on the test data
+y_pred = model.predict(X_test)
+
+# Calculate the accuracy of the model
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+</code></pre>
+				</div>
+				<p class="p"><!-- <span>Explanation: </span> -->The code above imports the Iris dataset using the `fetch_openml` function, splits the data into training and testing sets, creates a logistic regression model, trains the model, makes predictions on the test data, and calculates the accuracy of the model.
+<br><br>
+Make sure you have the Iris dataset CSV file available in your working directory or specify the correct file path in the `fetch_openml` function.
+				     
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+Project 2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">import pandas as pd
+from sklearn.datasets import fetch_openml
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+# Fetch the Wine dataset
+wine_data = fetch_openml(name='wine', as_frame=True)
+# Create a DataFrame from the fetched data
+wine_df = pd.DataFrame(data=wine_data['data'], columns=wine_data['feature_names'])
+wine_df['target'] = wine_data['target']
+# Split the data into features (X) and target (y)
+X = wine_df[['Alcohol']].values
+y = wine_df['Color_intensity'].values
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=24)
+# Create an instance of the Linear Regression model
+model = LinearRegression()
+# Train the model on the training data
+model.fit(X_train, y_train)
+# Make predictions on the test data
+y_pred = model.predict(X_test)
+# Calculate the coefficient of determination (R^2 score)
+r2 = r2_score(y_test, y_pred)
+print("R^2 Score:", r2)
+</code></pre>
+				</div>
+				<p class="p"><!-- <span>Explanation</span> --> 
+				
+       </p> 
+			</div>
+			<div class="container">
+			     <h4>
+Project 3
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.datasets import fetch_openml
+# Fetch a dataset (e.g., 'electricity') from OpenML
+dataset = fetch_openml(name='electricity', as_frame=True)
+# Convert the dataset to a DataFrame
+df = pd.DataFrame(dataset['data'], columns=dataset['feature_names'])
+df['target'] = dataset['target']
+# Extract the 'nesprice' and 'vicprice' columns for prediction
+X = df[['nswprice']].values.reshape(-1, 1)
+y = df[['vicprice']].values.reshape(-1, 1)
+# Create an instance of the Linear Regression model
+model = LinearRegression()
+# Train the model on the entire data
+model.fit(X, y)
+# Predict a single value
+new_nesprice = [[0.056443]]  # Provide the new 'nswprice' value for prediction
+predicted_vicprice = model.predict(new_nesprice)
+print("Predicted vicprice:", predicted_vicprice)
+</code></pre>
+				</div>
+				<p class="p"><!-- <span>Explanation</span> --> 
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+Method to extract more datasets
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"># available datasets
+dataset_names = ['eeg-eye-state', 'bank-marketing', 'diabetes', 'boston', 'credit-g', 'letter-recognition',
+                 'california', 'iris', 'steel-plates-fault', 'vehicle', 'abalone', 'arrhythmia', 'balance-scale',
+                 'glass', 'ionosphere', 'mushroom', 'wine-quality-red', 'yeast', 'zoo', 'forest-fires']</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+Above are the dataset names, you have replace with bank-marketing below in your code.
+<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">import pandas as pd
+from sklearn.datasets import fetch_openml
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+# Fetch the Wine dataset
+Data = fetch_openml(name='bank-marketing', as_frame=True)
+# Create a DataFrame from the fetched data
+Final_Data = pd.DataFrame(data=Data['data'], columns=Data['feature_names'])
+Final_Data.head(10)</code></pre>
+				</div>
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			
+			
+	
+			 
+		</section>
+	</main>
+	<footer>
+		<p>&copy; 2023 Data Science Guide</p>
+	</footer>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+	<script>
+		Prism.highlightAll();
+	</script>
+	<!-- <script>
+    function copyText() {
+        var codeElement = document.getElementById('code');
+        var text = codeElement.textContent;
+
+        navigator.clipboard.writeText(text)
+            .then(function() {
+                alert("Text copied to clipboard!");
+            })
+            .catch(function(error) {
+                console.error("Failed to copy text: ", error);
+            });
+    }
+</script>
+ -->
+</body>
+</html>

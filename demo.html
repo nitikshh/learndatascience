@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8">
+    <title>Learn Data Science</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        section h2 {
+            margin-bottom: 10px;
+            color:white;
+            text-align:center;
+            text-shadow: 2px 2px 8px black;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        pre{
+            padding:0px;
+
+        }
+        .container h4{
+            padding:5px;
+            width:100%;
+        }
+        .p{
+            background:#FEFCF3;
+            padding:0px;
+            font-size:13px;
+            
+        }
+        .p span{
+            background-color:#F5EBE0;
+            font-size:13px;
+        }
+        .chart {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width:100%;
+            overflow:scroll;
+            margin-bottom: 20px;
+        }
+        redtag{
+            color:green;
+            margin-top:1px;
+            font-size:13px;
+            font-family: 'Kanit', sans-serif;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100vh;
+            background-color: black;
+            transition: width 0.3s ease;
+            color:black;
+            overflow: hidden;
+        }
+
+        .icon::before {
+            content: "\2630"; /* Hamburger icon */
+        }
+
+        .icon.open::before {
+            content: "\2716"; /* Close icon */
+        }
+
+        .icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color:white;
+            cursor: pointer;
+        }
+
+        #navbarList {
+            margin-top: 50px;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        #navbarList li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #navbarList li a {
+            text-decoration: none;
+            color:white;
+        }
+        #code {
+        font-size: 12px;
+        }
+        
+@media(min-width:700px){
+     .p{
+          font-size:6px;
+     }
+     redtag{
+          font-size:7px;
+          color:red;
+     }
+     h4{
+          font-size:8px;
+     }
+     p span{
+          font-size:8px;
+     }
+}
+#icon-container {
+  position: fixed;
+  left: 88%;
+  top: 35px;
+  transform: translateY(-50%);
+  z-index: 9999;
+}
+
+#whatsapp-icon {
+  font-size: 32px;
+  cursor: pointer;
+  color:white;
+  
+}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+</head>
+<body>
+<div class="navbar" id="navbar">
+    <div class="icon" onclick="toggleNavbar()"></div>
+<div id="icon-container">
+  <a href="https://wa.me/whatsappphonenumber" target="_blank" id="whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></a>
+</div>
+<script>
+const whatsappIcon = document.getElementById('whatsapp-icon');
+const whatsappPhoneNumber = '7668703721'; // Replace with your phone number
+
+whatsappIcon.href = `https://wa.me/${whatsappPhoneNumber}`;
+     
+</script>
+    <ul id="navbarList">
+        <li><a href="index.html">Chapter 0 - Starting with small project</a></li>
+        <li><a href="ch_1_throey.html">Chapter 1 - The Theory</a></li>
+        <li><a href="ML_ch2.html">Chapter 2 - Machine Learning - I</a></li>
+        <li><a href="datacleaning_ch3.html">Chapter 3 - Data Cleaning</a></li>
+        <li><a href="dataVis_ch4.html">Chapter 4 - Data Visualization</a></li>
+        <li><a href="#">Chapter 6 - Conclusion</a></li>
+        <li><a href="#">Chapter 7 - Appendix A</a></li>
+        <li><a href="#">Chapter 8 - Appendix B</a></li>
+        <li><a href="#">Chapter 9 - Glossary</a></li>
+        <li><a href="#">Chapter 10 - Index</a></li>
+    </ul>
+</div>
+
+<script>
+    function toggleNavbar() {
+        var navbar = document.getElementById('navbar');
+        var icon = document.querySelector('.icon');
+        
+        if (navbar.style.width === '300px') {
+            navbar.style.width = '0';
+            icon.classList.remove('open');
+        } else {
+            navbar.style.width = '300px';
+            icon.classList.add('open');
+        }
+    }
+</script>
+
+<header>
+    <h1>Data Science</h1>
+</header>
+<main>
+    <section>
+        <h2>What is -------</h2>
+
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+	  	<p class="p"><span>Explanation</span> :
+
+     </p>
+</div>
+
+			
+			
+			
+		</section>
+	</main>
+	<footer>
+		<p>&copy; 2023 Data Science Guide</p>
+	</footer>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+	<script>
+		Prism.highlightAll();
+	</script>
+	<script>
+    function copyText() {
+        var codeElement = document.getElementById('code');
+        var text = codeElement.textContent;
+
+        navigator.clipboard.writeText(text)
+            .then(function() {
+                alert("Text copied to clipboard!");
+            })
+            .catch(function(error) {
+                console.error("Failed to copy text: ", error);
+            });
+    }
+</script>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  var paragraphs = document.querySelectorAll('.p');
+  paragraphs.forEach(function(paragraph) {
+    var text = paragraph.innerHTML;
+    var regex = /`([^`]+)`/g;
+    var styledText = text.replace(regex, '<redtag class="backtick-text">$1</redtag>');
+    paragraph.innerHTML = styledText;
+  });
+});
+</script>
+
+</body>
+</html>

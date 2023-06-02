@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8">
+    <title>Data Wrangling</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        section h2 {
+            margin-bottom: 10px;
+            color:white;
+            text-align:center;
+            text-shadow: 2px 2px 8px black;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        pre{
+            padding:0px;
+
+        }
+        .container h4{
+            padding:5px;
+            width:100%;
+        }
+        .p{
+            background:#FEFCF3;
+            padding:0px;
+            font-size:13px;
+            
+        }
+        .p span{
+            background-color:#F5EBE0;
+            font-size:13px;
+        }
+        .chart {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width:100%;
+            overflow:scroll;
+            margin-bottom: 20px;
+        }
+        redtag{
+            color:green;
+            margin-top:1px;
+            font-size:13px;
+            font-family: 'Kanit', sans-serif;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100vh;
+            background-color: black;
+            transition: width 0.3s ease;
+            color:black;
+            overflow: hidden;
+        }
+
+        .icon::before {
+            content: "\2630"; /* Hamburger icon */
+        }
+
+        .icon.open::before {
+            content: "\2716"; /* Close icon */
+        }
+
+        .icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color:white;
+            cursor: pointer;
+        }
+
+        #navbarList {
+            margin-top: 50px;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        #navbarList li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #navbarList li a {
+            text-decoration: none;
+            color:white;
+        }
+        #code {
+        font-size: 12px;
+        }
+        
+@media(min-width:700px){
+     .p{
+          font-size:6px;
+     }
+     redtag{
+          font-size:7px;
+          color:red;
+     }
+     h4{
+          font-size:8px;
+     }
+     p span{
+          font-size:8px;
+     }
+}
+#icon-container {
+  position: fixed;
+  left: 88%;
+  top: 35px;
+  transform: translateY(-50%);
+  z-index: 9999;
+}
+
+#whatsapp-icon {
+  font-size: 32px;
+  cursor: pointer;
+  color:white;
+  
+}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+</head>
+<body>
+<div class="navbar" id="navbar">
+    <div class="icon" onclick="toggleNavbar()"></div>
+<div id="icon-container">
+  <a href="https://wa.me/whatsappphonenumber" target="_blank" id="whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></a>
+</div>
+<script>
+const whatsappIcon = document.getElementById('whatsapp-icon');
+const whatsappPhoneNumber = '7668703721'; // Replace with your phone number
+
+whatsappIcon.href = `https://wa.me/${whatsappPhoneNumber}`;
+     
+</script>
+    <ul id="navbarList">
+        <li><a href="index.html">Chapter 0 - Starting with small project</a></li>
+        <li><a href="ch_1_throey.html">Chapter 1 - The Theory</a></li>
+        <li><a href="ML_ch2.html">Chapter 2 - Machine Learning - I</a></li>
+        <li><a href="datacleaning_ch3.html">Chapter 3 - Data Cleaning</a></li>
+        <li><a href="dataVis_ch4.html">Chapter 4 - Data Visualization</a></li>
+        <li><a href="ML_ch5.html">Chapter 5 - Machine Learning - II</a></li>
+        <li><a href="#">Chapter 7 - Appendix A</a></li>
+        <li><a href="#">Chapter 8 - Appendix B</a></li>
+        <li><a href="#">Chapter 9 - Glossary</a></li>
+        <li><a href="#">Chapter 10 - Index</a></li>
+    </ul>
+</div>
+
+<script>
+    function toggleNavbar() {
+        var navbar = document.getElementById('navbar');
+        var icon = document.querySelector('.icon');
+        
+        if (navbar.style.width === '300px') {
+            navbar.style.width = '0';
+            icon.classList.remove('open');
+        } else {
+            navbar.style.width = '300px';
+            icon.classList.add('open');
+        }
+    }
+</script>
+<header>
+    <h1>Data Science</h1>
+    
+</header>
+<main>
+    <section>
+        <h2>Data Wrangling</h2>
+
+		  <div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+Data wrangling, also known as data munging or data preprocessing, refers to the process of cleaning, transforming, and preparing raw data for analysis in data science. It involves several steps to ensure that the data is in a suitable format for further analysis and modeling.
+<br><br>
+Data wrangling is a crucial step in the data science workflow because raw data is often messy, incomplete, or inconsistent, and may contain errors, outliers, or missing values. The goal of data wrangling is to transform the data into a structured and usable format that can be readily analyzed and interpreted.
+<br><br>
+The data wrangling process typically includes the following steps:
+<br>
+1. Data collection: Gathering data from various sources such as databases, files, APIs, or web scraping.
+<br><br>
+2. Data inspection: Understanding the structure and properties of the data, identifying potential issues, and assessing data quality.
+<br><br>
+3. Data cleaning: Removing or correcting errors, inconsistencies, duplicates, and outliers in the data. This may involve techniques such as imputation for missing values, handling inconsistent formatting, or resolving inconsistencies.
+<br><br>
+4. Data transformation: Converting data into a consistent format suitable for analysis. This may involve reshaping data, merging multiple datasets, creating new variables, or deriving features.
+<br><br>
+5. Data integration: Combining data from multiple sources or integrating different datasets to create a unified dataset.
+<br><br>
+6. Data reduction: Selecting relevant variables or reducing the dimensionality of the dataset to improve computational efficiency and focus on important features.
+<br><br>
+7. Data formatting: Ensuring that the data is properly formatted and structured, including standardizing variable types, encoding categorical variables, and handling date/time formats.
+<br><br>
+8. Data validation: Checking the integrity and consistency of the cleaned and transformed data to ensure it meets the required quality standards.
+<br><br>
+By performing these steps, data wrangling helps ensure that the data is reliable, consistent, and appropriate for subsequent analysis tasks such as data exploration, statistical modeling, machine learning, or visualization. Effective data wrangling is crucial for obtaining accurate and meaningful insights from data and building robust models in data science projects.
+
+       </p>
+			</div>
+			
+			<h2>Data Collection</h2>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <!-- <pre onclick="copyText()"><code class="language-python" id="code"></code></pre> -->
+				</div>
+				<p class="p"><span>Explanation</span> :
+Data collection is the initial step in the data wrangling process. It involves gathering data from various sources to be used for analysis or modeling. Data collection can involve several methods and sources, depending on the specific project requirements and objectives. Here are some common aspects of data collection in data wrangling:
+<br><br>
+1. Identifying data sources: Determine the potential sources of data that are relevant to the project. This can include databases, files, APIs (Application Programming Interfaces), web scraping, surveys, or other data repositories.
+<br><br>
+2. Accessing data sources: Establish the means to access the identified data sources. This may involve connecting to databases, retrieving data from files or APIs, or implementing web scraping techniques to extract data from websites.
+<br><br>
+3. Retrieving raw data: Extract the raw data from the identified sources. This can involve querying databases, importing files into the data wrangling environment, using APIs to fetch data, or automating the process of web scraping to collect data from websites.
+<br><br>
+4. Data sampling: Depending on the size and complexity of the data, it may be necessary to collect a representative sample rather than the entire dataset. Sampling techniques can be employed to select a subset of the data for analysis. This is particularly useful when dealing with large datasets that may be resource-intensive to process.
+<br><br>
+5. Data format conversion: The collected data may be stored in different formats such as CSV, Excel, JSON, or databases. During data collection, it is often necessary to convert the data into a common format that can be easily processed and manipulated.
+<br><br>
+6. Data quality assessment: Evaluate the quality of the collected data. This involves checking for completeness, accuracy, consistency, and any potential errors or outliers. It's important to assess the data's reliability and suitability for the intended analysis.
+<br><br>
+Data collection is a crucial step in data wrangling as it forms the foundation for subsequent data cleaning, transformation, and analysis tasks. Ensuring the quality and reliability of the collected data is essential for obtaining accurate and meaningful insights during the data wrangling process and ultimately producing reliable results in data science projects.
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+Taking Data From File
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">import pandas as pd
+
+# Specify the file path
+file_path = "path/to/your/file.csv"
+
+# Read the file using pandas
+data = pd.read_csv(file_path)
+
+# Print the first few rows of the data
+print(data.head())
+</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+In this code, we first import the pandas library using <redtag>import pandas as pd</redtag/>. Then, we specify the file path of the data file that you want to read in the file_path variable. Replace "<redtag>path/to/your/file.csv</redtag/>" with the actual path and filename of your data file.
+<br><br>
+Next, we use the <redtag>pd.read_csv()</redtag/> function to read the data from the file. This assumes that the file is in CSV (Comma-Separated Values) format. If your file is in a different format (e.g., Excel, JSON, etc.), pandas provides corresponding functions <redtag>(read_excel(), read_json()</redtag/>, etc.) to handle those formats.
+<br><br>
+Finally, we print the first few rows of the data using <redtag>print(data.head())</redtag/>. The <redtag>head()</redtag/> function allows you to view the first n rows of the DataFrame, where n is 5 by default. You can modify it to display a different number of rows if needed.
+<br><br>
+Make sure you have pandas installed (pip install pandas) before running this code. Additionally, adjust the code as per your file format and any specific requirements for data processing or manipulation.
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+from APIs
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">import requests
+import pandas as pd
+# API endpoint URL
+api_url = "https://disease.sh/v3/covid-19/countries"
+# Send a GET request to the API
+response = requests.get(api_url)
+# Check if the request was successful (status code 200)
+if response.status_code == 200:
+    # Convert the response to JSON format
+    data = response.json()
+    # Create a pandas DataFrame from the JSON data
+    df = pd.DataFrame(data)
+    # Print the data
+    print(df.head())
+else:
+    print("Failed to retrieve data from the API. Error:", response.status_code)
+				     </code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+Let's break down the code step by step:
+<br><br>
+1. `import requests`: This line imports the `requests` library, which is used to send HTTP requests to a specified URL.
+<br><br>
+2. `import pandas as pd`: This line imports the `pandas` library and assigns it the alias `pd`, which is a popular library for data manipulation and analysis.
+<br><br>
+3. `api_url = "https://disease.sh/v3/covid-19/countries"`: This line assigns the API endpoint URL to the variable `api_url`. In this example, it is set to the URL of an API that provides COVID-19 data for different countries.
+<br><br>
+4. `response = requests.get(api_url)`: This line sends a GET request to the specified API endpoint URL using the `requests.get()` function. It retrieves the response from the API and assigns it to the variable `response`.
+<br><br>
+5. `if response.status_code == 200:`: This line checks if the request was successful by verifying the status code of the response. A status code of 200 indicates a successful request.
+<br><br>
+6. `data = response.json()`: This line converts the response content to JSON format using the `response.json()` method. It parses the JSON data and assigns it to the variable `data`.
+<br><br>
+7. `df = pd.DataFrame(data)`: This line creates a pandas DataFrame `df` from the JSON data. The DataFrame is a tabular data structure that can be used for further analysis and manipulation.
+<br><br>
+8. `print(df.head())`: This line prints the first few rows of the DataFrame using the `head()` method. It displays the retrieved data from the API in a tabular format.
+<br><br>
+9. `else: print("Failed to retrieve data from the API. Error:", response.status_code)`: This line is the else block of the conditional statement. If the request was not successful (status code is not 200), it prints an error message along with the response status code.
+<br><br>
+Overall, this code retrieves data from the specified API endpoint, converts it to a pandas DataFrame, and prints the first few rows of the DataFrame. It also includes error handling in case the request is unsuccessful.
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+web scrapping
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">import requests
+from bs4 import BeautifulSoup as bp
+import csv
+url = 'https://english12.w3spaces.com/Flamingo/The_last_lesson.html'
+r = requests.get(url)
+htmlContent = r.content
+soup = bp(htmlContent, 'html.parser')
+# Find all elements with class 'faq-item'
+faq_items = soup.find_all(class_='faq-item')
+# Open the CSV file in write mode
+with open('question_ans.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+    # Write the header row
+    writer.writerow(['Question', 'Answer'])
+    # Iterate over the FAQ items and write their questions and answers to the CSV file
+    for item in faq_items:
+        question = item.find(class_='faq-question').get_text(strip=True)
+        answer = item.find(class_='faq-answer').get_text(strip=True)
+        writer.writerow([question, answer])
+print("Data written to question_ans.csv file.")
+# Let's see the data
+df2 = pd.read_csv('question_ans.csv')
+df2.head()
+				     </code></pre>
+				</div>
+				<p class="p"><span> Explanation </span> :
+Let's break down the code step by step:
+<br><br>
+1. `import requests`: This line imports the `requests` library, which is used to send HTTP requests to a specified URL.
+<br><br>
+2. `from bs4 import BeautifulSoup as bp`: This line imports the `BeautifulSoup` class from the `bs4` module and assigns it the alias `bp`. BeautifulSoup is a library used for web scraping and parsing HTML content.
+<br><br>
+3. `import csv`: This line imports the `csv` module, which provides functionality for working with CSV files.
+<br><br>
+4. `url = 'https://english12.w3spaces.com /Flamingo/The_last_lesson.html'`: This line assigns the URL of a webpage to the `url` variable.
+<br><br>
+5. `r = requests.get(url)`: This line sends a GET request to the specified URL using the `requests.get()` function and assigns the response to the variable `r`.
+<br><br>
+6. `htmlContent = r.content`: This line retrieves the content of the response using the `content` attribute of the response object and assigns it to the `htmlContent` variable.
+<br><br>
+7. `soup = bp(htmlContent, 'html.parser')`: This line creates a BeautifulSoup object `soup` by passing the HTML content and the parser name `'html.parser'` to the `BeautifulSoup` constructor. This allows you to parse and extract data from the HTML content.
+<br><br>
+8. `faq_items = soup.find_all(class_='faq-item')`: This line uses the `find_all()` method of the BeautifulSoup object to find all elements with the CSS class `'faq-item'`. It returns a list of matching elements and assigns it to the `faq_items` variable.
+<br><br>
+9. `with open('question_ans.csv', 'w', newline='') as file:`: This line opens a CSV file named `'question_ans.csv'` in write mode using the `open()` function. The `newline=''` parameter is used for handling line endings. The file object is assigned to the variable `file`. The `with` statement ensures that the file is properly closed after writing.
+<br><br>
+10. `writer = csv.writer(file)`: This line creates a CSV writer object `writer` using the `csv.writer()` function, which allows writing rows to the CSV file.
+<br><br>
+11. `writer.writerow(['Question', 'Answer'])`: This line writes the header row containing the column names `'Question'` and `'Answer'` to the CSV file using the `writerow()` method of the CSV writer.
+<br><br>
+12. `for item in faq_items:`: This line starts a loop over each item in the `faq_items` list.
+<br><br>
+13. `question = item.find(class_='faq-question').get_text(strip=True)`: This line finds the element with the CSS class `'faq-question'` within the current `item` and retrieves its text content using the `get_text()` method. The `strip=True` argument removes any leading or trailing whitespace.
+<br><br>
+14. `answer = item.find(class_='faq-answer').get_text(strip=True)`: This line finds the element with the CSS class `'faq-answer'` within the current `item` and retrieves its text content using the `get_text()` method. The `strip=True` argument removes any leading or trailing whitespace.
+<br><br>
+15. `writer.writerow([question, answer])`: This line writes a row to the CSV file containing the extracted `question` and `answer` using the `writerow()` method of the CSV writer.
+<br><br>
+16. `df2 = pd.read_csv('question_ans.csv')`: This line reads the CSV file `'question_ans.csv'` into a pandas DataFrame `df2` using the `read_csv()` function from the `pandas` library.
+<br><br>
+17. `df2.head()`: This line prints the first few
+
+ rows of the DataFrame `df2` using the `head()` method, displaying the extracted data in tabular format.
+<br><br>
+Overall, this code performs web scraping on a webpage, extracts questions and answers from specific elements, and writes them to a CSV file. It then reads the CSV file into a pandas DataFrame and displays the first few rows of the DataFrame.
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+Data Sampling
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">from sklearn.datasets import fetch_openml
+import pandas as pd
+# Fetch the desired dataset from openml
+dataset = fetch_openml(name='iris', version=1, as_frame=True)
+# Convert the data to a pandas DataFrame
+df = pd.DataFrame(data=dataset.data, columns=dataset.feature_names)
+# Perform data sampling using the sample() method
+sample_size = 10  # Specify the desired sample size
+random_sample = df.sample(n=sample_size, random_state=42)
+# Print the random sample
+print(random_sample)
+
+#print the dataframe
+random_sample</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+Let's break down the code step by step:
+<br><br>
+1. `from sklearn.datasets import fetch_openml`: This line imports the `fetch_openml` function from the `sklearn.datasets` module. This function is used to fetch datasets from the OpenML platform.
+<br><br>
+2. `import pandas as pd`: This line imports the `pandas` library and assigns it the alias `pd`. Pandas is a popular library for data manipulation and analysis.
+<br><br>
+3. `dataset = fetch_openml(name='iris', version=1, as_frame=True)`: This line fetches the desired dataset from OpenML using the `fetch_openml` function. The `name` parameter specifies the dataset name ('iris' in this case), and the `version` parameter is set to 1. The `as_frame` parameter is set to `True` to return the data as a pandas DataFrame.
+<br><br>
+4. `df = pd.DataFrame(data=dataset.data, columns=dataset.feature_names)`: This line creates a pandas DataFrame `df` from the fetched dataset. The `data` attribute of the `dataset` object contains the actual data, and the `feature_names` attribute contains the column names. The `pd.DataFrame()` function is used to create the DataFrame, and the `data` and `columns` arguments are specified accordingly.
+<br><br>
+5. `sample_size = 10`: This line sets the desired sample size to 10. You can adjust this value according to your requirements.
+<br><br>
+6. `random_sample = df.sample(n=sample_size, random_state=42)`: This line performs data sampling using the `sample()` method of the DataFrame. The `n` parameter specifies the number of rows to be included in the sample (in this case, `sample_size`), and the `random_state` parameter sets a seed for reproducibility, ensuring that the same sample is selected each time the code is run with the same seed value. The sampled data is assigned to the `random_sample` variable.
+<br><br>
+7. `print(random_sample)`: This line prints the randomly sampled data to the console.
+<br><br>
+The code fetches the 'iris' dataset from OpenML, converts it to a pandas DataFrame, performs data sampling on the DataFrame, and then prints the sampled data to the console.
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+from Json file
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">import pandas as pd
+import json
+# JSON data
+json_data = '''
+{
+    "students": [
+        {
+            "name": "John",
+            "age": 25,
+            "country": "USA"
+        },
+        {
+            "name": "Alice",
+            "age": 30,
+            "country": "Canada"
+        },
+        {
+            "name": "Bob",
+            "age": 35,
+            "country": "UK"
+        },
+        {
+            "name": "Emily",
+            "age": 28,
+            "country": "Australia"
+        }
+    ]
+}
+'''
+# Convert JSON to Python dictionary
+data_dict = json.loads(json_data)
+# Convert dictionary to DataFrame
+df5 = pd.DataFrame(data_dict['students'])
+# Print the DataFrame
+print(df5)
+
+# Let's see that dataframe
+df5</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+Let's break down the code step by step:
+<br><br>
+1. `import pandas as pd`: This line imports the `pandas` library and assigns it the alias `pd`. Pandas is a popular library for data manipulation and analysis.
+<br><br>
+2. `import json`: This line imports the `json` module, which provides functionality for working with JSON data.
+<br><br>
+3. `json_data = ''' ... '''`: This section defines a multiline string `json_data` that contains JSON-formatted data. It represents a list of students, where each student is a dictionary with attributes like name, age, and country.
+<br><br>
+4. `data_dict = json.loads(json_data)`: This line uses the `json.loads()` function to convert the `json_data` string to a Python dictionary. It parses the JSON data and assigns it to the variable `data_dict`.
+<br><br>
+5. `df5 = pd.DataFrame(data_dict['students'])`: This line creates a pandas DataFrame `df5` from the dictionary `data_dict`. The DataFrame is constructed using the list of dictionaries under the key `'students'` in the `data_dict` dictionary.
+<br><br>
+6. `print(df5)`: This line prints the DataFrame `df5` to the console. The DataFrame displays the student data in tabular format.
+<br><br>
+7. `df5`: This line is not necessary for the code's functionality. It represents the DataFrame `df5` and will output the DataFrame if executed independently.
+<br><br>
+Overall, this code takes JSON data, converts it into a Python dictionary using `json.loads()`, and then creates a pandas DataFrame from the dictionary. It then prints the DataFrame to the console, displaying the student data in a tabular format.
+       </p>
+			</div>
+			<h2>Data Inspection</h2>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"> # Data inspection is an essential step in data wrangling, where you examine the structure, properties, and content of your dataset to gain insights and identify potential issues. 
+# Here's an example code snippet for data inspection in Python using pandas:
+
+import pandas as pd
+
+# Load the dataset into a pandas DataFrame
+df = pd.read_csv('your_dataset.csv')
+
+# Get the number of rows and columns in the dataset
+num_rows, num_cols = df.shape
+print("Number of rows:", num_rows)
+print("Number of columns:", num_cols)
+
+# Get an overview of the dataset
+print("\nDataset overview:")
+print(df.info())
+
+# Get basic statistical summary of numeric columns
+print("\nStatistical summary:")
+print(df.describe())
+
+# Check the first few rows of the dataset
+print("\nFirst few rows:")
+print(df.head())
+
+# Check the last few rows of the dataset
+print("\nLast few rows:")
+print(df.tail())
+
+# Check the column names
+print("\nColumn names:")
+print(df.columns)
+
+# Check the data types of each column
+print("\nData types:")
+print(df.dtypes)
+
+# Check for missing values in the dataset
+print("\nMissing values:")
+print(df.isnull().sum())</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+In the above code:
+<br>
+ First, you load your dataset into a pandas DataFrame (`df`) using `pd.read_csv()` or the appropriate method based on your dataset format.
+ <br><br>
+ You then use various pandas functions and methods to inspect the dataset: <br>
+  `df.shape` returns the number of rows and columns in the dataset.<br>
+  `df.info()` provides an overview of the dataset, including column names, data types, and the count of non-null values.<br>
+  `df.describe()` computes basic statistical summary (count, mean, standard deviation, min, quartiles, max) for numeric columns.<br>
+  `df.head()` displays the first few rows of the dataset.<br>
+   `df.tail()` displays the last few rows of the dataset.<br>
+  `df.columns` returns the column names.
+ `df.dtypes` shows the data types of each column.<br>
+`df.isnull().sum()` counts the number of missing values in each column.<br><br>
+
+You can customize the code based on your specific dataset and inspection requirements.
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">import pandas as pd
+
+# Load the dataset into a pandas DataFrame
+df = pd.read_csv('your_dataset.csv')
+
+# Get the number of unique values in each column
+print("\nNumber of unique values in each column:")
+print(df.nunique())
+
+# Get the value counts for a specific column
+print("\nValue counts for a specific column:")
+print(df['column_name'].value_counts())
+
+# Check for duplicate rows in the dataset
+print("\nDuplicate rows:")
+print(df[df.duplicated()])
+
+# Check for duplicate values in a specific column
+print("\nDuplicate values in a specific column:")
+print(df['column_name'][df['column_name'].duplicated()])
+
+# Check for outliers in numeric columns
+numeric_cols = df.select_dtypes(include=['int', 'float']).columns
+print("\nOutliers in numeric columns:")
+for col in numeric_cols:
+    q1 = df[col].quantile(0.25)
+    q3 = df[col].quantile(0.75)
+    iqr = q3 - q1
+    lower_bound = q1 - 1.5 * iqr
+    upper_bound = q3 + 1.5 * iqr
+    outliers = df[(df[col] < lower_bound) | (df[col] > upper_bound)]
+    if not outliers.empty:
+        print("Column:", col)
+        print(outliers)
+
+# Check for unique values in categorical columns
+categorical_cols = df.select_dtypes(include=['object']).columns
+print("\nUnique values in categorical columns:")
+for col in categorical_cols:
+    unique_values = df[col].unique()
+    print("Column:", col)
+    print(unique_values)
+
+# Check the correlation between numeric columns
+correlation_matrix = df.corr()
+print("\nCorrelation matrix:")
+print(correlation_matrix)
+
+# Check for missing values in each column
+print("\nMissing values in each column:")
+print(df.isnull().sum())
+
+# Check the memory usage of the DataFrame
+print("\nMemory usage:")
+print(df.memory_usage())
+
+# Check the data types and memory usage after converting columns to appropriate types
+df['column_name'] = pd.to_numeric(df['column_name'], downcast='integer')
+df['another_column'] = pd.to_datetime(df['another_column'])
+print("\nUpdated data types and memory usage:")
+print(df.dtypes)
+print(df.memory_usage())</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+- `df.nunique()` returns the number of unique values in each column.<br>
+- `df['column_name'].value_counts()` provides the value counts for a specific column.<br>
+- `df[df.duplicated()]` shows duplicate rows in the dataset.<br>
+- `df['column_name'][df['column_name'].duplicated()]` displays duplicate values in a specific column.<br>
+- Outlier detection using the interquartile range (IQR) method for numeric columns.<br>
+- Checking unique values in categorical columns using the `unique()` method.<br>
+- Computing the correlation matrix between numeric columns using `df.corr()`.<br>
+- `df.memory_usage()` shows the memory usage of the DataFrame.<br>
+- Converting columns to appropriate data types using `pd.to_numeric()` and `pd.to_datetime()` and checking the updated data types and memory usage.
+<br>
+Feel free to modify the code based on your specific dataset and inspection requirements.
+       </p>
+			</div>
+			<h2>Data Cleaning</h2>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">import pandas as pd
+from sklearn.datasets import fetch_openml
+
+# Fetch the desired dataset from openml
+dataset = fetch_openml(name='iris', version=1, as_frame=True)
+
+# Convert the data to a pandas DataFrame
+df = pd.DataFrame(data=dataset.data, columns=dataset.feature_names)
+
+# Display the initial state of the dataset
+print("Initial dataset:")
+print(df.head())
+
+# Check for missing values
+print("\nMissing values before cleaning:")
+print(df.isnull().sum())
+
+# Remove duplicate rows
+df = df.drop_duplicates()
+
+# Replace missing values with appropriate strategies
+df['column_name'].fillna(value, inplace=True)
+
+# Drop columns with high percentage of missing values
+df = df.dropna(thresh=len(df) * 0.7, axis=1)
+
+# Drop irrelevant columns
+df = df.drop(['column_name'], axis=1)
+
+# Handle outliers using appropriate methods
+df = df[(df['column_name'] > lower_bound) & (df['column_name'] < upper_bound)]
+
+# Handle inconsistent data by standardizing or correcting values
+df['column_name'] = df['column_name'].str.lower()
+
+# Convert data types of columns
+df['column_name'] = pd.to_numeric(df['column_name'])
+df['column_name'] = pd.to_datetime(df['column_name'])
+
+# Perform feature scaling or normalization
+df['column_name'] = (df['column_name'] - df['column_name'].mean()) / df['column_name'].std()
+
+# Remove leading/trailing whitespaces from string columns
+df['column_name'] = df['column_name'].str.strip()
+
+# Remove irrelevant or inconsistent rows based on conditions
+df = df[df['column_name'] > threshold]
+
+# Handle class imbalance using sampling techniques
+balanced_df = pd.concat([df[df['class'] == 'class_1'].sample(n=100), df[df['class'] == 'class_2'].sample(n=100)])
+
+# Perform data discretization or binning
+df['column_name'] = pd.cut(df['column_name'], bins=5, labels=False)
+
+# Apply feature engineering techniques
+df['new_column'] = df['column_name1'] + df['column_name2']
+df['new_column'] = df['column_name'].apply(lambda x: 'large' if x > threshold else 'small')
+
+# Handle inconsistent categories by grouping or merging
+df['column_name'].replace({'category_1': 'category_2'}, inplace=True)
+
+# Check for data integrity and resolve inconsistencies
+df['column_name'].replace({'value_1': 'value_2'}, inplace=True)
+
+# Display the cleaned dataset
+print("\nCleaned dataset:")
+print(df.head())
+
+# Check for missing values after cleaning
+print("\nMissing values after cleaning:")
+print(df.isnull().sum())
+
+# Save the cleaned dataset to a file
+df.to_csv('cleaned_dataset.csv', index=False)</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+This code covers various data cleaning techniques, including handling missing values, removing duplicates, dropping irrelevant columns, handling outliers, standardizing or correcting values, converting data types, feature scaling, removing leading/trailing whitespaces, removing irrelevant or inconsistent rows, handling class imbalance, data discretization, feature engineering, handling inconsistent categories, checking data integrity, and saving the cleaned dataset to a file.
+<br><br>
+You can modify and adapt the code based on your specific dataset and cleaning requirements.
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">import pandas as pd
+from sklearn.datasets import fetch_openml
+
+# Fetch the desired dataset from openml
+dataset = fetch_openml(name='iris', version=1, as_frame=True)
+
+# Convert the data to a pandas DataFrame
+df = pd.DataFrame(data=dataset.data, columns=dataset.feature_names)
+
+# Display the initial state of the dataset
+print("Initial dataset:")
+print(df.head())
+
+# Check for duplicate rows
+print("\nDuplicate rows:")
+print(df[df.duplicated()])
+
+# Remove duplicate rows
+df = df.drop_duplicates()
+
+# Handle inconsistent data by standardizing or correcting values
+df['column_name'] = df['column_name'].str.replace('incorrect_value', 'correct_value')
+
+# Drop rows with missing values
+df = df.dropna()
+
+# Check for outliers using advanced algorithms or visualizations
+outlier_threshold = 3.0  # Specify the outlier threshold
+outliers = df[(df['column_name'] > df['column_name'].mean() + outlier_threshold * df['column_name'].std()) |
+              (df['column_name'] < df['column_name'].mean() - outlier_threshold * df['column_name'].std())]
+print("\nOutliers:")
+print(outliers)
+
+# Remove outliers
+df = df[(df['column_name'] <= df['column_name'].mean() + outlier_threshold * df['column_name'].std()) &
+        (df['column_name'] >= df['column_name'].mean() - outlier_threshold * df['column_name'].std())]
+
+# Apply data transformation techniques
+df['log_transformed_column'] = df['column_name'].apply(lambda x: math.log(x) if x > 0 else 0)
+
+# Perform data discretization or binning using custom bins
+bins = [0, 25, 50, 75, 100]  # Specify custom bins
+labels = ['bin1', 'bin2', 'bin3', 'bin4']  # Specify labels for the bins
+df['binned_column'] = pd.cut(df['column_name'], bins=bins, labels=labels)
+
+# Encode categorical variables using one-hot encoding
+df_encoded = pd.get_dummies(df, columns=['categorical_column'])
+
+# Normalize data using min-max scaling
+df_normalized = (df_encoded - df_encoded.min()) / (df_encoded.max() - df_encoded.min())
+
+# Check for data integrity and resolve inconsistencies
+df['column_name'].replace({'value_1': 'value_2'}, inplace=True)
+
+# Check for data completeness and handle missing values
+print("\nMissing values:")
+print(df.isnull().sum())
+
+# Impute missing values using advanced techniques like regression imputation or K-nearest neighbors imputation
+
+# Save the cleaned dataset to a file
+df_normalized.to_csv('cleaned_dataset.csv', index=False)
+
+# Display the cleaned dataset
+print("\nCleaned dataset:")
+print(df_normalized.head())</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+This updated code covers the following additional data cleaning topics:
+<br><br>
+- Handling duplicate rows and removing them from the dataset.<br>
+- Handling inconsistent data by replacing incorrect values with correct values.<br>
+- Dropping rows with missing values.<br>
+- Checking for outliers using advanced algorithms or visualizations and removing them from the dataset.<br>
+- Applying data transformation techniques, such as logarithmic transformation.<br>
+- Performing data discretization or binning using custom bins and labels.<br>
+- Encoding categorical variables using one-hot encoding.<br>
+- Normalizing data using min-max scaling.<br>
+- Checking for data integrity and resolving inconsistencies.<br>
+- Checking for data completeness and handling missing values using advanced imputation techniques.<br>
+- Saving the cleaned dataset to a file.<br>
+- Displaying the cleaned dataset. <br>
+<br>
+Feel free to modify and adapt the code
+ according to your specific dataset and data cleaning requirements.
+       </p>
+			</div>
+			<h2>Data transformation</h2>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">import pandas as pd
+from sklearn.datasets import fetch_openml
+import numpy as np
+
+# Fetch the desired dataset from openml
+dataset = fetch_openml(name='iris', version=1, as_frame=True)
+
+# Convert the data to a pandas DataFrame
+df = pd.DataFrame(data=dataset.data, columns=dataset.feature_names)
+
+# Display the initial state of the dataset
+print("Initial dataset:")
+print(df.head())
+
+# Apply log transformation
+df['sepal_length_log'] = np.log(df['sepal length (cm)'])
+
+# Apply square root transformation
+df['petal_width_sqrt'] = np.sqrt(df['petal width (cm)'])
+
+# Apply reciprocal transformation
+df['sepal_width_reciprocal'] = 1 / df['sepal width (cm)']
+
+# Apply binning using cut function
+bins = [0, 5, 10, 15]  # Specify custom bins
+labels = ['low', 'medium', 'high']  # Specify labels for the bins
+df['sepal_length_binned'] = pd.cut(df['sepal length (cm)'], bins=bins, labels=labels)
+
+# Apply ordinal encoding to categorical variable
+category_mapping = {'setosa': 0, 'versicolor': 1, 'virginica': 2}  # Specify mapping for categories
+df['species_encoded'] = df['species'].map(category_mapping)
+
+# Apply one-hot encoding to categorical variable
+df_encoded = pd.get_dummies(df, columns=['species'])
+
+# Apply scaling using min-max normalization
+df['sepal_width_scaled'] = (df['sepal width (cm)'] - df['sepal width (cm)'].min()) / \
+                            (df['sepal width (cm)'].max() - df['sepal width (cm)'].min())
+
+# Apply z-score normalization
+df['petal_length_normalized'] = (df['petal length (cm)'] - df['petal length (cm)'].mean()) / \
+                                df['petal length (cm)'].std()
+
+# Apply feature engineering using mathematical operations
+df['petal_area'] = df['petal length (cm)'] * df['petal width (cm)']
+
+# Apply feature scaling using logarithmic scaling
+df['sepal_length_log_scaled'] = (np.log(df['sepal length (cm)']) - np.log(df['sepal length (cm)']).min()) / \
+                                (np.log(df['sepal length (cm)']).max() - np.log(df['sepal length (cm)']).min())
+
+# Apply feature scaling using min-max scaling with custom range
+custom_min = 0  # Specify custom minimum value
+custom_max = 100  # Specify custom maximum value
+df['sepal_width_custom_scaled'] = ((df['sepal width (cm)'] - df['sepal width (cm)'].min()) /
+                                   (df['sepal width (cm)'].max() - df['sepal width (cm)'].min())) * \
+                                  (custom_max - custom_min) + custom_min
+
+# Display the transformed dataset
+print("\nTransformed dataset:")
+print(df.head())</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+This code covers various data transformation techniques and terms, including log transformation, square root transformation, reciprocal transformation, binning using the `cut()` function, ordinal encoding, one-hot encoding, min-max normalization, z-score normalization, feature engineering using mathematical operations,
+ logarithmic scaling, and custom min-max scaling.
+<br><br>
+Feel free to modify and adapt the code according to your specific dataset and data transformation requirements.
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">import pandas as pd
+from sklearn.datasets import fetch_openml
+
+# Fetch the desired dataset from openml
+dataset = fetch_openml(name='iris', version=1, as_frame=True)
+
+# Convert the data to a pandas DataFrame
+df = pd.DataFrame(data=dataset.data, columns=dataset.feature_names)
+
+# Display the initial state of the dataset
+print("Initial dataset:")
+print(df.head())
+
+# Reshape data using pivot table
+df_pivot = df.pivot(index='sepal length (cm)', columns='species', values='petal length (cm)')
+
+# Merge multiple datasets
+dataset2 = fetch_openml(name='wine-quality-red', version=1, as_frame=True)
+df2 = pd.DataFrame(data=dataset2.data, columns=dataset2.feature_names)
+merged_df = pd.merge(df, df2, on='common_column')
+
+# Create new variables
+df['new_variable'] = df['existing_column1'] + df['existing_column2']
+
+# Derive features using existing variables
+df['derived_feature'] = df['existing_column1'] - df['existing_column2']
+
+# Apply reshaping using stack and unstack
+df_stacked = df.stack()
+df_unstacked = df_stacked.unstack()
+
+# Apply reshaping using melt
+df_melted = df.melt(id_vars=['column1', 'column2'], value_vars=['column3', 'column4'], var_name='variable', value_name='value')
+
+# Display the transformed dataset
+print("\nTransformed dataset:")
+print(df.head())
+</code></pre>
+				</div>
+				
+			<!-- 	<p class="p"><span>Explanation</span> :
+				
+       </p> -->
+       
+			</div>
+			<h2>Data integration</h2>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"># Data integration is the process of combining data from different sources into a unified format.
+
+import pandas as pd
+from sklearn.datasets import fetch_openml
+
+# Fetch the desired dataset from openml
+dataset = fetch_openml(name='iris', version=1, as_frame=True)
+
+# Convert the data to a pandas DataFrame
+df1 = pd.DataFrame(data=dataset.data, columns=dataset.feature_names)
+df2 = pd.DataFrame(data=dataset.target, columns=['target'])
+
+# Display the initial state of the datasets
+print("Initial datasets:")
+print("df1:")
+print(df1.head())
+print("\ndf2:")
+print(df2.head())
+
+# Merge datasets using a common column
+merged_df = pd.merge(df1, df2, left_index=True, right_index=True)
+
+# Concatenate datasets vertically
+concatenated_df = pd.concat([df1, df2], axis=0)
+
+# Append rows from one dataset to another
+df1 = df1.append(df2, ignore_index=True)
+
+# Check for data inconsistencies or discrepancies
+inconsistencies = df1[df1['column_name1'] != df1['column_name2']]
+print("\nInconsistencies:")
+print(inconsistencies)
+
+# Resolve data inconsistencies or discrepancies
+df1['column_name1'] = df1['column_name2']
+
+# Remove duplicate columns after merging datasets
+merged_df = merged_df.loc[:, ~merged_df.columns.duplicated()]
+
+# Handle data conflicts in merged datasets
+merged_df['column_name'] = merged_df['column_name'].combine_first(merged_df['column_name'])
+
+# Handle missing values in merged datasets
+merged_df['column_name'].fillna(value, inplace=True)
+
+# Save the merged dataset to a file
+merged_df.to_csv('merged_dataset.csv', index=False)
+
+# Display the merged dataset
+print("\nMerged dataset:")
+print(merged_df.head())</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+This code covers various data integration techniques, including merging datasets using a common column, concatenating datasets vertically, appending rows from one dataset to another, checking for data inconsistencies or discrepancies, resolving data inconsistencies, removing duplicate columns after merging datasets, handling data conflicts, handling missing values, and saving the merged dataset to a file.
+<br><br>
+You can modify and adapt the code based on your specific datasets and integration requirements, replacing the dummy words with actual column names from your dataset.
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">import pandas as pd
+from sklearn.datasets import fetch_openml
+
+# Fetch the desired datasets from openml
+dataset1 = fetch_openml(name='iris', version=1, as_frame=True)
+dataset2 = fetch_openml(name='wine', version=1, as_frame=True)
+
+# Convert the data to pandas DataFrames
+df1 = pd.DataFrame(data=dataset1.data, columns=dataset1.feature_names)
+df2 = pd.DataFrame(data=dataset2.data, columns=dataset2.feature_names)
+
+# Display the initial state of the datasets
+print("Initial datasets:")
+print("df1:")
+print(df1.head())
+print("\ndf2:")
+print(df2.head())
+
+# Join the datasets using a common column
+joined_df = pd.merge(df1, df2, on='common_column')
+
+# Save the joined dataset to a file
+joined_df.to_csv('joined_dataset.csv', index=False)
+
+# Display the joined dataset
+print("\nJoined dataset:")
+print(joined_df.head())
+</code></pre>
+				</div>
+				<p class="p"><!-- <span>Explanation</span> --> :
+				
+       </p>
+			</div>
+			<h2>Data Reduction</h2>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"># Data reduction techniques aim to reduce the dimensionality or size of a dataset while preserving its essential information.
+# Here's an example code that covers various data reduction techniques, using the extracted dataset from `fetch_openml`:
+
+import pandas as pd
+from sklearn.datasets import fetch_openml
+from sklearn.decomposition import PCA
+from sklearn.feature_selection import SelectKBest, chi2
+
+# Fetch the desired dataset from openml
+dataset = fetch_openml(name='iris', version=1, as_frame=True)
+
+# Convert the data to a pandas DataFrame
+df = pd.DataFrame(data=dataset.data, columns=dataset.feature_names)
+
+# Display the initial state of the dataset
+print("Initial dataset:")
+print(df.head())
+
+# Perform Principal Component Analysis (PCA) for dimensionality reduction
+pca = PCA(n_components=2)
+reduced_data_pca = pca.fit_transform(df)
+
+# Display the reduced dataset after PCA
+df_pca = pd.DataFrame(data=reduced_data_pca, columns=['PC1', 'PC2'])
+print("\nReduced dataset after PCA:")
+print(df_pca.head())
+
+# Perform feature selection using SelectKBest and chi-squared test
+selector = SelectKBest(score_func=chi2, k=2)
+selected_features = selector.fit_transform(df, dataset.target)
+
+# Display the selected features
+df_selected = pd.DataFrame(data=selected_features, columns=['Selected1', 'Selected2'])
+print("\nSelected features:")
+print(df_selected.head())
+
+# Perform sampling for data reduction
+sampled_data = df.sample(frac=0.5, random_state=42)
+
+# Display the sampled dataset
+print("\nSampled dataset:")
+print(sampled_data.head())
+
+# Perform data compression using appropriate compression algorithms
+compressed_data = df.to_csv('compressed_dataset.csv', index=False)
+
+# Load the compressed dataset
+df_compressed = pd.read_csv('compressed_dataset.csv')
+
+# Display the compressed dataset
+print("\nCompressed dataset:")
+print(df_compressed.head())
+
+# Perform data aggregation or summarization
+grouped_data = df.groupby('class').mean()
+
+# Display the aggregated dataset
+print("\nAggregated dataset:")
+print(grouped_data)
+
+# Perform data discretization or binning
+df['sepal_width_binned'] = pd.cut(df['sepal width (cm)'], bins=3, labels=['Low', 'Medium', 'High'])
+
+# Display the dataset after data discretization
+print("\nDataset after data discretization:")
+print(df.head())
+
+# Perform feature extraction using appropriate techniques (e.g., text mining, image processing)
+
+# Save the reduced dataset to a file
+df_pca.to_csv('reduced_dataset.csv', index=False)
+
+# Display the reduced dataset
+print("\nReduced dataset:")
+print(df_pca.head())</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+This code covers various data reduction techniques, including Principal Component Analysis (PCA) for dimensionality reduction, feature selection using SelectKBest and chi-squared test, sampling, data compression, data aggregation or summarization, data discretization or binning, and feature extraction.
+<br><br>
+You can modify and adapt the code based on your specific dataset and data reduction requirements.
+       </p>
+			</div>
+			<h2>Data validation</h2>
+			<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"># Data validation is an essential aspect of data cleaning and ensures that the data conforms to specific rules or constraints. 
+# Here's an example code that covers various data validation techniques using the extracted dataset from `fetch_openml`:
+
+import pandas as pd
+from sklearn.datasets import fetch_openml
+
+# Fetch the desired dataset from openml
+dataset = fetch_openml(name='iris', version=1, as_frame=True)
+
+# Convert the data to a pandas DataFrame
+df = pd.DataFrame(data=dataset.data, columns=dataset.feature_names)
+
+# Display the initial state of the dataset
+print("Initial dataset:")
+print(df.head())
+
+# Check for missing values
+print("\nMissing values:")
+print(df.isnull().sum())
+
+# Check for duplicate rows
+print("\nDuplicate rows:")
+print(df[df.duplicated()])
+
+# Check for outliers using advanced algorithms or visualizations
+outlier_threshold = 3.0  # Specify the outlier threshold
+outliers = df[(df['sepal_length'] > df['sepal_length'].mean() + outlier_threshold * df['sepal_length'].std()) |
+              (df['sepal_length'] < df['sepal_length'].mean() - outlier_threshold * df['sepal_length'].std())]
+print("\nOutliers:")
+print(outliers)
+
+# Check for data integrity and consistency
+print("\nData integrity:")
+inconsistent_data = df[(df['sepal_length'] <= 0) | (df['petal_width'] > 10)]
+print(inconsistent_data)
+
+# Check for data completeness
+print("\nData completeness:")
+incomplete_data = df[df.isnull().any(axis=1)]
+print(incomplete_data)
+
+# Validate data based on domain-specific rules
+# Example: Sepal length should be positive
+invalid_data = df[df['sepal_length'] <= 0]
+print("\nInvalid data:")
+print(invalid_data)
+
+# Validate data using custom functions or regular expressions
+# Example: Validate email addresses in a column
+import re
+
+def validate_email(email):
+    pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+    if re.match(pattern, email):
+        return True
+    else:
+        return False
+
+invalid_emails = df[~df['email_column'].apply(validate_email)]
+print("\nInvalid emails:")
+print(invalid_emails)
+
+# Validate data using external data sources or reference datasets
+# Example: Check if a category value exists in a reference dataset
+reference_categories = ['category1', 'category2', 'category3']
+invalid_categories = df[~df['category_column'].isin(reference_categories)]
+print("\nInvalid categories:")
+print(invalid_categories)
+
+# Validate data using statistical methods or machine learning models
+# Example: Identify data points with high leverage or influence
+import statsmodels.api as sm
+
+X = df[['sepal_width', 'petal_length', 'petal_width']]  # Specify relevant columns as features
+y = df['sepal_length']  # Specify the target column
+model = sm.OLS(y, X)
+influential_points = model.get_influence().summary_frame().filter('cooks_d').loc[df.index]
+print("\nInfluential points:")
+print(influential_points)
+
+# Validate data using business rules or constraints
+# Example: Check if a calculated column meets a specific condition
+df['calculated_column'] = df['sepal_length'] * df['petal_length']
+invalid_data = df[df['calculated_column'] < 10]
+print("\nInvalid calculated data:")
+print(invalid_data)
+
+# Display the final state of the dataset
+print("\nFinal dataset:")
+print(df.head())</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+This code covers various data validation techniques, including checking for missing values,
+ duplicate rows, outliers, data integrity and consistency, data completeness, validation based on domain-specific rules, custom function or regular expression-based validation, validation using external data sources or reference datasets, validation using statistical methods or machine learning models, and validation using business rules or constraints.
+<br><br>
+Please note that you'll need to replace the column names (`sepal_length`, `petal_width`, `email_column`, `category_column`, etc.) with the actual column names from your dataset. Adapt the code according to your specific data validation requirements and constraints.
+<br><br>
+Feel free to modify and enhance the code to suit your needs
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			
+	
+			 
+		</section>
+	</main>
+	<footer>
+		<p>&copy; 2023 Data Science Guide</p>
+	</footer>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+	<script>
+		Prism.highlightAll();
+	</script>
+	<!-- <script>
+    function copyText() {
+        var codeElement = document.getElementById('code');
+        var text = codeElement.textContent;
+
+        navigator.clipboard.writeText(text)
+            .then(function() {
+                alert("Text copied to clipboard!");
+            })
+            .catch(function(error) {
+                console.error("Failed to copy text: ", error);
+            });
+    }
+</script> -->
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  var paragraphs = document.querySelectorAll('.p');
+  paragraphs.forEach(function(paragraph) {
+    var text = paragraph.innerHTML;
+    var regex = /`([^`]+)`/g;
+    var styledText = text.replace(regex, '<redtag class="backtick-text">$1</redtag>');
+    paragraph.innerHTML = styledText;
+  });
+});
+</script>
+</body>
+</html>

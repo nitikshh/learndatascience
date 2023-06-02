@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8">
+    <title>Basic Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        section h2 {
+            margin-bottom: 10px;
+            color:white;
+            text-align:center;
+            text-shadow: 2px 2px 8px black;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        pre{
+            padding:0px;
+
+        }
+        .container h4{
+            padding:5px;
+            width:100%;
+        }
+        .p{
+            background:#FEFCF3;
+            padding:0px;
+            font-size:13px;
+            
+        }
+        .p span{
+            background-color:#F5EBE0;
+            font-size:13px;
+        }
+        .chart {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width:100%;
+            overflow:scroll;
+            margin-bottom: 20px;
+        }
+        redtag{
+            color:red;
+            margin-top:1px;
+            font-size:13px;
+            font-family: 'Kanit', sans-serif;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100vh;
+            background-color: black;
+            transition: width 0.3s ease;
+            color:black;
+            overflow: hidden;
+        }
+
+        .icon::before {
+            content: "\2630"; /* Hamburger icon */
+        }
+
+        .icon.open::before {
+            content: "\2716"; /* Close icon */
+        }
+
+        .icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color:white;
+            cursor: pointer;
+        }
+
+        #navbarList {
+            margin-top: 50px;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        #navbarList li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #navbarList li a {
+            text-decoration: none;
+            color:white;
+        }
+        #code {
+        font-size: 12px;
+        }
+        
+@media(min-width:700px){
+     .p{
+          font-size:6px;
+     }
+     redtag{
+          font-size:7px;
+          color:red;
+     }
+     h4{
+          font-size:8px;
+     }
+     p span{
+          font-size:8px;
+     }
+     .section{
+          font-size:8px;
+     }
+}
+    .section {
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align:center;
+        }
+  
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+</head>
+<body>
+<div class="navbar" id="navbar">
+    <div class="icon" onclick="toggleNavbar()"></div>
+    <ul id="navbarList">
+        <li><a href="index.html">Chapter 0 - Starting with small project</a></li>
+        <li><a href="ch_1_throey.html">Chapter 1 - The Theory</a></li>
+        <li><a href="ML_ch2.html">Chapter 2 - Machine Learning - I</a></li>
+        <li><a href="datacleaning_ch3.html">Chapter 3 - Data Cleaning</a></li>
+        <li><a href="dataVis_ch4.html">Chapter 4 - Data Visualization</a></li>
+        <li><a href="ML_ch5.html">Chapter 5 - Machine Learning - II</a></li>
+        <li><a href="#">Chapter 7 - Appendix A</a></li>
+        <li><a href="#">Chapter 8 - Appendix B</a></li>
+        <li><a href="#">Chapter 9 - Glossary</a></li>
+        <li><a href="#">Chapter 10 - Index</a></li>
+    </ul>
+</div>
+
+<script>
+    function toggleNavbar() {
+        var navbar = document.getElementById('navbar');
+        var icon = document.querySelector('.icon');
+        
+        if (navbar.style.width === '300px') {
+            navbar.style.width = '0';
+            icon.classList.remove('open');
+        } else {
+            navbar.style.width = '300px';
+            icon.classList.add('open');
+        }
+    }
+</script>
+<header>
+    <h1>Data Science</h1>
+</header>
+<div class="section">
+        <h2>Welcome to the Data Science Learning website</h2>
+        <p>If you are new to Python, we recommend learning it first before diving into Data Science. Python is a popular programming language used extensively in Data Science.</p>
+        <p>Click the button below to visit our Python Learning Website:</p>
+        <button class="btn" onclick="redirectToPythonWebsite()">Learn Python</button>
+    </div>
+<script>
+        // JavaScript function to redirect to the Python Learning Website
+        function redirectToPythonWebsite() {
+            window.location.href = "computer/index.html";
+        }
+    </script>
+<main>
+    <section>
+        <h2>The Basics Project</h2>
+        <div class="container">
+            <h4>Adding the CSV file</h4>
+            <div class="chart" id="chart1">
+                <pre onclick="copyText()"><code class="language-python" id="code">#Click on code to Copy
+import pandas as pd
+from sklearn.datasets import fetch_openml
+# Import Titanic dataset
+data = fetch_openml(name='titanic', version=1, as_frame=True)
+# Convert data to a pandas DataFrame
+titanic_df = pd.DataFrame(data.data, columns=data.feature_names)
+# Access the target variable
+titanic_df['target'] = data.target
+
+</code></pre>
+            </div>
+            <p class="p"><span>Explanation</span> :
+                <redtag>import pandas as pd:</redtag>
+                This line imports the pandas library and assigns it the alias "pd". This library is commonly used for data manipulation and analysis.
+                <br><br>
+                <redtag>from sklearn.datasets import fetch_openml:</redtag>
+                This line imports the fetch_openml function from the sklearn.datasets module. This function is used to retrieve datasets from the OpenML repository, which is a platform for sharing machine learning datasets.
+                <br><br>
+                <redtag>data = fetch_openml(name='titanic', version=1, as_frame=True):</redtag>
+                This line fetches the Titanic dataset from the OpenML repository. The name parameter specifies the name of the dataset to fetch, which in this case is 'titanic'. The version parameter specifies the version of the dataset to fetch, and in this case, it is version 1. The as_frame parameter is set to True, which means the dataset will be returned as a pandas DataFrame.
+                <br><br>
+                <redtag>titanic_df = pd.DataFrame(data.data, columns=data.feature_names):</redtag>
+                This line creates a pandas DataFrame called titanic_df using the fetched dataset. The data.data attribute of the data object contains the feature data of the Titanic dataset. The columns parameter is set to data.feature_names, which contains the names of the features in the dataset. This line essentially converts the fetched dataset into a tabular format for easier analysis and manipulation.
+                <br><br>
+                <redtag>titanic_df['target'] = data.target:</redtag>
+                This line adds a new column called 'target' to the titanic_df DataFrame. The data.target attribute of the data object contains the target variable (i.e., the variable to be predicted) of the Titanic dataset. By assigning it to the 'target' column of titanic_df, the target variable is incorporated into the DataFrame.
+                <br><br>
+                In summary, the code imports the Titanic dataset using the fetch_openml function, converts it into a pandas DataFrame, and adds a 'target' column to the DataFrame to include the target variable. This allows for further analysis and modeling using the data science capabilities provided by pandas and other libraries.
+            </p>
+        </div>
+    
+
+						<div class="container">
+			     <h4>
+Display some first rows 
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">titanic_df.head()</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				The code <redtag>titanic_df.head()</redtag> is used to display the first few rows of a DataFrame called titanic_df. In data science, a DataFrame is a tabular data structure commonly used in the Python programming language, particularly with the pandas library.
+<br><br>
+By calling the <redtag>head()</redtag> function on a DataFrame, it returns the top rows of the DataFrame as a preview of its contents. By default, it displays the first five rows, but you can specify a different number of rows to be shown by passing an argument to the head() function.
+<br><br>
+The purpose of displaying the head of a DataFrame is to quickly inspect the data and get an overview of its structure. It allows you to observe the column names and the values in the initial rows, which can provide insights into the data types, formats, and the overall structure of the dataset.
+<br><br>
+By examining the first few rows, you can gain a preliminary understanding of the data, identify potential issues or anomalies, and make informed decisions about data preprocessing, cleaning, or feature engineering steps that might be required before performing further analysis or building models.
+       </p>
+			</div>
+			
+			<div class="container">
+			     <h4>
+Copy the dataframe
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">df = titanic_df.copy()</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+The line of code <redtag>df = titanic_df.copy()</redtag/>  is used to create a copy of the DataFrame titanic_df and assign it to a new variable df.
+<br><br>
+In data science, it is often necessary to create a copy of a DataFrame to perform operations without modifying the original dataset. The <redtag>copy()</redtag/> method allows you to create an independent copy of the DataFrame, ensuring that any changes made to the new DataFrame (df) will not affect the original DataFrame (titanic_df).
+<br><br>
+By using <redtag>df = titanic_df.copy(),</redtag/> you are essentially creating a new DataFrame with the same data and column structure as titanic_df. This new DataFrame is assigned to the variable df, allowing you to work with it separately.
+<br><br>
+This copy operation is particularly useful when you want to make modifications or apply transformations to the data without altering the original DataFrame. It helps maintain data integrity and provides a clean starting point for subsequent analyses or manipulations.
+       </p>
+			</div>
+						<div class="container">
+			     <h4>
+Renaming the columns
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">new_column_names = {
+    'pclass': 'Passenger Class',
+    'sex': 'Sex',
+    'age': 'Age',
+    'sibsp': 'Siblings/Spouses Aboard',
+    'parch': 'Parents/Children Aboard',
+    'fare': 'Fare',
+    'embarked': 'Port of Embarkation',
+}
+# Rename the columns
+df = df.rename(columns=new_column_names)</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				A dictionary named <redtag>new_column_names</redtag/> is created. This dictionary maps the original column names to the desired new names. Each key-value pair represents a column name and its corresponding new name. Here's the mapping defined in the code:<br>
+				<pre onclick="copyText()"><code class="language-python" id="code">new_column_names = {
+    'pclass': 'Passenger Class',
+    'sex': 'Sex',
+    'age': 'Age',
+    'sibsp': 'Siblings/Spouses Aboard',
+    'parch': 'Parents/Children Aboard',
+    'fare': 'Fare',
+    'embarked': 'Port of Embarkation',
+}</code></pre>
+				</div>
+The next line of code performs the actual renaming of the columns. It uses the rename() method provided by the DataFrame (df) object.<br>
+<redtag>
+</redtag/>
+<pre onclick="copyText()"><code class="language-python" id="code">df = df.rename(columns=new_column_names)</code></pre>
+				</div>
+<br>
+The <redtag>rename()</redtag/> method is called on the DataFrame df and takes the columns parameter, which accepts a dictionary mapping the old column names to the new names. In this case, the new_column_names dictionary is passed as the argument.
+<br><br>
+The <redtag>rename()</redtag/> method iterates over the columns of the DataFrame and replaces the old column names with their corresponding new names according to the provided dictionary.
+<br><br>
+After executing the code, the DataFrame df will have its column names updated based on the mappings defined in the new_column_names dictionary. The updated DataFrame will reflect the new names for each column, making the data more understandable and easier to work with.
+       </p>
+			</div>
+			
+						<div class="container">
+			     <h4>
+Display first 10 rows 
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">df.head(10)</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				The code <redtag>df.head(10)</redtag/> is a command commonly used in data science and data analysis to display the first few rows of a dataframe, df. In this case, the number 10 specifies that we want to display the first 10 rows of the dataframe.<br><br>By calling <redtag>df.head(10)</redtag/>, the code will print out the first 10 rows of the dataframe df. Each row will typically include the values in each column of the dataframe, providing a preview of the dataset. This information can be useful for understanding the data's format, identifying any potential issues or inconsistencies, and making initial observations or insights.
+       </p>
+			</div>
+						<div class="container">
+			     <h4>
+Finding information by describe()
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">df.describe()</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+The code <redtag>`df.describe()`</redtag/> is a common method used in data science to generate descriptive statistics of a DataFrame or a dataset. Let's break down what each part of the code does:
+<br><br>
+- <redtag>`df`</redtag/> refers to a DataFrame object, which is a two-dimensional tabular data structure commonly used in data analysis. It can be created from various data sources such as CSV files, SQL databases, or Excel sheets.
+<br><br>
+- The <redtag>`describe()`</redtag/> method is called on the DataFrame object `df`. This method calculates various summary statistics of the numerical columns in the DataFrame, such as count, mean, standard deviation, minimum, quartiles, and maximum values. By default, it excludes any non-numeric columns from the analysis.
+<br><br>
+When <redtag>`df.describe()`</redtag/> is executed, it returns a new DataFrame that contains the calculated summary statistics. The resulting DataFrame has the following columns:
+<br><br>
+- <redtag>`count`</redtag/>: The number of non-null values in each column. This represents the number of observations available for each numerical feature.
+<br><br>
+- <redtag>`mean`</redtag/>: The average value of each column. It is calculated by summing up all the values in the column and dividing by the number of non-null values.
+<br><br>
+- <redtag>`std`</redtag/>: The standard deviation, which measures the spread or dispersion of the values in each column. It quantifies the amount of variation or deviation from the mean.
+<br><br>
+- <redtag>`min`</redtag/>: The minimum value observed in each column. It represents the smallest value present.
+<br><br>
+- <redtag>`25%`, `50%`, and `75%`</redtag/>: These are the quartiles of the data distribution. The 25% quartile (also known as the first quartile or lower quartile) represents the value below which 25% of the data falls. The 50% quartile (also known as the median) represents the value below which 50% of the data falls. The 75% quartile (also known as the third quartile or upper quartile) represents the value below which 75% of the data falls.
+<br><br>
+- <redtag>`max`</redtag/>: The maximum value observed in each column. It represents the largest value present.
+<br><br>
+The <redtag>`describe()`</redtag/> method provides a quick way to obtain an overview of the distribution and basic statistics of the numerical data in a DataFrame. It helps in identifying potential outliers, understanding the central tendency and variability of the data, and gaining initial insights into the dataset.
+       </p>
+			</div>
+						<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">df.info()</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+The code `<redtag>df.info()</redtag/>` is a commonly used method in data science and is typically used with a pandas DataFrame object (represented by `df` in this case). It provides a summary of information about the DataFrame, including the column names, the number of non-null values in each column, and the data types of the columns.
+<br><br>
+Here's a breakdown of the information provided by `df.info()`:
+<br>
+1. <redtag>Column Names</redtag/>: The method displays the names of all the columns present in the DataFrame. This is useful for quickly understanding the structure of the data and identifying the variables available for analysis.
+<br><br>
+2. <redtag>Non-Null Count</redtag/>: For each column, `<redtag>df.info()</redtag/>` shows the number of non-null values. This information helps in identifying missing or incomplete data. By knowing the number of non-null values, you can assess the quality and completeness of your dataset.
+<br><br>
+3. <redtag>Data Types</redtag/>: The method also displays the data type of each column. Common data types include integers, floats, strings, dates, and categorical variables. Knowing the data types is important for performing appropriate data manipulation and analysis. For example, numerical operations can only be performed on numeric data types.
+<br><br>
+The output of `<redtag>df.info()</redtag/>` is usually presented in a tabular format, with columns for column names, non-null counts, and data types. It provides a concise summary of the DataFrame, giving you a quick overview of the data structure, missing values, and data types of the columns. This summary is helpful for initial data exploration and understanding the characteristics of the dataset.
+       </p>
+			</div>
+						<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">df.shape()</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+In the context of data science, the code <redtag>`df.shape()`</redtag/> is used to determine the dimensions or shape of a data frame. 
+<br><br>
+Here's a breakdown of the code:
+<br>
+- <redtag>`shape()`</redtag/>: It is a method that returns the shape of the data frame. The shape of a data frame is represented as a tuple containing two values: the number of rows and the number of columns, respectively. 
+<br><br>
+So when <redtag>`df.shape()`</redtag/> is executed, it will return a tuple containing the dimensions of the data frame in the format `(rows, columns)`. This information is useful for understanding the structure and size of the data frame, which can help in various data analysis tasks such as determining the number of observations, checking for data integrity, and performing computations on the data frame.
+       </p>
+			</div>
+						<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">df.tail()</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+The code <redtag>df.tail()</redtag/> is commonly used in data science to examine the last few rows of a pandas DataFrame object, where df is the name of the DataFrame.
+<br><br>
+The <redtag>tail()</redtag/> method in pandas returns the last n rows of the DataFrame. By default, it returns the last 5 rows if no argument is provided. It is useful for quickly inspecting the end of a DataFrame and getting a sense of its structure, values, and any potential issues.
+       </p>
+			</div>
+						<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">df[df['Age'] < 18]</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+The code <redtag>`df[df['Age'] < 18]`</redtag/> is used to filter rows from a DataFrame `df` based on a specific condition. 
+<br><br>
+Let's break down the code step by step:
+<br>
+1. <redtag>`df['Age']`</redtag/> retrieves the column labeled 'Age' from the DataFrame `df`. Assuming `df` is a pandas DataFrame, this syntax allows accessing a specific column by its name.
+<br><br>
+2. <redtag>`df['Age'] < 18`</redtag/> creates a Boolean Series where each element is `True` if the corresponding age value is less than 18, and `False` otherwise. This condition is applied element-wise to each value in the 'Age' column, resulting in a Boolean Series of the same length as the original DataFrame.
+<br><br>
+3. <redtag>`df[df['Age'] < 18]`</redtag/> uses the Boolean Series as a filter to select only the rows where the corresponding value in the 'Age' column is less than 18. In other words, it returns a new DataFrame that contains only the rows where the age is less than 18.
+<br><br>
+By applying this code, you can effectively filter out rows from the original DataFrame where the age is less than 18, allowing you to focus on a specific subset of the data.
+       </p>
+			</div>
+						<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">age_below_18 = titanic_df['age'] < 18
+# Count the occurrences of each unique value
+count = age_below_18.value_counts()
+# Print the count
+print(count[True])</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+The given code performs an analysis on a DataFrame called 'titanic_df' related to the Titanic dataset, specifically focusing on the 'age' column.
+<br><br>
+1. <redtag>`age_below_18 = titanic_df['age'] < 18`</redtag/>: This line creates a Boolean Series named 'age_below_18' by comparing each value in the 'age' column of the 'titanic_df' DataFrame to the condition '< 18'. The result is a Series with 'True' values where the age is below 18 and 'False' values otherwise.
+<br><br>
+2. <redtag>`count = age_below_18.value_counts()`</redtag/>: This line calculates the count of occurrences for each unique value in the 'age_below_18' Series. It uses the <redtag>'value_counts()'</redtag/> function, which returns a new Series where the unique values of 'age_below_18' are the index and the corresponding counts are the values. The resulting Series is stored in the 'count' variable.
+<br><br>
+3. <redtag>`print(count[True])`</redtag/>: This line prints the count of occurrences where the value is 'True' in the 'count' Series. In this case, it prints the count of passengers in the 'titanic_df' DataFrame who are below 18 years old. Since 'True' represents ages below 18 in the 'age_below_18' Series, accessing the value at the 'True' index in the 'count' Series gives the desired count.
+       </p>
+			</div>
+						<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"># Select 'age' and 'pclass' columns and create a new DataFrame
+new_df = titanic_df[['age', 'pclass']]
+# Print the new DataFrame
+print(new_df.head())</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+The given code is written in Python and utilizes the pandas library for data manipulation and analysis. It performs the following steps:
+<br>
+1. <redtag>`new_df = titanic_df[['age', 'pclass']]`</redtag/>: This line creates a new DataFrame called `new_df` by selecting specific columns from an existing DataFrame called `titanic_df`. The columns selected are `'age'` and `'pclass'`. The double square brackets `[['age', 'pclass']]` are used to access multiple columns by passing them as a list.
+<br><br>
+2. <redtag>`print(new_df.head())`</redtag/>: This line prints the first few rows of the newly created DataFrame `new_df`. The `head()` function is a pandas method that returns the top n rows of a DataFrame, where n is 5 by default. By calling `print()`, the output is displayed in the console or notebook.
+<br><br>
+In summary, the code extracts the `'age'` and `'pclass'` columns from the `titanic_df` DataFrame and creates a new DataFrame `new_df`. It then displays the first few rows of the `new_df` DataFrame using the `head()` function.
+       </p>
+			</div>
+						<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"># Filter individuals with age below 30 and in first class
+filtered_df = titanic_df[(titanic_df['age'] < 30) & (titanic_df['pclass'] == 1)]
+# Count the number of rows in the filtered DataFrame
+count = len(filtered_df)
+# Print the count
+print(count)</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+The given code performs a data filtering and counting operation on a DataFrame named `titanic_df`, likely containing information about passengers on the Titanic. Here is a breakdown of what each line of code does:
+<br><br>
+1. <redtag>`filtered_df = titanic_df[(titanic_df['age'] < 30) & (titanic_df['pclass'] == 1)]`</redtag/><br>
+   - This line creates a new DataFrame called `filtered_df` by filtering the original `titanic_df` DataFrame.<br>
+   - The filter conditions are specified within square brackets `<redtag>[]</redtag/>`:<br>
+     - <redtag>`(titanic_df['age'] < 30)`</redtag/> filters for individuals whose age is <redtag>below 30</redtag/>.<br>
+     - <redtag>`(titanic_df['pclass'] == 1)`</redtag/> filters for individuals who are in the <redtag>first class</redtag/> (where 'pclass' refers to the passenger class).<br>
+   - The <redtag>`&`</redtag/> operator combines both filter conditions, ensuring that both conditions must be true for a row to be included in the `filtered_df`.
+<br><br>
+2. <redtag>`count = len(filtered_df)`</redtag/> <br>
+   - This line calculates the number of rows in the `filtered_df` DataFrame.<br>
+   - The <redtag>`len()`</redtag/> function is used to determine the length (i.e., the number of rows) of the DataFrame, and the result is stored in the variable `count`.
+<br><br>
+3. <redtag>`print(count)`</redtag/> <br>
+   - This line prints the value of the variable `count`, which represents the number of rows in the filtered DataFrame.<br>
+   - The output will be the count of individuals who are below 30 years old and in the first class according to the given filter conditions.
+       </p>
+			</div>
+						<div class="container">
+			     <h4>
+
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"># Filter individuals with age below 30 and in first class
+filtered_df = titanic_df[(titanic_df['age'] < 30) & (titanic_df['pclass'] == 2)]
+# Count the number of rows in the filtered DataFrame
+count = len(filtered_df)
+# Print the count
+print(count)</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+The given code performs a data filtering and counting operation on a DataFrame named `titanic_df`, likely containing information about passengers on the Titanic. Here is a breakdown of what each line of code does:
+<br><br>
+1. <redtag>`filtered_df = titanic_df[(titanic_df['age'] < 30) & (titanic_df['pclass'] == 1)]`</redtag/><br>
+   - This line creates a new DataFrame called `filtered_df` by filtering the original `titanic_df` DataFrame.<br>
+   - The filter conditions are specified within square brackets `<redtag>[]</redtag/>`:<br>
+     - <redtag>`(titanic_df['age'] < 30)`</redtag/> filters for individuals whose age is <redtag>below 30</redtag/>.<br>
+     - <redtag>`(titanic_df['pclass'] == 2)`</redtag/> filters for individuals who are in the <redtag>first class</redtag/> (where 'pclass' refers to the passenger class).<br>
+   - The <redtag>`&`</redtag/> operator combines both filter conditions, ensuring that both conditions must be true for a row to be included in the `filtered_df`.
+<br><br>
+2. <redtag>`count = len(filtered_df)`</redtag/> <br>
+   - This line calculates the number of rows in the `filtered_df` DataFrame.<br>
+   - The <redtag>`len()`</redtag/> function is used to determine the length (i.e., the number of rows) of the DataFrame, and the result is stored in the variable `count`.
+<br><br>
+3. <redtag>`print(count)`</redtag/> <br>
+   - This line prints the value of the variable `count`, which represents the number of rows in the filtered DataFrame.<br>
+   - The output will be the count of individuals who are below 30 years old and in the first class according to the given filter conditions.
+       </p>
+			</div>
+		
+			<div class="container">
+			     <h4>
+Plotting The Graph
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">%matplotlib inline
+import matplotlib.pyplot as plt
+import seaborn as sns 
+# Assuming you have the Titanic dataset stored in a DataFrame called 'titanic_df'
+# from sklearn.datasets import fetch_openml
+# Import Titanic dataset
+# data = fetch_openml(name='titanic', version=1, as_frame=True)
+# Convert data to a pandas DataFrame
+# titanic_df = pd.DataFrame(data.data, columns=data.feature_names)
+# Filter NaN values in 'age','sex' column
+filtered_df = titanic_df.dropna(subset=['age'])
+filtered_df = titanic_df.dropna(subset=['sex'])
+# Create a bar plot
+plt.bar(filtered_df['sex'], filtered_df['age'])
+
+</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+The code you provided is using the data science libraries Matplotlib, Seaborn, and Scikit-learn to create a bar plot based on the Titanic dataset. Let's break down the code step by step:
+<br>
+1. <redtag>`%matplotlib inline`</redtag/>: This is a magic command specific to Jupyter Notebook or JupyterLab environments. It enables the inline display of Matplotlib plots within the notebook itself.
+<br><br>
+2. <redtag>`import matplotlib.pyplot as plt`</redtag/>: This imports the `pyplot` module from the Matplotlib library, which provides a collection of functions to create various types of plots and visualizations.
+<br><br>
+3. <redtag>`from sklearn.datasets import fetch_openml`</redtag/>: This imports the `fetch_openml` function from the `datasets` module of Scikit-learn. It is used to fetch datasets from the OpenML platform, including the Titanic dataset in this case.
+<br><br>
+4. <redtag>`import seaborn as sns`</redtag/>: This imports the Seaborn library, which is a higher-level interface to Matplotlib. Seaborn provides additional functionality and aesthetically pleasing styles for creating statistical graphics.
+<br><br>
+5. <redtag>`filtered_df = titanic_df.dropna(subset=['age'])`</redtag/>: This line drops rows from the DataFrame `titanic_df` that have missing values (NaN) in the 'age' column. The result is stored in a new DataFrame called `filtered_df`.
+<br><br>
+6. <redtag>`filtered_df = titanic_df.dropna(subset=['sex'])`</redtag/>: Similarly, this line drops rows from `titanic_df` that have missing values in the 'sex' column. The updated DataFrame is still stored in `filtered_df`.
+<br><br>
+7. <redtag>`plt.bar(filtered_df['sex'], filtered_df['age'])`</redtag/>: This code creates a bar plot using Matplotlib's `bar` function. It takes two arguments: the 'sex' column from the `filtered_df` DataFrame, which represents the categorical values for the x-axis, and the 'age' column from the same DataFrame, which represents the numerical values for the y-axis. The result is a bar plot showing the distribution of ages for each gender.
+<br><br>
+<redtag>Note</redtag/> - that for this code to work, the Titanic dataset should be loaded into a DataFrame named <redtag>`titanic_df`</redtag/> prior to running these lines.
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+Some other Graphs
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code">import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Assuming you have the Titanic dataset stored in a DataFrame called 'df'
+
+# Bar Plot: Survival Count by Sex
+sns.set_style("whitegrid")
+plt.figure(figsize=(8, 6))
+sns.countplot(data=df, x='Sex', hue='Survived')
+plt.title("Survival Count by Sex")
+plt.xlabel("Sex")
+plt.ylabel("Count")
+plt.show()
+
+# Histogram: Age Distribution
+plt.figure(figsize=(8, 6))
+sns.histplot(data=df, x='Age', kde=True)
+plt.title("Age Distribution")
+plt.xlabel("Age")
+plt.ylabel("Count")
+plt.show()
+
+# Scatter Plot: Fare vs. Age
+plt.figure(figsize=(8, 6))
+sns.scatterplot(data=df, x='Age', y='Fare', hue='Survived')
+plt.title("Fare vs. Age")
+plt.xlabel("Age")
+plt.ylabel("Fare")
+plt.show()
+</code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+The first plot is a <redtag>bar plot</redtag/> that shows the count of survivors and non-survivors based on gender. It uses the countplot function from Seaborn to create a bar chart with the 'Sex' column on the x-axis and the count of occurrences on the y-axis. The 'Survived' column is used to differentiate the bars by hue.
+<br><br>
+The second plot is a <redtag>histogram</redtag/> that displays the distribution of ages among the passengers. It uses the histplot function from Seaborn to create a histogram with the 'Age' column on the x-axis and the count of occurrences on the y-axis. The kde=True argument adds a kernel density estimation line to the plot.
+<br><br>
+The third plot is a <redtag>scatter plot</redtag/> that shows the relationship between the fare paid and the age of the passengers. It uses the scatterplot function from Seaborn to create a scatter plot with the 'Age' column on the x-axis and the 'Fare' column on the y-axis. The 'Survived' column is used to differentiate the points by hue.
+<br><br>
+Remember to ensure that you have the Titanic dataset loaded into a DataFrame named '<redtag>df</redtag/>' before running this code
+       </p>
+			</div>
+			<!-- <div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			<div class="container">
+			     <h4>
+2
+			     </h4>
+				<div class="chart" id="chart1">
+				     <pre onclick="copyText()"><code class="language-python" id="code"></code></pre>
+				</div>
+				<p class="p"><span>Explanation</span> :
+				
+       </p>
+			</div>
+			
+	
+			 -->
+		</section>
+	</main>
+	<footer>
+		<p>&copy; 2023 Data Science Guide</p>
+	</footer>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+	<script>
+		Prism.highlightAll();
+	</script>
+	<!-- <script>
+    function copyText() {
+        var codeElement = document.getElementById('code');
+        var text = codeElement.textContent;
+
+        navigator.clipboard.writeText(text)
+            .then(function() {
+                alert("Text copied to clipboard!");
+            })
+            .catch(function(error) {
+                console.error("Failed to copy text: ", error);
+            });
+    }
+</script> -->
+
+</body>
+</html>
